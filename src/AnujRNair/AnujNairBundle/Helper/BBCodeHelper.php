@@ -44,6 +44,7 @@ class BBCodeHelper
             '[/code]'
         ];
 
+        $string = htmlspecialchars($string, ENT_NOQUOTES | ENT_HTML5);
         $converted = preg_replace("/[\r]/", '<br>', preg_replace($bbFind, $bbReplace, $string));
 
         // Match and convert code blocks
@@ -56,7 +57,7 @@ class BBCodeHelper
                 ? '</code></pre>'
                 : '</code>'
             );
-            $converted = preg_replace($bbCodeRegex, $opening . $fullMatches[3][$i] . $closing, $converted, 1);
+            $converted = preg_replace($bbCodeRegex, $opening . htmlspecialchars($fullMatches[3][$i]) . $closing, $converted, 1);
         }
 
         return $converted;

@@ -6,10 +6,13 @@ use AnujRNair\AnujNairBundle\Entity\Blog;
 use AnujRNair\AnujNairBundle\Entity\Comment;
 use AnujRNair\AnujNairBundle\Entity\Tag;
 use AnujRNair\AnujNairBundle\Forms\Blog\CommentType;
+use AnujRNair\AnujNairBundle\Helper\BBCodeHelper;
 use Doctrine\ORM\NoResultException;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -142,6 +145,25 @@ class BlogController extends Controller
             'tagSummary' => $tagSummary,
             'tagId'      => $tagId
         ];
+    }
+
+    /**
+     * @Route("/preview", name="_an_blog_preview")
+     * @Method({"POST"})
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response|static
+     */
+    public function previewPostAction(Request $request)
+    {
+        $comment = new Comment();
+        $commentForm = $this->createForm(new CommentType(), $comment);
+        $commentForm->handleRequest($request);
+
+        // Posting the comment, parse and return!
+        if ($commentForm->isValid()) {
+            return JsonResponse::create(['parsed' => BBCodeHelper::parseBBCode($comment->getComment())]);
+        }
+        return JsonResponse::create(['parsed' => null]);
     }
 
 }
