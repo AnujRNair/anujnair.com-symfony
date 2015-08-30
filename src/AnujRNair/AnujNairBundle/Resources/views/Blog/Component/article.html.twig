@@ -1,0 +1,52 @@
+<article class="blog-article{% if mini %} mini{% endif %}">
+    <h1>
+        {% if mini %}
+            <a href="{{ path('_an_blog_article', {id: blog.getId, title:blog.getUrlSafeTitle}) }}">
+        {% endif %}
+            {{ blog.getTitle }}
+        {% if mini %}
+            </a>
+        {% endif %}
+    </h1>
+    <h2>
+        <span class="icon-clock"></span>
+        Posted by {{ blog.getUser.getFirstName ~ ' ' ~ blog.getUser.getLastName }}
+        on
+        <time datetime="{{ blog.getDatePublished|date('Y-m-d H:i:s') }}">{{ blog.getDatePublished|date('jS M, Y') }}</time>
+    </h2>
+    <h2>
+        <span class="icon-comment"></span>
+        <a href="{{ path('_an_blog_article', {id: blog.getId, title:blog.getUrlSafeTitle}) }}#comments">
+            {% if blog.countComments == 0 %}
+                Comments
+            {% elseif blog.countComments == 1 %}
+                {{ blog.countComments }} Comment
+            {% else %}
+                {{ blog.countComments }} Comments
+            {% endif %}
+        </a>
+    </h2>
+    {% if blog.getTags|length > 0 %}
+        <h2>
+            <span class="icon-tags"></span>
+            Tags:
+            {% for tag in blog.getTags %}
+                <a href="{{ path('_an_blog_tag', {tagId: tag.getId, name: tag.getUrlSafeName}) }}" class="tag">{{ tag.getName }}</a>
+            {% endfor %}
+        </h2>
+    {% endif %}
+    <p>
+        {{ blog.contents|raw }}
+    </p>
+    <a href="{{ path('_an_blog_article', {id: blog.getId, title:blog.getUrlSafeTitle}) }}" class="more">Read More</a>
+</article>
+
+{% if mini == false %}
+    <div id="comments" class="blog-comment">
+        <h3>Comments</h3>
+        {% for comment in blog.getVisibleComments %}
+            {% include 'AnujNairBundle:Blog/Component:comment.html.twig' with {comment: comment} %}
+        {% endfor %}
+        {% include 'AnujNairBundle:Blog/Component:postComment.html.twig' %}
+    </div>
+{% endif %}

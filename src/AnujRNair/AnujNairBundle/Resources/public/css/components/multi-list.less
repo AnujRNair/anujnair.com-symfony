@@ -1,0 +1,28 @@
+.multi-list {
+    list-style: none;
+    padding-left: 0;
+    padding-bottom: 15px;
+
+    ul {
+        list-style: none;
+        padding-left: 20px;
+        padding-top: 5px;
+
+        ul {
+            font-size: @font-size-small;
+
+            li {
+                position: relative;
+                line-height: 1.7em;
+
+                span {
+                    position: absolute;
+                }
+                a {
+                    display: inline-block;
+                    padding-left: 25px;
+                }
+            }
+        }
+    }
+}

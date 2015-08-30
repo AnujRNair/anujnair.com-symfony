@@ -1,0 +1,3 @@
+anuj_nair:
+    resource: "@AnujNairBundle/Resources/config/routing.yml"
+    prefix:   /

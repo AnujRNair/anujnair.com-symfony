@@ -1,0 +1,31 @@
+<div class="row">
+    <div class="col-xs-12">
+        <div class="media">
+            <div class="media-left">
+                <div class="avatar">
+                    {% if comment.getUser %}
+                        <img class="img-responsive" src="{{ asset('bundles/anujnair/images/' ~ comment.getUser.getUserName|lower ~ '/Avatar.jpg') }}" />
+                    {% else %}
+                        <span class="icon-user"></span>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="media-body">
+                <h4 class="media-heading{% if comment.getUser %} admin{% endif %}">
+                    {% if comment.getUser %}
+                        {{ comment.getUser.getFirstName ~ ' ' ~ comment.getUser.getLastName }}
+                    {% else %}
+                        {{ comment.getName }}
+                    {% endif %}
+                    <span>
+                        commented on
+                        <time datetime="{{ comment.getDatePosted|date('Y-m-d H:i:s') }}">{{ comment.getDatePosted|date('jS M, Y') }}</time>
+                    </span>
+                </h4>
+                <div class="media-body-text">
+                    {{ comment.getComment|raw }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,22 @@
+_an_default:
+    path: /
+    defaults:
+        _controller: FrameworkBundle:Redirect:urlRedirect
+        path: /blog
+        permanant: true
+
+_an_header:
+    resource: "@AnujNairBundle/Controller/HeaderController.php"
+    type:     annotation
+
+_an_footer:
+    resource: "@AnujNairBundle/Controller/FooterController.php"
+    type:     annotation
+
+_an_blog:
+    resource: "@AnujNairBundle/Controller/BlogController.php"
+    type:     annotation
+
+_an_admin:
+    resource: "@AnujNairBundle/Controller/AdminController.php"
+    type:     annotation

@@ -1,0 +1,52 @@
+<div class="row post-comment">
+    <div class="col-xs-12">
+        <div class="media">
+            <div class="media-left">
+                <div class="avatar">
+                    <span class="icon-user"></span>
+                </div>
+            </div>
+            <div class="media-body">
+                <div class="media-heading">
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active"><a href="#tab-write" data-toggle="tab">Write</a></li>
+                        <li role="presentation"><a href="#tab-preview" data-toggle="tab">Preview</a></li>
+                    </ul>
+                </div>
+                <div class="tab-content">
+                    <div class="media-body-text tab-pane active" id="tab-write" role="tabpanel">
+                        {{ form_start(commentForm) }}
+                            <div class="row">
+                                <div class="col-md-6">
+                                    {{ form_row(commentForm.name) }}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    {{ form_row(commentForm.comment) }}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-10 bbcode">
+                                    BBCode:
+                                    <code>[b][/b]</code>
+                                    <code>[i][/i]</code>
+                                    <code>[u][/u]</code>
+                                    <code>[img][/img]</code>
+                                    <code>[>][<]</code>
+                                    <code>[code lang="{lang}"][/code]</code>
+                                </div>
+                                <div class="col-md-2">
+                                    {{ form_row(commentForm.save) }}
+                                </div>
+                            </div>
+                        {{ form_end(commentForm) }}
+                    </div>
+                    <div class="media-body-text tab-pane" id="tab-preview" role="tabpanel">
+                        Something to preview
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

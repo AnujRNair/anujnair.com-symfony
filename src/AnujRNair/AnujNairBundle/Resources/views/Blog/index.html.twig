@@ -1,0 +1,44 @@
+{% extends 'AnujNairBundle::mainLayout.html.twig' %}
+
+{% block content %}
+    <div class="row">
+        <section class="col-md-8">
+            {% for blog in blogPosts %}
+                {% include 'AnujNairBundle:Blog/Component:article.html.twig' with {'blog': blog, mini: true} %}
+            {% endfor %}
+            <div class="text-center">
+                {% include 'AnujNairBundle:Components:pagination.html.twig' %}
+            </div>
+        </section>
+        <aside class="col-md-4 blog-aside">
+            <div class="row">
+                <div class="col-md-12 col-sm-8">
+                    <h3>Past Blog Entries</h3>
+                    {% include 'AnujNairBundle:Components:multiDimensionalList.html.twig' with {
+                        multiList: archive,
+                        itemLinkUrl: '_an_blog_article',
+                        itemLinkIdAttr: 'getId',
+                        itemLinkTitleAttr: 'getUrlSafeTitle',
+                        itemNameAttr: 'getTitle',
+                        itemIcon: 'icon-calendar'
+                    } %}
+                </div>
+                <div class="col-md-12 col-sm-4">
+                    <h3>Blog Tags</h3>
+                    <ul class="tag-summary">
+                        {% for tagData in tagSummary %}
+                            <li>
+                                <span class="icon-tag"></span>
+                                <a href="{{ path('_an_blog_tag', {tagId: tagData.id, name: tagData.name|lower}) }}">
+                                    {% if tagId is defined and tagId == tagData.id %}<strong>{% endif %}
+                                        {{ tagData['name'] }} <span class="tag-count">({{ tagData['tagCount'] }})</span>
+                                    {% if tagId is defined and tagId == tagData.id %}</strong>{% endif %}
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </aside>
+    </div>
+{% endblock %}

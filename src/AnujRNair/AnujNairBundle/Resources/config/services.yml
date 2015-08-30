@@ -1,0 +1,4 @@
+services:
+#    anuj_nair.example:
+#        class: AnujRNair\AnujNairBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]

@@ -1,0 +1,86 @@
+header.main-header {
+    font-family: @headings-font-family;
+
+    .row-bg {
+        background: url('/bundles/anujnair/images/bg/header.png') #101318 no-repeat center top;
+        min-height: 150px;
+    }
+    .row-details {
+        position: relative;
+        top: -55px;
+        margin-bottom: -55px;
+
+        .media-body {
+            padding-top: 5px;
+            padding-left: 10px;
+        }
+        .media-heading {
+            margin-bottom: 20px;
+            font-size: @font-size-h1;
+            white-space: nowrap;
+
+            a,
+            a:hover,
+            a:visited,
+            a:active {
+                color: #fff;
+                text-decoration: none;
+            }
+        }
+        nav {
+            @media (max-width: @screen-xs-max) {
+                text-align: center;
+                border-top: 1px dotted #e6e6e6;
+            }
+        }
+        .nav {
+            float: right;
+            @media (max-width: @screen-xs-max) {
+                float: none;
+                margin-bottom: 5px;
+            }
+            > li {
+                > a {
+                    &:hover,
+                    &:focus {
+                        background-color: transparent;
+                        border-bottom: 2px solid @nav-pills-active-link-hover-color;
+                        @media (max-width: @screen-xs-max) {
+                            border-bottom: 2px solid @text-color;
+                        }
+                    }
+                }
+            }
+        }
+        .nav-pills {
+            padding-top: 2px;
+            font-size: @font-size-base;
+            display: inline-block;
+
+            > li {
+                > a {
+                    border-radius: 0;
+                    border-bottom: 2px solid transparent;
+                    color: @nav-pills-active-link-hover-color;
+                    @media (max-width: @screen-xs-max) {
+                        color: @text-color;
+                    }
+                }
+                + li {
+                    margin-left: 4px;
+                }
+                &.active > a {
+                    &,
+                    &:hover,
+                    &:focus {
+                        background-color: transparent;
+                        border-bottom: 2px solid @nav-pills-active-link-hover-color;
+                        @media (max-width: @screen-xs-max) {
+                            border-bottom: 2px solid @text-color;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

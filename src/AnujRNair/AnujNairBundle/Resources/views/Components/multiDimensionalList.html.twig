@@ -1,0 +1,27 @@
+<ul class="multi-list">
+    {% for year, months in multiList %}
+        <li>{{ year }}</li>
+        <li>
+            <ul>
+                {% for month, items in months %}
+                    <li>{{ month }}</li>
+                    <li>
+                        <ul>
+                            {% for item in items %}
+                                <li>
+                                    <span class="{{ itemIcon }} pull-left"></span>
+                                    <a href="{{ path(itemLinkUrl, {
+                                        'id': attribute(item, itemLinkIdAttr),
+                                        'title': attribute(item, itemLinkTitleAttr),
+                                    }) }}">
+                                        {{ attribute(item, itemNameAttr) }}
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                {% endfor %}
+            </ul>
+        </li>
+    {% endfor %}
+</ul>

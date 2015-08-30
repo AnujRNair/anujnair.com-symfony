@@ -1,0 +1,12 @@
+{% extends 'AnujNairBundle::mainLayout.html.twig' %}
+
+{% block content %}
+    <div class="row">
+        <section class="col-md-8">
+            {% include 'AnujNairBundle:Blog/Component:article.html.twig' with {'blog': blog, mini: false} %}
+        </section>
+        <aside class="col-md-4 blog-aside">
+        </aside>
+    </div>
+{% endblock %}
+

@@ -1,0 +1,22 @@
+{% extends "AnujNairBundle::layout.html.twig" %}
+
+{% block body %}
+
+    <div class="main-container">
+        {% block header %}
+            {{ render(path('_an_header_index')) }}
+        {% endblock %}
+
+        <div class="container content-container">
+            {% block content %}
+            {% endblock %}
+        </div>
+
+        <div id="main-container-push"></div>
+    </div>
+
+    {% block footer %}
+        {{ render(path('_an_footer_index')) }}
+    {% endblock %}
+
+{% endblock %}
