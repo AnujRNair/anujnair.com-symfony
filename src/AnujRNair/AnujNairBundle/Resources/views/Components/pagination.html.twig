@@ -1,10 +1,6 @@
 <nav>
     <ul class="pager">
-        {% if page * (noPerPage + 1) > pagination.count %}
-            <li class="previous disabled">
-                <span class="icon-left-open"></span><span>Older</span>
-            </li>
-        {% else %}
+        {% if (page * (noPerPage + 1) <= pagination.count) %}
             <li class="previous">
                 <a href="{{ path(pageUrl, {page: page + 1, noPerPage: noPerPage}) }}">
                     <span class="icon-left-open"></span><span>Older</span>
@@ -12,14 +8,10 @@
             </li>
         {% endif %}
 
-        {% if page == 1 %}
-            <li class="next disabled">
-                <span class="icon-right-open"></span><span>Newer</span>
-            </li>
-        {% else %}
+        {% if page > 1 %}
             <li class="next">
                 <a href="{{ path(pageUrl, {page: page - 1, noPerPage: noPerPage}) }}">
-                    <span class="icon-right-open"></span><span>Newer</span>
+                    <span>Newer</span><span class="icon-right-open"></span>
                 </a>
             </li>
         {% endif %}
