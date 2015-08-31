@@ -2,10 +2,10 @@
 require(['config'], function () {
     "use strict";
     require([
+        'components/syntaxHighlighter',
         'bootstrap',
-        'components/syntax-highlighter',
-        'components/bbcode-preview'
-    ], function () {
-
+        'components/bbcodePreview'
+    ], function (syntaxHighlighter) {
+        syntaxHighlighter.highlight(true);
     });
 });

@@ -17,12 +17,13 @@
     <h2>
         <span class="icon-comment"></span>
         <a href="{{ path('_an_blog_article', {id: blog.getId, title:blog.getUrlSafeTitle}) }}#comments">
-            {% if blog.countComments == 0 %}
+            {% set visibleCommentCount = blog.countVisibleComments %}
+            {% if visibleCommentCount == 0 %}
                 Comments
-            {% elseif blog.countComments == 1 %}
-                {{ blog.countComments }} Comment
+            {% elseif visibleCommentCount == 1 %}
+                {{ visibleCommentCount }} Comment
             {% else %}
-                {{ blog.countComments }} Comments
+                {{ visibleCommentCount }} Comments
             {% endif %}
         </a>
     </h2>

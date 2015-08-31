@@ -342,6 +342,17 @@ class Blog
     }
 
     /**
+     * Count comments
+     * @return int
+     */
+    public function countVisibleComments()
+    {
+        $criteria = Criteria::create();
+        $criteria->where(Criteria::expr()->neq('deleted', true));
+        return $this->comments->matching($criteria)->count();
+    }
+
+    /**
      * @ORM\PrePersist
      */
     protected function prePersist()
