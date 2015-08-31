@@ -66,7 +66,7 @@ class Portfolio
 
     /**
      * @var \DateTime
-     * @ORM\Column(name="date_updated", type="datetimetz")
+     * @ORM\Column(name="date_updated", type="datetimetz", nullable=true)
      */
     private $dateUpdated;
 
@@ -286,15 +286,16 @@ class Portfolio
     /**
      * @ORM\PrePersist
      */
-    protected function prePersist()
+    public function prePersist()
     {
         $this->dateCreated = new \DateTime();
+        $this->deleted = false;
     }
 
     /**
      * @ORM\PreUpdate
      */
-    protected function preUpdate()
+    public function preUpdate()
     {
         $this->dateUpdated = new \DateTime();
     }

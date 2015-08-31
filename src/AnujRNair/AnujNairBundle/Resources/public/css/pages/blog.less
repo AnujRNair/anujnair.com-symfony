@@ -19,10 +19,6 @@
         }
     }
     h1 {
-        font-size: @font-size-h3;
-        border-bottom: 1px dotted #e6e6e6;
-        padding-bottom: 10px;
-
         a,
         a:hover,
         a:visited,
@@ -57,11 +53,6 @@
 .blog-comment {
     padding-bottom: 20px;
 
-    h3 {
-        border-bottom: 1px dotted #e6e6e6;
-        padding-bottom: 10px;
-        margin-bottom: 15px;
-    }
     .row {
         margin-bottom: 10px;
     }
@@ -134,6 +125,8 @@
         }
     }
     .post-comment {
+        margin-top: 15px;
+
         .media-heading {
             padding: 5px 12px 0;
             border-bottom: 1px solid #ddd;
@@ -149,6 +142,18 @@
             font-size: @font-size-small;
             color: @gray-light;
         }
+    }
+    .closed-comment {
+        text-align: center;
+        color: @text-muted;
+        padding: 10px 0;
+        font-size: @font-size-small;
+    }
+}
+
+.no-blog-posts {
+    h3 {
+        text-align: center;
     }
 }
 

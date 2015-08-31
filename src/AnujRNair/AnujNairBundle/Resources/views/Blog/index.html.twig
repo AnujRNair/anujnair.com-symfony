@@ -3,17 +3,32 @@
 {% block content %}
     <div class="row">
         <section class="col-md-8">
-            {% for blog in blogPosts %}
-                {% include 'AnujNairBundle:Blog/Component:article.html.twig' with {'blog': blog, mini: true} %}
-            {% endfor %}
-            <div class="text-center">
-                {% include 'AnujNairBundle:Components:pagination.html.twig' %}
-            </div>
+            {% if blogPosts.iterator.count > 0 %}
+                {% for blog in blogPosts %}
+                    {% include 'AnujNairBundle:Blog/Component:article.html.twig' with {'blog': blog, mini: true} %}
+                {% endfor %}
+                <div class="text-center">
+                    {% include 'AnujNairBundle:Components:pagination.html.twig' with {
+                        pagination: blogPosts,
+                        pageUrl: '_an_blog_index',
+                        page: page,
+                        noPerPage: noPerPage
+                    } %}
+                </div>
+            {% else %}
+                <div class="no-blog-posts">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <h3>There doesn't seem to be any blog posts here <span class="icon-frown"></span></h3>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
         </section>
         <aside class="col-md-4 blog-aside">
             <div class="row">
                 <div class="col-md-12 col-sm-8">
-                    <h3>Past Blog Entries</h3>
+                    <h3 class="title-header">Past Blog Entries</h3>
                     {% include 'AnujNairBundle:Components:multiDimensionalList.html.twig' with {
                         multiList: archive,
                         itemLinkUrl: '_an_blog_article',
@@ -24,7 +39,7 @@
                     } %}
                 </div>
                 <div class="col-md-12 col-sm-4">
-                    <h3>Blog Tags</h3>
+                    <h3 class="title-header">Blog Tags</h3>
                     <ul class="tag-summary">
                         {% for tagData in tagSummary %}
                             <li>

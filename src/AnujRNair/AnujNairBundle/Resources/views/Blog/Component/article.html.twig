@@ -1,5 +1,5 @@
 <article class="blog-article{% if mini %} mini{% endif %}">
-    <h1>
+    <h1 class="title-header">
         {% if mini %}
             <a href="{{ path('_an_blog_article', {id: blog.getId, title:blog.getUrlSafeTitle}) }}">
         {% endif %}
@@ -44,10 +44,14 @@
 
 {% if mini == false %}
     <div id="comments" class="blog-comment">
-        <h3>Comments</h3>
+        <h3 class="title-header">Comments</h3>
         {% for comment in blog.getVisibleComments %}
             {% include 'AnujNairBundle:Blog/Component:comment.html.twig' with {comment: comment} %}
         {% endfor %}
-        {% include 'AnujNairBundle:Blog/Component:postComment.html.twig' %}
+        {% if blog.hasComments %}
+            {% include 'AnujNairBundle:Blog/Component:postComment.html.twig' %}
+        {% else %}
+            <div class="closed-comment">Comments have been closed for this post</div>
+        {% endif %}
     </div>
 {% endif %}

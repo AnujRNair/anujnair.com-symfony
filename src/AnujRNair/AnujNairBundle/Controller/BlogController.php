@@ -7,6 +7,7 @@ use AnujRNair\AnujNairBundle\Entity\Comment;
 use AnujRNair\AnujNairBundle\Entity\Tag;
 use AnujRNair\AnujNairBundle\Forms\Blog\CommentType;
 use AnujRNair\AnujNairBundle\Helper\BBCodeHelper;
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\NoResultException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -64,8 +65,9 @@ class BlogController extends Controller
     public function postAction(Request $request, $id, $title = null)
     {
         $blog = null;
+        /** @var EntityManager $em */
+        $em = $this->getDoctrine()->getManager();
         try {
-            $em = $this->getDoctrine()->getManager();
             /** @var Blog $blog */
             $blog = $em->getRepository('AnujNairBundle:Blog')
                 ->getBlogById($id);
@@ -87,7 +89,14 @@ class BlogController extends Controller
 
         // Posting a comment, let's save it!
         if ($commentForm->isValid()) {
+            $comment->setBlog($blog);
+            $em->persist($comment);
+            $em->flush();
 
+            return $this->redirect($this->generateUrl('_an_blog_article', [
+                'id'    => $blog->getId(),
+                'title' => $blog->getUrlSafeTitle()
+            ]) . '#comment' . $comment->getId());
         }
 
         return [

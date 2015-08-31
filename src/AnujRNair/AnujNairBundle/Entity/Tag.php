@@ -167,8 +167,9 @@ class Tag
     /**
      * @ORM\PrePersist
      */
-    protected function prePersist()
+    public function prePersist()
     {
         $this->dateCreated = new \DateTime();
+        $this->deleted = false;
     }
 }

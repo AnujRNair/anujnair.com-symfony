@@ -65,7 +65,7 @@ class Blog
 
     /**
      * @var \DateTime
-     * @ORM\Column(name="date_updated", type="datetimetz")
+     * @ORM\Column(name="date_updated", type="datetimetz", nullable=true)
      */
     private $dateUpdated;
 
@@ -355,15 +355,17 @@ class Blog
     /**
      * @ORM\PrePersist
      */
-    protected function prePersist()
+    public function prePersist()
     {
         $this->datePublished = new \DateTime();
+        $this->deleted = false;
+        $this->hasComments = true;
     }
 
     /**
      * @ORM\PreUpdate
      */
-    protected function preUpdate()
+    public function preUpdate()
     {
         $this->dateUpdated = new \DateTime();
     }
