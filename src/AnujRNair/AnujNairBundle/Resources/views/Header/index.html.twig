@@ -35,18 +35,13 @@
                     <div class="col-sm-6">
                         <nav>
                             <ul class="nav nav-pills">
-                                <li class="active">
-                                    <a href="{{ url('_an_blog_index') }}">Blog</a>
-                                </li>
-                                <li>
-                                    <a href="#">Portfolio</a>
-                                </li>
-                                <li>
-                                    <a href="#">About Me</a>
-                                </li>
-                                <li>
-                                    <a href="#">Contact Me</a>
-                                </li>
+                                {% for section in nav.getSections %}
+                                    <li{% if nav.isActive(section) %} class="active"{% endif %}>
+                                        <a href="{{ url(section['route']) }}">
+                                            {{ section['name'] }}
+                                        </a>
+                                    </li>
+                                {% endfor %}
                             </ul>
                         </nav>
                     </div>

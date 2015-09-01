@@ -1,10 +1,13 @@
 {% extends "AnujNairBundle::layout.html.twig" %}
 
+{# This should be overwritten in each twig file to define the active nav section #}
+{% block activeRoute '_an_none' %}
+
 {% block body %}
 
     <div class="main-container">
         {% block header %}
-            {{ render(path('_an_header_index')) }}
+            {{ render(path('_an_header_index', {activeRoute: block('activeRoute')})) }}
         {% endblock %}
 
         <div class="container content-container">

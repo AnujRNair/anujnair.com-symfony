@@ -7,15 +7,16 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 /**
- * Class HeaderController
+ * Class ContactController
  * @package AnujRNair\AnujNairBundle\Controller
- * @Route("/header")
+ * @Route("/contact")
  */
-class HeaderController extends Controller{
+class ContactController extends Controller
+{
 
     /**
-     * @Route("/index", name="_an_header_index")
-     * @Template("AnujNairBundle:Header:index.html.twig")
+     * @Route("/", name="_an_contact_index")
+     * @Template()
      */
     public function indexAction()
     {

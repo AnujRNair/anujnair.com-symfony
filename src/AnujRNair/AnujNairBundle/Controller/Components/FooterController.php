@@ -1,6 +1,6 @@
 <?php
 
-namespace AnujRNair\AnujNairBundle\Controller;
+namespace AnujRNair\AnujNairBundle\Controller\Components;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -8,7 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 /**
  * Class FooterController
- * @package AnujRNair\AnujNairBundle\Controller
+ * @package AnujRNair\AnujNairBundle\Controller\Components
  * @Route("/footer")
  */
 class FooterController extends Controller{

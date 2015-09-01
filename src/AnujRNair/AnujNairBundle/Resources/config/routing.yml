@@ -6,15 +6,27 @@ _an_default:
         permanant: true
 
 _an_header:
-    resource: "@AnujNairBundle/Controller/HeaderController.php"
+    resource: "@AnujNairBundle/Controller/Components/HeaderController.php"
     type:     annotation
 
 _an_footer:
-    resource: "@AnujNairBundle/Controller/FooterController.php"
+    resource: "@AnujNairBundle/Controller/Components/FooterController.php"
     type:     annotation
 
 _an_blog:
     resource: "@AnujNairBundle/Controller/BlogController.php"
+    type:     annotation
+
+_an_portfolio:
+    resource: "@AnujNairBundle/Controller/PortfolioController.php"
+    type:     annotation
+
+_an_about:
+    resource: "@AnujNairBundle/Controller/AboutController.php"
+    type:     annotation
+
+_an_contact:
+    resource: "@AnujNairBundle/Controller/ContactController.php"
     type:     annotation
 
 _an_admin:
