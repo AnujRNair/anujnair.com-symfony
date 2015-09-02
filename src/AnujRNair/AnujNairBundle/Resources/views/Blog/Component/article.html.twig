@@ -43,7 +43,9 @@
             {{ blog.contents|raw }}
         {% endif %}
     </div>
-    <a href="{{ path('_an_blog_article', {id: blog.getId, title:blog.getUrlSafeTitle}) }}" class="more">Read More</a>
+    {% if mini %}
+        <a href="{{ path('_an_blog_article', {id: blog.getId, title:blog.getUrlSafeTitle}) }}" class="more">Read More</a>
+    {% endif %}
 </article>
 
 {% if mini == false %}

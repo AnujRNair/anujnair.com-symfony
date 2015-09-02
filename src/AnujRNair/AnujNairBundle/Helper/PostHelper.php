@@ -11,8 +11,8 @@ class PostHelper
 
     /**
      * Parse BB Code into full html
-     * @param $string
-     * @return mixed
+     * @param string $string the string to parse for BB code
+     * @return string the string with BB code converted to html
      */
     public static function parseBBCode($string)
     {
@@ -74,10 +74,10 @@ class PostHelper
 
     /**
      * Safely shorten a string to a specific length, which includes HTML
-     * @param $string
-     * @param int $length
-     * @param string $truncationIndicator
-     * @return string
+     * @param string $string the html string to safe shorten
+     * @param int $length the approximate length to shorten to
+     * @param string $truncationIndicator how to denote text has been shortened
+     * @return string the shortened html string
      */
     public static function safeShorten($string, $length = 500, $truncationIndicator = '...')
     {
@@ -129,33 +129,36 @@ class PostHelper
         }
 
         // Match open tags in the shortened string
-        $selfClosedTags = ['area', 'base', 'br', 'col', 'hr', 'img', 'input', 'link', 'meta', 'param']; //XHTML strict void elements
+        $selfClosedTags = ['area', 'base', 'br', 'col', 'command', 'embed', 'hr', 'img', 'input',
+                           'keygen', 'link', 'meta', 'param', 'source', 'track', 'wbr'];
         preg_match_all($regexClose, $iHtml, $m);
 
         // Count number of open tags in the shortened string
         $tags = [];
+        $length = 0;
         foreach ($m[1] as $v) {
             if (in_array($v, $selfClosedTags)) {
                 continue;
             }
             if ($v[0] != '/') {
-                if (isset($tags[$v])) {
-                    $tags[$v] += 1;
-                } else {
-                    $tags[$v] = 1;
-                }
+                $tags[] = $v;
+                $length++;
             } else {
-                $tags[mb_substr($v, 1, mb_strlen($v, $encoding), $encoding)] -= 1;
+                for ($i = $length - 1; $i >= 0; $i--) {
+                    if ($tags[$i] === mb_substr($v, 1, mb_strlen($v, $encoding), $encoding)) {
+                        unset($tags[$i]);
+                        $length--;
+                        $tags = array_values($tags);
+                        break;
+                    }
+                }
             }
         }
 
         // Reverse the tags and add them to the html - this should close any open tags in the correct order
-        $tags = array_reverse($tags);
-        foreach ($tags as $tag => $unclosedCount) {
-            if ($unclosedCount <= 0) {
-                continue;
-            }
-            for ($i = 0; $i < $unclosedCount; $i++) {
+        if (count($tags) > 0) {
+            $tags = array_reverse($tags);
+            foreach ($tags as $tag) {
                 $iHtml .= '</' . $tag . '>';
             }
         }
