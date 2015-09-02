@@ -2,7 +2,7 @@
 
 namespace AnujRNair\AnujNairBundle\Entity;
 
-use AnujRNair\AnujNairBundle\Helper\BBCodeHelper;
+use AnujRNair\AnujNairBundle\Helper\PostHelper;
 use AnujRNair\AnujNairBundle\Helper\URLHelper;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Criteria;
@@ -175,7 +175,18 @@ class Blog
      */
     public function getContents()
     {
-        return BBCodeHelper::parseBBCode($this->contents);
+        return PostHelper::parseBBCode($this->contents);
+    }
+
+    /**
+     * Get the abstract of a post, which has been parsed
+     * @param int $length
+     * @param string $truncationIndicator
+     * @return string
+     */
+    public function getAbstract($length = 500, $truncationIndicator = '...')
+    {
+        return PostHelper::safeShorten(PostHelper::parseBBCode($this->contents), $length, $truncationIndicator);
     }
 
     /**

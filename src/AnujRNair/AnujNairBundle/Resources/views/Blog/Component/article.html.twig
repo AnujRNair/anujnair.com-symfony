@@ -36,9 +36,13 @@
             {% endfor %}
         </h2>
     {% endif %}
-    <p>
-        {{ blog.contents|raw }}
-    </p>
+    <div class="blog-contents">
+        {% if mini %}
+            {{ blog.abstract|raw }}
+        {% else %}
+            {{ blog.contents|raw }}
+        {% endif %}
+    </div>
     <a href="{{ path('_an_blog_article', {id: blog.getId, title:blog.getUrlSafeTitle}) }}" class="more">Read More</a>
 </article>
 

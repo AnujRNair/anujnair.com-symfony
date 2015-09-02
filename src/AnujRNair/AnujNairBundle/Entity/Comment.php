@@ -2,7 +2,7 @@
 
 namespace AnujRNair\AnujNairBundle\Entity;
 
-use AnujRNair\AnujNairBundle\Helper\BBCodeHelper;
+use AnujRNair\AnujNairBundle\Helper\PostHelper;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -162,7 +162,7 @@ class Comment
      */
     public function getComment()
     {
-        return BBCodeHelper::parseBBCode($this->comment);
+        return PostHelper::parseBBCode($this->comment);
     }
 
     /**

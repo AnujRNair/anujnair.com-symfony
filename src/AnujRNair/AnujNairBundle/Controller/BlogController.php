@@ -6,7 +6,7 @@ use AnujRNair\AnujNairBundle\Entity\Blog;
 use AnujRNair\AnujNairBundle\Entity\Comment;
 use AnujRNair\AnujNairBundle\Entity\Tag;
 use AnujRNair\AnujNairBundle\Forms\Blog\CommentType;
-use AnujRNair\AnujNairBundle\Helper\BBCodeHelper;
+use AnujRNair\AnujNairBundle\Helper\PostHelper;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\NoResultException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -170,7 +170,7 @@ class BlogController extends Controller
 
         // Posting the comment, parse and return!
         if ($commentForm->isValid()) {
-            return JsonResponse::create(['parsed' => BBCodeHelper::parseBBCode($comment->getComment())]);
+            return JsonResponse::create(['parsed' => PostHelper::parseBBCode($comment->getComment())]);
         }
         return JsonResponse::create(['parsed' => null]);
     }

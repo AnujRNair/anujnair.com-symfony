@@ -6,9 +6,20 @@ use AnujRNair\AnujNairBundle\Entity\Blog;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
+/**
+ * Class BlogRepository
+ * @package AnujRNair\AnujNairBundle\Repository
+ */
 class BlogRepository extends EntityRepository
 {
 
+    /**
+     * Get a single undeleted blog
+     * @param $id
+     * @return mixed
+     * @throws \Doctrine\ORM\NoResultException
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
     public function getBlogById($id)
     {
         return $this->getEntityManager()
@@ -22,6 +33,12 @@ class BlogRepository extends EntityRepository
             ->getSingleResult();
     }
 
+    /**
+     * Get a paginated list of undeleted blogs
+     * @param $page
+     * @param $numberPerPage
+     * @return Paginator
+     */
     public function getBlogPosts($page, $numberPerPage)
     {
         $query = $this->getEntityManager()
@@ -37,6 +54,12 @@ class BlogRepository extends EntityRepository
         return new Paginator($query, false);
     }
 
+    /**
+     * Return a multi dimensional array of blog posts by year and month
+     * @param $page
+     * @param $numberPerPage
+     * @return array
+     */
     public function getBlogPostsByYearMonth($page, $numberPerPage)
     {
         $blogPosts = $this->getEntityManager()
@@ -61,6 +84,13 @@ class BlogRepository extends EntityRepository
         return $results;
     }
 
+    /**
+     * Get undeleted blog posts by a tag id
+     * @param $tagId
+     * @param $page
+     * @param $numberPerPage
+     * @return Paginator
+     */
     public function getBlogPostsByTagId($tagId, $page, $numberPerPage)
     {
         $query = $this->getEntityManager()

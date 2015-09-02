@@ -2,9 +2,17 @@
 
 namespace AnujRNair\AnujNairBundle\Helper;
 
+/**
+ * Class URLHelper
+ * @package AnujRNair\AnujNairBundle\Helper
+ */
 class URLHelper
 {
 
+    /**
+     * @param $string
+     * @return mixed|string
+     */
     public static function getURLSafeString($string)
     {
         // Lower string
