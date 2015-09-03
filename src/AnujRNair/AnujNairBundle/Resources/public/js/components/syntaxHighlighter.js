@@ -30,7 +30,7 @@ define([
         }
 
         // Load the line numbers plugin
-        if (loadPlugins) {
+        if (loadPlugins && elements.length > 0) {
             promises.push(
                 $.ajax('/bower_components/prism/plugins/line-numbers/prism-line-numbers.min.js', {
                     method: 'GET',

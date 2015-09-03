@@ -36,11 +36,14 @@ class BlogController extends Controller
         $noPerPage = min($request->get('noPerPage', 10), 100);
 
         $em = $this->getDoctrine()->getManager();
-        $blogPosts = $em->getRepository('AnujNairBundle:Blog')
+        $blogPosts = $em
+            ->getRepository('AnujNairBundle:Blog')
             ->getBlogPosts($page, $noPerPage);
-        $archive = $em->getRepository('AnujNairBundle:Blog')
+        $archive = $em
+            ->getRepository('AnujNairBundle:Blog')
             ->getBlogPostsByYearMonth(1, 20);
-        $tagSummary = $em->getRepository('AnujNairBundle:Tag')
+        $tagSummary = $em
+            ->getRepository('AnujNairBundle:Tag')
             ->getTagSummary();
 
         return [
@@ -69,7 +72,8 @@ class BlogController extends Controller
         $em = $this->getDoctrine()->getManager();
         try {
             /** @var Blog $blog */
-            $blog = $em->getRepository('AnujNairBundle:Blog')
+            $blog = $em
+                ->getRepository('AnujNairBundle:Blog')
                 ->getBlogById($id);
 
             // Make sure URL points to correct place for SEO purposes
@@ -94,14 +98,20 @@ class BlogController extends Controller
             $em->flush();
 
             return $this->redirect($this->generateUrl('_an_blog_article', [
-                'id'    => $blog->getId(),
-                'title' => $blog->getUrlSafeTitle()
-            ]) . '#comment' . $comment->getId());
+                    'id'    => $blog->getId(),
+                    'title' => $blog->getUrlSafeTitle()
+                ]) . '#comment' . $comment->getId()
+            );
         }
 
+        $similarBlogPosts = $em
+            ->getRepository('AnujNairBundle:Blog')
+            ->getSimilarBlogPosts($id, 1, 20);
+
         return [
-            'blog'        => $blog,
-            'commentForm' => $commentForm->createView()
+            'blog'             => $blog,
+            'similarBlogPosts' => $similarBlogPosts,
+            'commentForm'      => $commentForm->createView()
         ];
     }
 
@@ -124,7 +134,8 @@ class BlogController extends Controller
 
         try {
             /** @var Tag $tag */
-            $tag = $em->getRepository('AnujNairBundle:Tag')
+            $tag = $em
+                ->getRepository('AnujNairBundle:Tag')
                 ->getTagById($tagId);
 
             // Make sure URL points to correct place for SEO purposes
@@ -139,11 +150,14 @@ class BlogController extends Controller
             throw $this->createNotFoundException('I couldn\'t find that tag!');
         }
 
-        $blogPosts = $em->getRepository('AnujNairBundle:Blog')
+        $blogPosts = $em
+            ->getRepository('AnujNairBundle:Blog')
             ->getBlogPostsByTagId($tag->getId(), $page, $noPerPage);
-        $archive = $em->getRepository('AnujNairBundle:Blog')
+        $archive = $em
+            ->getRepository('AnujNairBundle:Blog')
             ->getBlogPostsByYearMonth(1, 20);
-        $tagSummary = $em->getRepository('AnujNairBundle:Tag')
+        $tagSummary = $em
+            ->getRepository('AnujNairBundle:Tag')
             ->getTagSummary();
 
         return [

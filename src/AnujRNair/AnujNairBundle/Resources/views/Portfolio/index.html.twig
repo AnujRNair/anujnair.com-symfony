@@ -3,4 +3,20 @@
 {% block activeRoute '_an_portfolio_index' %}
 
 {% block content %}
+    <div class="row">
+        <section class="col-md-8">
+            <h1 class="title-header">My Portfolio and Development Work</h1>
+
+            <div class="row">
+                {% for portfolio in portfolioList %}
+                    {% include 'AnujNairBundle:Portfolio/Component:smallTile.html.twig' with {
+                        'portfolio': portfolio
+                    } %}
+                {% endfor %}
+            </div>
+        </section>
+        <aside class="col-md-4">
+
+        </aside>
+    </div>
 {% endblock %}

@@ -1,0 +1,31 @@
+<div class="col-sm-6">
+    <article class="portfolio-item-small">
+        <div class="media">
+            <div class="media-top text-center">
+                <a href="#">
+                    <img class="img-responsive img-rounded" src="{{ portfolio.getImage }}">
+                </a>
+            </div>
+            <div class="media-body">
+                <h2 class="media-heading">
+                    <a href="#">
+                        {{ portfolio.getName }}
+                    </a>
+                </h2>
+
+                <div class="project-detail">
+                    <span class="icon-globe"></span>
+                    {{ portfolio.getTypeAsString }}
+                </div>
+                <div class="project-detail">
+                    <span class="icon-clock"></span>
+                    Created 31st Jan 2015
+                </div>
+                <div class="project-detail">
+                    <span class="icon-link"></span>
+                    <a href="#">{{ portfolio.getName }}</a>
+                </div>
+            </div>
+        </div>
+    </article>
+</div>

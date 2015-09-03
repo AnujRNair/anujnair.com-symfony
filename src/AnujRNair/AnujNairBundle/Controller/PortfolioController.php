@@ -20,7 +20,15 @@ class PortfolioController extends Controller
      */
     public function indexAction()
     {
-        return [];
+        $em = $this->getDoctrine()->getManager();
+
+        $portfolioList = $em
+            ->getRepository('AnujNairBundle:Portfolio')
+            ->getPortfolioList(1, 50);
+
+        return [
+            'portfolioList' => $portfolioList
+        ];
     }
 
 }

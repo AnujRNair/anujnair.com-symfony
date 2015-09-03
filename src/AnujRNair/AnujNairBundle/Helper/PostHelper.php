@@ -26,35 +26,56 @@ class PostHelper
         $bbCodeRegex = '/\[code lang(?:uage)?=([\"\'])(.+?)(?:\1)\](.+?)\[\/code\]([\r\n]+)?/ims';
         preg_match_all($bbCodeRegex, $string, $fullMatches);
 
-        $bbFind = [
-            '/\[b\](.*?)\[\/b\]/is',
-            '/\[i\](.*?)\[\/i\]/is',
-            '/\[u\](.*?)\[\/u\]/is',
-            '/(?:\r\n)?\[subheader\](.*?)\[\/subheader\](?:[\r\n]+)?/is',
-            '/\[url\=([\"\'])(.*?)\1\](.*?)\[\/url\]/is',
-            '/\[img(?:[\s]+)?(?:width=([\'\"])(\d+)\1)?(?:[\s]+)?(?:height=([\'\"])(\d+)\3)?\](.*?)\[\/img\]/is',
-            '/\[list\][\r\n]+(.*?)\[\/list\]/is',
-            '/\[\*\](.*?)[\r\n]+/i',
-            '/\[>](.*?)\[<\][\r\n]+/is',
-            '/[\r\n]+\[code/',      #Needed to remove leading line breaks :(
-            '/\[\/code\][\r\n]+/'   #Needed to remove trailing line breaks :(
-        ];
-        $bbReplace = [
-            '<strong>$1</strong>',
-            '<em>$1</em>',
-            '<u>$1</u>',
-            '<h4>$1</h4>',
-            '<a href="$2">$3</a>',
-            '<img src="$5" style="max-width: ${2}px; max-height:${4}px;" />',
-            '<ul>$1</ul>',
-            '<li>$1</li>',
-            '<blockquote>$1</blockquote>',
-            '[code',
-            '[/code]'
+        $patternAndCallbacks = [
+            '/\[b\](.*?)\[\/b\]/is' => function ($matches) {
+                return "<strong>$matches[1]</strong>";
+            },
+            '/\[i\](.*?)\[\/i\]/is' => function ($matches) {
+                return "<em>$matches[1]</em>";
+            },
+            '/\[u\](.*?)\[\/u\]/is' => function ($matches) {
+                return "<u>$matches[1]</u>";
+            },
+            '/(?:\r\n)?\[subheader\](.*?)\[\/subheader\](?:[\r\n]+)?/i' => function ($matches) {
+                return "<h4>$matches[1]</h4>";
+            },
+            '/\[url(?:\=([\"\'])(.*?)\1)?\](.*?)\[\/url\]/i' => function ($matches) {
+                if (strlen($matches[2]) > 0) {
+                    return "<a href='$matches[2]'>$matches[3]</a>";
+                } else {
+                    return "<a href='$matches[3]'>$matches[3]</a>";
+                }
+            },
+            '/\[img(?:[\s]+)?(?:width=([\'\"])(\d+)\1)?(?:[\s]+)?(?:height=([\'\"])(\d+)\3)?\](.*?)\[\/img\]/i' => function ($matches) {
+                if (strlen($matches[2]) > 0 && strlen($matches[4]) > 0) {
+                    return "<img src='$matches[5]' style='max-width: $matches[2]px; max-height:$matches[4]px;' />";
+                } elseif (strlen($matches[2]) > 0) {
+                    return "<img src='$matches[5]' style='max-width: $matches[2]px;' />";
+                } elseif (strlen($matches[4]) > 0) {
+                    return "<img src='$matches[5]' style='max-height: $matches[4]px;' />";
+                } else {
+                    return "<img src='$matches[5]' />";
+                }
+            },
+            '/\[list\][\r\n]+(.*?)\[\/list\]/is' => function ($matches) {
+                return "<ul>$matches[1]</ul>";
+            },
+            '/\[\*\](.*?)[\r\n]+/i' => function ($matches) {
+                return "<li>$matches[1]</li>";
+            },
+            '/\[quote\](.*?)\[\/quote\][\r\n]+/ims' => function ($matches) {
+                return "<blockquote>$matches[1]</blockquote>";
+            },
+            '/[\r\n]+\[code/' => function () {
+                return '[code';
+            },
+            '/\[\/code\][\r\n]+/' => function () {
+                return '[/code]';
+            }
         ];
 
         $string = htmlspecialchars($string, ENT_NOQUOTES | ENT_HTML5);
-        $converted = preg_replace("/[\r]/", '<br>', preg_replace($bbFind, $bbReplace, $string));
+        $converted = preg_replace("/[\r]/", '<br>', self::preg_replace_callback_array($patternAndCallbacks, $string));
 
         // Match and convert code blocks
         for ($i = 0; $i < count($fullMatches[0]); $i++) {
@@ -163,6 +184,25 @@ class PostHelper
             }
         }
         return $iHtml;
+    }
+
+    /**
+     * Implementation of the PHP7 preg_replace_callback_array function
+     * @param array $patterns_and_callbacks
+     * @param string $subject
+     * @param int $limit
+     * @param int $count
+     * @return null|array|string
+     */
+    protected static function preg_replace_callback_array(array $patterns_and_callbacks, $subject, $limit = -1, &$count = null)
+    {
+        foreach ($patterns_and_callbacks as $pattern => $callback) {
+            $subject = preg_replace_callback($pattern, $callback, $subject, $limit, $count);
+            if ($subject === null) {
+                return null;
+            }
+        }
+        return $subject;
     }
 
 }

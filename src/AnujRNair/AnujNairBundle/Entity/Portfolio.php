@@ -14,6 +14,10 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Portfolio
 {
+
+    const TYPE_WEBSITE = 1;
+    const TYPE_PROJECT = 2;
+
     /**
      * @var integer
      * @ORM\Column(name="id", type="integer", options={"unsigned" = true})
@@ -35,10 +39,10 @@ class Portfolio
     private $name;
 
     /**
-     * @var string
-     * @ORM\Column(name="abstract", type="string", length=300)
+     * @var int
+     * @ORM\Column(name="type", type="smallint")
      */
-    private $abstract;
+    private $type;
 
     /**
      * @var string
@@ -86,7 +90,7 @@ class Portfolio
     }
 
     /**
-     * Get id of pprtfolio
+     * Get id of portfolio
      * @return integer
      */
     public function getId()
@@ -115,23 +119,44 @@ class Portfolio
     }
 
     /**
-     * Set abstract
-     * @param string $abstract
+     * Set type
+     * @param string $type
      * @return Portfolio
      */
-    public function setAbstract($abstract)
+    public function setType($type)
     {
-        $this->abstract = $abstract;
+        if (!in_array($type, [self::TYPE_PROJECT, self::TYPE_WEBSITE])) {
+            throw new \InvalidArgumentException('Trying to set unrecognised portfolio type');
+        }
+        $this->type = $type;
         return $this;
     }
 
     /**
-     * Get abstract
+     * Get type
      * @return string
      */
-    public function getAbstract()
+    public function getType()
     {
-        return $this->abstract;
+        if (!in_array($this->type, [self::TYPE_PROJECT, self::TYPE_WEBSITE])) {
+            throw new \RuntimeException('Trying to get unrecognised portfolio type');
+        }
+        return $this->type;
+    }
+
+    /**
+     * Get type as a string
+     * @return string
+     */
+    public function getTypeAsString()
+    {
+        switch ($this->getType()) {
+            case 1:
+                return 'Website';
+            case 2:
+                return 'Project';
+        }
+        throw new \RuntimeException('Trying to get unrecognised portfolio type');
     }
 
     /**
