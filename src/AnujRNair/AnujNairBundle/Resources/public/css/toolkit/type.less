@@ -5,6 +5,13 @@ blockquote {
     padding: 8px 12px;
 }
 
+/*
+    h1 = main title header
+    h2 = sub / section title headers
+    h3 = metadata headers
+    h4 = bb code subheaders and comment headers
+*/
+
 .title-header {
     font-size: @font-size-h3;
     border-bottom: 1px dotted #e6e6e6;
@@ -17,5 +24,14 @@ blockquote {
     a:active {
         color: @gray-dark;
         text-decoration: none;
+    }
+}
+
+.metadata {
+    font-size: @font-size-h6;
+    margin: 12px 0;
+
+    .tag {
+        margin-left: 5px;
     }
 }

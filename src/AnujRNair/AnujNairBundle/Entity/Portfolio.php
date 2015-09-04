@@ -2,6 +2,8 @@
 
 namespace AnujRNair\AnujNairBundle\Entity;
 
+use AnujRNair\AnujNairBundle\Helper\PostHelper;
+use AnujRNair\AnujNairBundle\Helper\URLHelper;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -119,6 +121,15 @@ class Portfolio
     }
 
     /**
+     * Get URL safe title
+     * @return string
+     */
+    public function getUrlSafeName()
+    {
+        return URLHelper::getURLSafeString($this->name);
+    }
+
+    /**
      * Set type
      * @param string $type
      * @return Portfolio
@@ -171,12 +182,21 @@ class Portfolio
     }
 
     /**
-     * Get contents
+     * Get raw contents which has not been parsed
+     * @return string
+     */
+    public function getRawContents()
+    {
+        return $this->contents;
+    }
+
+    /**
+     * Get contents which has been parsed
      * @return string
      */
     public function getContents()
     {
-        return $this->contents;
+        return PostHelper::parseBBCode($this->contents);
     }
 
     /**

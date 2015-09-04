@@ -150,11 +150,11 @@ class BlogRepository extends EntityRepository
             ->getResult();
 
         $results = [];
-        $maxTagCount = $blogPosts[0]['tagCount'];
         if (count($blogPosts) > 0) {
+            $maxTagCount = $blogPosts[0]['tagCount'];
             foreach ($blogPosts as $postArray) {
                 if ($postArray['tagCount'] === $maxTagCount) {
-                    $results['Relevant Blog Posts'][] = $postArray[0];
+                    $results['Similar Blog Posts'][] = $postArray[0];
                 } else {
                     $results['Extra Reading'][] = $postArray[0];
                 }

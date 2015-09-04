@@ -1,0 +1,31 @@
+<section class="col-md-8">
+    <article class="portfolio-article">
+        <h1 class="title-header">{{ portfolio.getName }}</h1>
+
+        <div class="portfolio-image">
+            <img src="{{ portfolio.getImage }}" class="img-responsive img-rounded">
+        </div>
+        <h3 class="metadata">
+            <span class="icon-globe"></span>
+            {{ portfolio.getTypeAsString }}
+        </h3>
+        <h3 class="metadata">
+            <span class="icon-clock"></span>
+            Created <time datetime="{{ portfolio.getDateCreated|date('Y-m-d H:i:s') }}">{{ portfolio.getDateCreated|date('jS M, Y') }}</time>
+        </h3>
+        <h3 class="metadata">
+            <span class="icon-tags"></span>
+            Tags:
+            {% for tag in portfolio.getTags %}
+                <a href="{{ path('_an_portfolio_tag', {tagId: tag.getId, name: tag.getUrlSafeName}) }}" class="tag">{{ tag.getName }}</a>
+            {% endfor %}
+        </h3>
+        <h3 class="metadata">
+            <span class="icon-link"></span>
+            <a href="{{ portfolio.getLink }}">{{ portfolio.getName }}</a>
+        </h3>
+        <div class="portfolio-contents">
+            {{ portfolio.getContents }}
+        </div>
+    </article>
+</section>

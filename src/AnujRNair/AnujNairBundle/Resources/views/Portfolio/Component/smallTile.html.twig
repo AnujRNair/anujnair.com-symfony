@@ -2,36 +2,42 @@
     <article class="portfolio-item-small">
         <div class="media">
             <div class="media-top text-center">
-                <a href="#">
+                <a href="{{ path('_an_portfolio_article', {
+                    id: portfolio.getId,
+                    name: portfolio.getUrlSafeName
+                }) }}">
                     <img class="img-responsive img-rounded" src="{{ portfolio.getImage }}">
                 </a>
             </div>
             <div class="media-body">
-                <h2 class="media-heading">
-                    <a href="#">
+                <h1 class="media-heading">
+                    <a href="{{ path('_an_portfolio_article', {
+                        id: portfolio.getId,
+                        name: portfolio.getUrlSafeName
+                    }) }}">
                         {{ portfolio.getName }}
                     </a>
-                </h2>
+                </h1>
 
-                <div class="project-detail">
+                <h3 class="metadata">
                     <span class="icon-globe"></span>
                     {{ portfolio.getTypeAsString }}
-                </div>
-                <div class="project-detail">
+                </h3>
+                <h3 class="metadata">
                     <span class="icon-clock"></span>
                     Created <time datetime="{{ portfolio.getDateCreated|date('Y-m-d H:i:s') }}">{{ portfolio.getDateCreated|date('jS M, Y') }}</time>
-                </div>
-                <div class="project-detail">
+                </h3>
+                <h3 class="metadata">
                     <span class="icon-tags"></span>
                     Tags:
                     {% for tag in portfolio.getTags %}
                         <a href="{{ path('_an_portfolio_tag', {tagId: tag.getId, name: tag.getUrlSafeName}) }}" class="tag">{{ tag.getName }}</a>
                     {% endfor %}
-                </div>
-                <div class="project-detail">
+                </h3>
+                <h3 class="metadata">
                     <span class="icon-link"></span>
-                    <a href="#">{{ portfolio.getName }}</a>
-                </div>
+                    <a href="{{ portfolio.getLink }}">{{ portfolio.getName }}</a>
+                </h3>
             </div>
         </div>
     </article>

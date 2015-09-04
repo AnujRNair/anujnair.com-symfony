@@ -30,7 +30,7 @@
         <aside class="col-md-4 blog-aside">
             <div class="row">
                 <div class="col-md-12 col-sm-8">
-                    <h3 class="title-header">Past Blog Entries</h3>
+                    <h2 class="title-header">Past Blog Entries</h2>
                     {% include 'AnujNairBundle:Components:multiDimensionalList.html.twig' with {
                         multiList: archive,
                         itemLinkUrl: '_an_blog_article',
@@ -41,8 +41,8 @@
                     } %}
                 </div>
                 <div class="col-md-12 col-sm-4">
-                    <h3 class="title-header">Blog Tags</h3>
-                    <ul class="tag-summary">
+                    <h2 class="title-header">Blog Tags</h2>
+                    <ul class="list">
                         {% for tagData in tagSummary %}
                             <li>
                                 <span class="icon-tag"></span>

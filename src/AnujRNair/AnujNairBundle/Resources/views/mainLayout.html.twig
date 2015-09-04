@@ -10,7 +10,7 @@
             {{ render(path('_an_header_index', {activeRoute: block('activeRoute')})) }}
         {% endblock %}
 
-        <div class="container content-container">
+        <div class="container content-container {% block pageCss %}{% endblock %}">
             {% block content %}
             {% endblock %}
         </div>

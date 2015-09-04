@@ -8,7 +8,8 @@
                         <span class="{{ itemIcon }} pull-left"></span>
                         <a href="{{ path(itemLinkUrl, {
                             'id': attribute(item, itemLinkIdAttr),
-                            'title': attribute(item, itemLinkTitleAttr),
+                            'title': (itemLinkTitleAttr is defined ? attribute(item, itemLinkTitleAttr) : null),
+                            'name': (itemLinkNameAttr is defined ? attribute(item, itemLinkNameAttr) : null)
                         }) }}">
                             {{ attribute(item, itemNameAttr) }}
                         </a>
