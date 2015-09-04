@@ -44,7 +44,7 @@ class BlogController extends Controller
             ->getBlogPostsByYearMonth(1, 20);
         $tagSummary = $em
             ->getRepository('AnujNairBundle:Tag')
-            ->getTagSummary();
+            ->getBlogTagSummary();
 
         return [
             'page'       => $page,
@@ -140,9 +140,9 @@ class BlogController extends Controller
 
             // Make sure URL points to correct place for SEO purposes
             if ($name !== $tag->getUrlSafeName()) {
-                return $this->redirect($this->generateUrl('_an_blog_article', [
-                    'id'    => $tag->getId(),
-                    'title' => $tag->getUrlSafeName()
+                return $this->redirect($this->generateUrl('_an_blog_tag', [
+                    'tagId' => $tag->getId(),
+                    'name'  => $tag->getUrlSafeName()
                 ]), 301);
             }
 
@@ -158,7 +158,7 @@ class BlogController extends Controller
             ->getBlogPostsByYearMonth(1, 20);
         $tagSummary = $em
             ->getRepository('AnujNairBundle:Tag')
-            ->getTagSummary();
+            ->getBlogTagSummary();
 
         return [
             'page'       => $page,

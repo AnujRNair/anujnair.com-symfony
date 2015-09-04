@@ -19,7 +19,14 @@
                 </div>
                 <div class="project-detail">
                     <span class="icon-clock"></span>
-                    Created 31st Jan 2015
+                    Created <time datetime="{{ portfolio.getDateCreated|date('Y-m-d H:i:s') }}">{{ portfolio.getDateCreated|date('jS M, Y') }}</time>
+                </div>
+                <div class="project-detail">
+                    <span class="icon-tags"></span>
+                    Tags:
+                    {% for tag in portfolio.getTags %}
+                        <a href="{{ path('_an_portfolio_tag', {tagId: tag.getId, name: tag.getUrlSafeName}) }}" class="tag">{{ tag.getName }}</a>
+                    {% endfor %}
                 </div>
                 <div class="project-detail">
                     <span class="icon-link"></span>

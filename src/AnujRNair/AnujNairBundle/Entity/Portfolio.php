@@ -309,6 +309,19 @@ class Portfolio
     }
 
     /**
+     * Get Tags for the portfolio
+     * @return Tag[]
+     */
+    public function getTags()
+    {
+        $tags = [];
+        foreach ($this->tagMap as $map) {
+            $tags[] = $map->getTag();
+        }
+        return $tags;
+    }
+
+    /**
      * @ORM\PrePersist
      */
     public function prePersist()

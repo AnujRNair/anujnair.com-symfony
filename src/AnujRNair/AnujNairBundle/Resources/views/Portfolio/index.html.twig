@@ -16,7 +16,12 @@
             </div>
         </section>
         <aside class="col-md-4">
-
+            <div class="row">
+                {% include 'AnujNairBundle:Portfolio/Component:about.html.twig' with {
+                    'tagSummary': tagSummary
+                } %}
+                {% include 'AnujNairBundle:Portfolio/Component:moreInfo.html.twig' %}
+            </div>
         </aside>
     </div>
 {% endblock %}

@@ -32,10 +32,10 @@ class TagRepository extends EntityRepository
     }
 
     /**
-     * Get a tags summary
+     * Get a summary of tags for blog posts
      * @return array
      */
-    public function getTagSummary()
+    public function getBlogTagSummary()
     {
         return $this->getEntityManager()
             ->createQuery('
@@ -53,6 +53,33 @@ class TagRepository extends EntityRepository
                     t.name
                 order by t.name asc
             ')
+            ->getResult();
+    }
+
+    /**
+     * Get a summary of tags for portfolio sites
+     * @param int $limit
+     * @return array
+     */
+    public function getPortfolioTagSummary($limit)
+    {
+        return $this->getEntityManager()
+            ->createQuery('
+                select
+                    t.id,
+                    t.name,
+                    count(t.id) as tagCount
+                from AnujNairBundle:Tag as t
+                inner join t.tagMap as tm
+                inner join tm.portfolio as p
+                where t.deleted = 0
+                and p.deleted = 0
+                group by
+                    t.id,
+                    t.name
+                order by tagCount desc
+            ')
+            ->setMaxResults($limit)
             ->getResult();
     }
 
