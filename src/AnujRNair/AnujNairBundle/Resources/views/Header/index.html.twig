@@ -9,7 +9,7 @@
                             <div class="media-left">
                                 <div class="avatar">
                                     <a href="{{ url('_an_blog_index') }}">
-                                        <img class="img-responsive" src="{{ asset('bundles/anujnair/images/anujnair/Avatar.jpg') }}" />
+                                        <img class="img-responsive" src="{{ asset('bundles/anujnair/images/anujnair/anuj-avatar.jpg') }}" />
                                     </a>
                                 </div>
                             </div>
@@ -27,7 +27,7 @@
                                 </p>
                                 <p>
                                     <span class="icon-mail"></span>
-                                    <a href="{{ url('_an_contact_index') }}">Contact Me</a>
+                                    <a href="{{ url('_an_about_index') }}">Contact Me</a>
                                 </p>
                             </div>
                         </div>
@@ -38,6 +38,7 @@
                                 {% for section in nav.getSections %}
                                     <li{% if nav.isActive(section) %} class="active"{% endif %}>
                                         <a href="{{ url(section['route']) }}">
+                                            <span class="{{ section['icon'] }}"></span>
                                             {{ section['name'] }}
                                         </a>
                                     </li>

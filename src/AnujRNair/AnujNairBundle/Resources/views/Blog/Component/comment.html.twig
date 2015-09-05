@@ -4,7 +4,7 @@
             <div class="media-left">
                 <div class="avatar">
                     {% if comment.getUser %}
-                        <img class="img-responsive" src="{{ asset('bundles/anujnair/images/' ~ comment.getUser.getUserName|lower ~ '/Avatar.jpg') }}" />
+                        <img class="img-responsive" src="{{ asset('bundles/anujnair/images/' ~ comment.getUser.getUserName|lower ~ '/' ~ comment.getUser.getFirstName|lower ~ '-avatar.jpg') }}" />
                     {% else %}
                         <span class="icon-user"></span>
                     {% endif %}

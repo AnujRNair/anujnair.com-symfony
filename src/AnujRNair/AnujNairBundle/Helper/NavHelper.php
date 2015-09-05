@@ -30,13 +30,15 @@ class NavHelper
     /**
      * @param string $route
      * @param string $name
+     * @param string $icon
      * @return $this
      */
-    public function add($route, $name)
+    public function add($route, $name, $icon)
     {
         $this->sections[] = [
             'route' => $route,
-            'name' => $name
+            'name' => $name,
+            'icon' => $icon
         ];
         return $this;
     }

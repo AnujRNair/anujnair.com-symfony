@@ -25,10 +25,6 @@ _an_about:
     resource: "@AnujNairBundle/Controller/AboutController.php"
     type:     annotation
 
-_an_contact:
-    resource: "@AnujNairBundle/Controller/ContactController.php"
-    type:     annotation
-
 _an_admin:
     resource: "@AnujNairBundle/Controller/AdminController.php"
     type:     annotation

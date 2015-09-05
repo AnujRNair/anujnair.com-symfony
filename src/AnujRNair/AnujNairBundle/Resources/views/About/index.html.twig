@@ -1,17 +1,45 @@
 {% extends 'AnujNairBundle::mainLayout.html.twig' %}
 
 {% block activeRoute '_an_about_index' %}
+{% block pageCss 'about' %}
 
 {% block content %}
     <div class="row">
         <section class="col-md-8">
-            <h1 class="title-header">Title Here</h1>
-
-            <div class="row">
+            <div class="jumbotron">
+                <h1>This is Anuj Nair <span class="icon-right"></span></h1>
+                <h2>This is his bio <span class="icon-down"></span></h2>
+                <div class="business-card">
+                    <div class="card-name">Anuj Nair</div>
+                    <div class="card-profession">Software Engineer</div>
+                    <div class="card-detail">
+                        <span class="icon-github"></span>
+                        <a href="http://github.com/AnujRNair">http://github.com/AnujRNair</a>
+                    </div>
+                    <div class="card-detail">
+                        <span class="icon-linkedin"></span>
+                        <a href="https://www.linkedin.com/in/anujrnair">https://www.linkedin.com/in/anujrnair</a>
+                    </div>
+                    <div class="card-detail">
+                        <span class="icon-globe"></span>
+                        <a href="http://anujnair.com">http://anujnair.com</a>
+                    </div>
+                    <div class="card-detail">
+                        <span class="icon-location"></span>
+                        San Francisco Bay Area, California
+                    </div>
+                </div>
             </div>
         </section>
         <aside class="col-md-4">
-
+            <div class="row">
+                <div class="col-md-12 col-sm-8">
+                    <h2 class="title-header">Let's Connect!</h2>
+                </div>
+                <div class="col-md-12 col-sm-4">
+                    {% include 'AnujNairBundle:About/Components:findMeLinks.html.twig' %}
+                </div>
+            </div>
         </aside>
     </div>
 {% endblock %}
