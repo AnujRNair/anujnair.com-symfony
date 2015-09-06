@@ -1,16 +1,16 @@
 <?php
 
-namespace AnujRNair\AnujNairBundle\Forms\Blog;
+namespace AnujRNair\AnujNairBundle\Forms\About;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Class CommentType
+ * Class ContactType
  * @package AnujRNair\AnujNairBundle\Forms\Blog
  */
-class CommentType extends AbstractType
+class ContactType extends AbstractType
 {
 
     /**
@@ -31,20 +31,43 @@ class CommentType extends AbstractType
                     'maxlength'   => 100
                 ]
             ])
-            ->add('comment', 'textarea', [
-                'label'      => 'Comment',
+            ->add('email', 'email', [
+                'label'      => 'Email',
                 'label_attr' => [
                     'class' => 'sr-only'
                 ],
                 'required'   => true,
                 'attr'       => [
-                    'placeholder' => 'Write comment here',
-                    'maxlength'   => 8000,
-                    'rows'        => 5
+                    'placeholder' => 'Email',
+                    'maxlength'   => 200
                 ]
             ])
-            ->add('save', 'submit', [
-                'label' => 'Comment',
+            ->add('subject', 'text', [
+                'label'      => 'Subject',
+                'label_attr' => [
+                    'class' => 'sr-only'
+                ],
+                'required'   => true,
+                'attr'       => [
+                    'placeholder' => 'Subject',
+                    'maxlength'   => 200
+                ]
+            ])
+            ->add('contents', 'textarea', [
+                'label'      => 'Contents',
+                'label_attr' => [
+                    'class' => 'sr-only'
+                ],
+                'required'   => true,
+                'attr'       => [
+                    'placeholder' => 'Write email here',
+                    'maxlength'   => 2000,
+                    'rows'        => 4
+                ]
+            ])
+            ->add('send', 'submit', [
+                'label' => 'Send',
+                'icon' => 'icon-paper-plane',
                 'attr'  => [
                     'class' => 'btn btn-success pull-right'
                 ]
@@ -57,7 +80,7 @@ class CommentType extends AbstractType
      */
     public function getName()
     {
-        return 'anujnair_comment_form';
+        return 'anujnair_contact_form';
     }
 
     /**
@@ -66,7 +89,7 @@ class CommentType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => 'AnujRNair\AnujNairBundle\Entity\Comment',
+            'data_class' => 'AnujRNair\AnujNairBundle\Entity\Form\Contact'
         ]);
     }
 

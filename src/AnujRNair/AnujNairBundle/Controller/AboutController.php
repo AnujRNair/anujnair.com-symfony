@@ -2,6 +2,8 @@
 
 namespace AnujRNair\AnujNairBundle\Controller;
 
+use AnujRNair\AnujNairBundle\Entity\Form\Contact;
+use AnujRNair\AnujNairBundle\Forms\About\ContactType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -20,7 +22,12 @@ class AboutController extends Controller
      */
     public function indexAction()
     {
-        return [];
+        $contact = new Contact();
+        $contactForm = $this->createForm(new ContactType(), $contact);
+
+        return [
+            'contactForm' => $contactForm->createView()
+        ];
     }
 
 }

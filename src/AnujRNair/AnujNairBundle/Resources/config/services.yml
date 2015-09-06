@@ -1,4 +1,6 @@
 services:
-#    anuj_nair.example:
-#        class: AnujRNair\AnujNairBundle\Example
-#        arguments: [@service_id, "plain_value", %parameter%]
+
+    form.form_extention.icon:
+        class: AnujRNair\AnujNairBundle\Forms\SubmitTypeIconExtension
+        tags:
+            - { name: form.type_extension, alias: submit }
