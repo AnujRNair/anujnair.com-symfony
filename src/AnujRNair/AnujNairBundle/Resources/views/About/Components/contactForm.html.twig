@@ -1,0 +1,35 @@
+<h2 class="title-header">Let's Connect!</h2>
+{{ form_start(contactForm) }}
+    <div class="form-group">
+        {{ form_label(contactForm.name) }}
+        {{ form_errors(contactForm.name) }}
+        <div class="input-group">
+            <div class="input-group-addon icon-user"></div>
+            {{ form_widget(contactForm.name) }}
+        </div>
+    </div>
+    <div class="form-group">
+        {{ form_label(contactForm.email) }}
+        {{ form_errors(contactForm.email) }}
+        <div class="input-group">
+            <div class="input-group-addon icon-mail-alt"></div>
+            {{ form_widget(contactForm.email) }}
+        </div>
+    </div>
+    <div class="form-group">
+        {{ form_label(contactForm.subject) }}
+        {{ form_errors(contactForm.subject) }}
+        <div class="input-group">
+            <div class="input-group-addon icon-pencil"></div>
+            {{ form_widget(contactForm.subject) }}
+        </div>
+    </div>
+    <div class="form-group">
+        {{ form_label(contactForm.contents) }}
+        {{ form_errors(contactForm.contents) }}
+        <div class="input-group">
+            <div class="input-group-addon icon-comment"></div>
+            {{ form_widget(contactForm.contents) }}
+        </div>
+    </div>
+{{ form_end(contactForm) }}

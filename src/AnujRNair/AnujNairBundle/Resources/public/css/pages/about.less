@@ -1,14 +1,14 @@
 .about {
+    h1 {
+        font-size: @font-size-h2 * 1.2;
+    }
+    h2 {
+        font-size: @font-size-h3;
+    }
     .jumbotron {
         margin-top: 15px;
+        margin-bottom: 15px;
         background: url('/bundles/anujnair/images/anujnair/anuj-hero.png') 50% 0 no-repeat transparent;
-
-        h1 {
-            font-size: @font-size-h2 * 1.2;
-        }
-        h2 {
-            font-size: @font-size-h3;
-        }
     }
     .business-card {
         background-color: #ffffff;
@@ -25,6 +25,11 @@
             font-family: @headings-font-family;
             font-size: @font-size-h4;
             text-transform: uppercase;
+        }
+        .card-logo {
+            text-transform: none;
+            font-size: @font-size-base;
+            font-family: 'Delicious-Roman';
         }
         .card-profession {
             font-family: 'Delicious-Roman';
