@@ -1,36 +1,36 @@
 <h2 class="title-header" id="contact-me">Let's Connect!</h2>
 {% include '@AnujNair/Components/messages.html.twig' %}
 {{ form_start(contactForm) }}
-    <div class="form-group">
+    <div class="form-group{% if contactForm.children.name.vars.errors.count() > 0 %} has-error{% endif %}">
         {{ form_label(contactForm.name) }}
-        {{ form_errors(contactForm.name) }}
         <div class="input-group">
             <div class="input-group-addon icon-user"></div>
             {{ form_widget(contactForm.name) }}
         </div>
+        {{ form_errors(contactForm.name) }}
     </div>
-    <div class="form-group">
+    <div class="form-group{% if contactForm.children.email.vars.errors.count() > 0 %} has-error{% endif %}">
         {{ form_label(contactForm.email) }}
-        {{ form_errors(contactForm.email) }}
         <div class="input-group">
             <div class="input-group-addon icon-mail-alt"></div>
             {{ form_widget(contactForm.email) }}
         </div>
+        {{ form_errors(contactForm.email) }}
     </div>
-    <div class="form-group">
+    <div class="form-group{% if contactForm.children.subject.vars.errors.count() > 0 %} has-error{% endif %}">
         {{ form_label(contactForm.subject) }}
-        {{ form_errors(contactForm.subject) }}
         <div class="input-group">
             <div class="input-group-addon icon-pencil"></div>
             {{ form_widget(contactForm.subject) }}
         </div>
+        {{ form_errors(contactForm.subject) }}
     </div>
-    <div class="form-group">
+    <div class="form-group{% if contactForm.children.contents.vars.errors.count() > 0 %} has-error{% endif %}">
         {{ form_label(contactForm.contents) }}
-        {{ form_errors(contactForm.contents) }}
         <div class="input-group">
             <div class="input-group-addon icon-comment"></div>
             {{ form_widget(contactForm.contents) }}
         </div>
+        {{ form_errors(contactForm.contents) }}
     </div>
 {{ form_end(contactForm) }}

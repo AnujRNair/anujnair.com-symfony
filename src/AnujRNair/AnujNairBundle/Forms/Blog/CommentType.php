@@ -14,12 +14,26 @@ class CommentType extends AbstractType
 {
 
     /**
+     * @var string The url to post to
+     */
+    private $actionUrl;
+
+    /**
+     * @param string $actionUrl
+     */
+    public function __construct($actionUrl)
+    {
+        $this->actionUrl = $actionUrl;
+    }
+
+    /**
      * @param FormBuilderInterface $builder
      * @param array $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->setAction($this->actionUrl)
             ->add('name', 'text', [
                 'label'      => 'Name',
                 'label_attr' => [

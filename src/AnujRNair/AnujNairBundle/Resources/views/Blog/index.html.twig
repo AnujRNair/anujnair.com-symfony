@@ -1,12 +1,15 @@
 {% extends 'AnujNairBundle::mainLayout.html.twig' %}
 
+{% block htmlTitle 'Anuj Nair\'s Blog &raquo; AnujNair.com' %}
+{% block htmlDescription 'View Anuj Nair\'s Blog to see his latest findings and see what he has been recently working on.' %}
+{% block htmlKeywords 'Anuj, Anuj Nair, Blog, Article, Software, Engineering, Programming, PHP, SQL, JS, JavaScript' %}
 {% block activeRoute '_an_blog_index' %}
 {% block pageCss 'blog' %}
 
 {% block content %}
     <div class="row">
         <section class="col-md-8">
-            {% if blogPosts.iterator.count > 0 %}
+            {% if blogPosts|length > 0 %}
                 {% for blog in blogPosts %}
                     {% include 'AnujNairBundle:Blog/Component:article.html.twig' with {'blog': blog, mini: true} %}
                 {% endfor %}
@@ -20,10 +23,8 @@
                 </div>
             {% else %}
                 <div class="no-blog-posts">
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <h3>There doesn't seem to be any blog posts here <span class="icon-frown"></span></h3>
-                        </div>
+                    <div class="alert alert-info text-center">
+                        There doesn't seem to be any blog posts here <span class="icon-frown"></span>
                     </div>
                 </div>
             {% endif %}

@@ -94,6 +94,16 @@ class PostHelper
     }
 
     /**
+     * Remove all BB code from the string parsed in
+     * @param string $string
+     * @return string
+     */
+    public static function stripBBCode($string)
+    {
+        return preg_replace('/\[\/?[b|i|u|subheader|url|img|list|\*|quote|code|\r|\n]+.*?\]/i', '', $string);
+    }
+
+    /**
      * Safely shorten a string to a specific length, which includes HTML
      * @param string $string the html string to safe shorten
      * @param int $length the approximate length to shorten to

@@ -1,5 +1,8 @@
 {% extends 'AnujNairBundle::mainLayout.html.twig' %}
 
+{% block htmlTitle 'About Anuj Nair and Contact Info &raquo; AnujNair.com' %}
+{% block htmlDescription 'Learn about Anuj Nair and find his contact information here.' %}
+{% block htmlKeywords 'Anuj, Anuj Nair, Bio, Contact, Information, Skills, Interests, Tools, Tech, Connect' %}
 {% block activeRoute '_an_about_index' %}
 {% block pageCss 'about' %}
 
@@ -149,7 +152,8 @@
                 <div class="col-md-12 col-sm-8">
                     {% include '@AnujNair/About/Components/contactForm.html.twig' with {contactForm: contactForm} %}
                 </div>
-                <div class="col-md-12 col-sm-4">
+                <div class="col-md-12 col-sm-4" itemscope itemtype="http://schema.org/Organization">
+                    <link itemprop="url" href="http://anujnair.com">
                     {% include 'AnujNairBundle:About/Components:findMeLinks.html.twig' %}
                 </div>
             </div>

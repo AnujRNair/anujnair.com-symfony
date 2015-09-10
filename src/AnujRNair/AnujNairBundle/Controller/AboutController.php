@@ -25,8 +25,10 @@ class AboutController extends Controller
      */
     public function indexAction(Request $request)
     {
+        $actionUrl = $this->generateUrl('_an_about_index') . '#contact-me';
+
         $contact = new Contact();
-        $contactForm = $this->createForm(new ContactType(), $contact);
+        $contactForm = $this->createForm(new ContactType($actionUrl), $contact);
         $contactForm->handleRequest($request);
 
         if ($contactForm->isValid()) {
@@ -49,7 +51,7 @@ class AboutController extends Controller
                 );
             $this->get('mailer')->send($message);
             $this->addFlash('success', 'Thanks for your email! I\'ll be in contact shortly.');
-            return $this->redirect($this->generateUrl('_an_about_index') . '#contact-me');
+            return $this->redirect($actionUrl);
         }
 
         return [

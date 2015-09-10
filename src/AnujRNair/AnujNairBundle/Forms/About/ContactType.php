@@ -14,12 +14,26 @@ class ContactType extends AbstractType
 {
 
     /**
+     * @var string
+     */
+    private $actionUrl;
+
+    /**
+     * @param string $actionUrl
+     */
+    public function __construct($actionUrl)
+    {
+        $this->actionUrl = $actionUrl;
+    }
+
+    /**
      * @param FormBuilderInterface $builder
      * @param array $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->setAction($this->actionUrl)
             ->add('name', 'text', [
                 'label'      => 'Name',
                 'label_attr' => [

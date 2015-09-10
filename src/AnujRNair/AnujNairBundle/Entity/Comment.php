@@ -4,6 +4,7 @@ namespace AnujRNair\AnujNairBundle\Entity;
 
 use AnujRNair\AnujNairBundle\Helper\PostHelper;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Comment
@@ -39,12 +40,30 @@ class Comment
     /**
      * @var string
      * @ORM\Column(name="name", type="string", length=100, nullable=true)
+     * @Assert\NotBlank()
+     * @Assert\Length(
+     *  min="3",
+     *  max="100",
+     *  minMessage="Your name should have 3 characters or more",
+     *  maxMessage="Your name should have 100 characters or less"
+     * )
+     * @Assert\Regex(
+     *  "/^[a-z\'\-\s]+$/",
+     *  message="Your name should only contain alpha characters!"
+     * )
      */
     private $name;
 
     /**
      * @var string
      * @ORM\Column(name="comment", type="string", length=8000)
+     * @Assert\NotBlank()
+     * @Assert\Length(
+     *  min="10",
+     *  max="8000",
+     *  minMessage="Your comment should have 10 characters or more",
+     *  maxMessage="Your comment should have 8000 characters or less"
+     * )
      */
     private $comment;
 

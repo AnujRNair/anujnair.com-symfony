@@ -1,5 +1,14 @@
 {% extends 'AnujNairBundle::mainLayout.html.twig' %}
 
+{% block htmlTitle %}{{ portfolio.getName}} &raquo; Anuj Nair's Portfolio &raquo; AnujNair.com{% endblock %}
+{% block htmlDescription %}More information about the {{ portfolio.getName }} project by Anuj Nair{% endblock %}
+{% block htmlKeywords %}
+    {% set keywords = [portfolio.getName] %}
+    {% for tag in portfolio.getTags %}
+        {% set keywords = keywords|merge([tag.getName]) %}
+    {% endfor %}
+    {{ keywords|join(', ') }}
+{% endblock %}
 {% block activeRoute '_an_portfolio_index' %}
 {% block pageCss 'portfolio' %}
 

@@ -87,8 +87,13 @@ class BlogController extends Controller
             throw $this->createNotFoundException('I couldn\'t find that blog post!');
         }
 
+        $actionUrl = $this->generateUrl('_an_blog_article', [
+            'id'    => $blog->getId(),
+            'title' => $blog->getUrlSafeTitle()
+        ]) ;
+
         $comment = new Comment();
-        $commentForm = $this->createForm(new CommentType(), $comment);
+        $commentForm = $this->createForm(new CommentType($actionUrl . '#post-comment'), $comment);
         $commentForm->handleRequest($request);
 
         // Posting a comment, let's save it!
@@ -97,11 +102,7 @@ class BlogController extends Controller
             $em->persist($comment);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('_an_blog_article', [
-                    'id'    => $blog->getId(),
-                    'title' => $blog->getUrlSafeTitle()
-                ]) . '#comment' . $comment->getId()
-            );
+            return $this->redirect($actionUrl . '#comment' . $comment->getId());
         }
 
         $similarBlogPosts = $em

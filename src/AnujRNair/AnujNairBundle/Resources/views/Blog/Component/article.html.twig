@@ -1,5 +1,5 @@
-<article class="blog-article{% if mini %} mini{% endif %}">
-    <h1 class="title-header">
+<article class="blog-article{% if mini %} mini{% endif %}" itemscope itemtype="http://schema.org/Article">
+    <h1 class="title-header" itemprop="name">
         {% if mini %}
             <a href="{{ path('_an_blog_article', {id: blog.getId, title:blog.getUrlSafeTitle}) }}">
         {% endif %}
@@ -36,7 +36,14 @@
             {% endfor %}
         </h3>
     {% endif %}
-    <div class="blog-contents">
+    {% if mini == false %}
+        <h3 class="metadata">
+            <span class="icon-right-open"></span>
+            <a href="{{ url('_an_blog_index') }}">Blog</a> &gt;&gt;
+            {{ blog.getTitle }}
+        </h3>
+    {% endif %}
+    <div class="blog-contents" itemprop="description">
         {% if mini %}
             {{ blog.abstract|raw }}
         {% else %}

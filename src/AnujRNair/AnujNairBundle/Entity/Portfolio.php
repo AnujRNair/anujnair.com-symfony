@@ -17,9 +17,6 @@ use Doctrine\ORM\Mapping as ORM;
 class Portfolio
 {
 
-    const TYPE_WEBSITE = 1;
-    const TYPE_PROJECT = 2;
-
     /**
      * @var integer
      * @ORM\Column(name="id", type="integer", options={"unsigned" = true})
@@ -39,12 +36,6 @@ class Portfolio
      * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
-
-    /**
-     * @var int
-     * @ORM\Column(name="type", type="smallint")
-     */
-    private $type;
 
     /**
      * @var string
@@ -127,47 +118,6 @@ class Portfolio
     public function getUrlSafeName()
     {
         return URLHelper::getURLSafeString($this->name);
-    }
-
-    /**
-     * Set type
-     * @param string $type
-     * @return Portfolio
-     */
-    public function setType($type)
-    {
-        if (!in_array($type, [self::TYPE_PROJECT, self::TYPE_WEBSITE])) {
-            throw new \InvalidArgumentException('Trying to set unrecognised portfolio type');
-        }
-        $this->type = $type;
-        return $this;
-    }
-
-    /**
-     * Get type
-     * @return string
-     */
-    public function getType()
-    {
-        if (!in_array($this->type, [self::TYPE_PROJECT, self::TYPE_WEBSITE])) {
-            throw new \RuntimeException('Trying to get unrecognised portfolio type');
-        }
-        return $this->type;
-    }
-
-    /**
-     * Get type as a string
-     * @return string
-     */
-    public function getTypeAsString()
-    {
-        switch ($this->getType()) {
-            case 1:
-                return 'Website';
-            case 2:
-                return 'Project';
-        }
-        throw new \RuntimeException('Trying to get unrecognised portfolio type');
     }
 
     /**

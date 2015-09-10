@@ -179,6 +179,17 @@ class Blog
     }
 
     /**
+     * Get contents which has been parsed, but has no HTML
+     * @param int $length
+     * @param string $truncationIndicator
+     * @return string
+     */
+    public function getNoHTMLAbstract($length = 150, $truncationIndicator = '...')
+    {
+        return PostHelper::safeShorten(PostHelper::stripBBCode($this->contents), $length, $truncationIndicator);
+    }
+
+    /**
      * Get the abstract of a post, which has been parsed
      * @param int $length
      * @param string $truncationIndicator
