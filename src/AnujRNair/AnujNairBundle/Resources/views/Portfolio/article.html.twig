@@ -19,7 +19,7 @@
         } %}
         <aside class="col-md-4">
             <div class="row">
-                <div class="col-md-12 col-sm-8">
+                <div class="col-md-12 col-sm-6">
                     {% if similarPortfolioArticles|length > 0 %}
                         <h2 class="title-header">More of my work</h2>
                         {% include 'AnujNairBundle:Components:singleDimensionalList.html.twig' with {
@@ -31,6 +31,17 @@
                             itemIcon: 'icon-globe'
                         } %}
                     {% endif %}
+                </div>
+                <div class="col-md-12 col-sm-6">
+                    <h2 class="title-header">Latest Blog Entries</h2>
+                    {% include 'AnujNairBundle:Components:multiDimensionalList.html.twig' with {
+                        multiList: blogArchive,
+                        itemLinkUrl: '_an_blog_article',
+                        itemLinkIdAttr: 'getId',
+                        itemLinkTitleAttr: 'getUrlSafeTitle',
+                        itemNameAttr: 'getTitle',
+                        itemIcon: 'icon-calendar'
+                    } %}
                 </div>
             </div>
         </aside>

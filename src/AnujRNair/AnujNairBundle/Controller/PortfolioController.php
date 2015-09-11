@@ -72,9 +72,14 @@ class PortfolioController extends Controller
             ->getRepository('AnujNairBundle:Portfolio')
             ->getSimilarPortfolioArticles($id, 1, 20);
 
+        $blogArchive = $em
+            ->getRepository('AnujNairBundle:Blog')
+            ->getBlogPostsByYearMonth(1, 10);
+
         return [
             'portfolio'                => $portfolio,
-            'similarPortfolioArticles' => $similarPortfolio
+            'similarPortfolioArticles' => $similarPortfolio,
+            'blogArchive'              => $blogArchive
         ];
     }
 
