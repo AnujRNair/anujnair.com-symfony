@@ -18,7 +18,7 @@ class AdminController extends Controller
      */
     public function indexAction()
     {
-        var_dump('here'); die();
+        return [];
     }
 
 }

@@ -3,10 +3,10 @@
 namespace AnujRNair\AnujNairBundle\Listeners\Error;
 
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\Event\KernelEvent;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Templating\EngineInterface;
 
 class ExceptionHandler
@@ -20,22 +20,26 @@ class ExceptionHandler
     }
 
     /**
+     * Handle an exception and display the correct error message. Firstly check
+     * for a errorXXX.format.twig file, otherwise default to error.html.twig
      * @param GetResponseEvent $event
      * @param HttpException $exception
      * @param string $format
      */
     public function handle(GetResponseEvent $event, $exception, $format = 'html')
     {
-        $message = 'I\'m not sure what happened';
-        $statusCode = 500;
+        $message = $exception->getMessage();
         if ($exception instanceof HttpException) {
-            $message = $exception->getMessage();
             $statusCode = $exception->getStatusCode();
+        } elseif ($exception instanceof AccessDeniedException) {
+            $statusCode = $exception->getCode();
+        } else {
+            $statusCode = 500;
         }
 
         $baseDirectory = 'AnujNairBundle:Error:';
         try {
-            $renderedView = $this->template->render("{$baseDirectory}error{$exception->getStatusCode()}.$format.twig", [
+            $renderedView = $this->template->render("{$baseDirectory}error{$statusCode}.$format.twig", [
                 'statusCode' => $statusCode,
                 'message'    => $message
             ]);
@@ -46,13 +50,6 @@ class ExceptionHandler
             ]);
         }
         $response = Response::create($renderedView, $statusCode);
-        $event->stopPropagation();
-        $event->setResponse($response);
-    }
-
-    public function redirect(GetResponseEvent $event, $url)
-    {
-        $response = RedirectResponse::create($url);
         $event->stopPropagation();
         $event->setResponse($response);
     }

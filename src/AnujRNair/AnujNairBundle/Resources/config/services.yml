@@ -13,6 +13,6 @@ services:
     exception_listener:
         class: AnujRNair\AnujNairBundle\Listeners\Error\ExceptionListener
         tags:
-            - { name: kernel.event_listener, event: kernel.exception, method: onKernelException }
+            - { name: kernel.event_listener, event: kernel.exception, method: onKernelException, priority: 250 }
         arguments:
             - @exception.handler

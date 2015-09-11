@@ -24,8 +24,6 @@ class ExceptionListener
         $exception = $event->getException();
         $request = $event->getRequest();
 
-        //var_dump($exception); die();
-
         if ($exception instanceof NotFoundHttpException) {
             // 404
             $this->exceptionHandler->handle($event, $exception, $request->getRequestFormat());
