@@ -4,6 +4,7 @@ namespace AnujRNair\AnujNairBundle\Controller;
 
 use AnujRNair\AnujNairBundle\Entity\Blog;
 use AnujRNair\AnujNairBundle\Entity\Comment;
+use AnujRNair\AnujNairBundle\Entity\Guest;
 use AnujRNair\AnujNairBundle\Entity\Tag;
 use AnujRNair\AnujNairBundle\Forms\Blog\CommentType;
 use AnujRNair\AnujNairBundle\Helper\PostHelper;
@@ -90,7 +91,7 @@ class BlogController extends Controller
         $actionUrl = $this->generateUrl('_an_blog_article', [
             'id'    => $blog->getId(),
             'title' => $blog->getUrlSafeTitle()
-        ]) ;
+        ]);
 
         $comment = new Comment();
         $commentForm = $this->createForm(new CommentType($actionUrl . '#post-comment'), $comment);
@@ -98,8 +99,35 @@ class BlogController extends Controller
 
         // Posting a comment, let's save it!
         if ($commentForm->isValid()) {
+            // Get details that we will need
+            $ip = $request->getClientIp();
+            $userAgent = substr($request->headers->get('User-Agent'), 0, 255);
+            $datetime = new \DateTime();
+            $guest = $comment->getGuest();
+
+            // Try and find an existing guest
+            /** @var Guest $existingGuest */
+            $existingGuest = $em
+                ->getRepository('AnujNairBundle:Guest')
+                ->getGuestByNameIpUserAgent($guest->getName(), $ip, $userAgent);
+
+            if ($existingGuest !== null) {
+                $guest = $existingGuest;
+            } else {
+                $guest
+                    ->setDateCreated($datetime)
+                    ->setIpCreated($ip)
+                    ->setUserAgent($userAgent);
+            }
+            $guest
+                ->setDateLastVisited($datetime)
+                ->setIpLastVisited($ip);
+
+            // Save to the database
             $comment->setBlog($blog);
+            $comment->setGuest($guest);
             $em->persist($comment);
+            $em->persist($guest);
             $em->flush();
 
             return $this->redirect($actionUrl . '#comment' . $comment->getId());

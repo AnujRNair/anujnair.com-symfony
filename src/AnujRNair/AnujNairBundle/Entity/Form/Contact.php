@@ -64,6 +64,11 @@ class Contact
     private $contents;
 
     /**
+     * @var integer
+     */
+    private $ip;
+
+    /**
      * @return string
      */
     public function getName()
@@ -125,6 +130,22 @@ class Contact
     public function setContents($contents)
     {
         $this->contents = $contents;
+    }
+
+    /**
+     * @return int
+     */
+    public function getIp()
+    {
+        return long2ip($this->ip);
+    }
+
+    /**
+     * @param int $ip
+     */
+    public function setIp($ip)
+    {
+        $this->ip = ip2long($ip);
     }
 
 }

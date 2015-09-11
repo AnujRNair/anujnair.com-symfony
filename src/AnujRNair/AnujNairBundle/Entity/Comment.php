@@ -38,21 +38,11 @@ class Comment
     private $user;
 
     /**
-     * @var string
-     * @ORM\Column(name="name", type="string", length=100, nullable=true)
-     * @Assert\NotBlank()
-     * @Assert\Length(
-     *  min="3",
-     *  max="100",
-     *  minMessage="Your name should have 3 characters or more",
-     *  maxMessage="Your name should have 100 characters or less"
-     * )
-     * @Assert\Regex(
-     *  "/^[a-z\'\-\s]+$/",
-     *  message="Your name should only contain alpha characters!"
-     * )
+     * @var Guest
+     * @ORM\ManyToOne(targetEntity="AnujRNair\AnujNairBundle\Entity\Guest", inversedBy="comments")
+     * @ORM\JoinColumn(name="guest_id", referencedColumnName="id", nullable=true)
      */
-    private $name;
+    private $guest;
 
     /**
      * @var string
@@ -120,7 +110,7 @@ class Comment
      * @param User $user
      * @return Comment
      */
-    public function setUser($user)
+    public function setUser(User $user)
     {
         $this->user = $user;
         return $this;
@@ -136,23 +126,23 @@ class Comment
     }
 
     /**
-     * Set name
-     * @param string $name
+     * Set guest
+     * @param Guest $guest
      * @return Comment
      */
-    public function setName($name)
+    public function setGuest(Guest $guest)
     {
-        $this->name = $name;
+        $this->guest = $guest;
         return $this;
     }
 
     /**
-     * Get name
-     * @return string
+     * Get guest
+     * @return Guest
      */
-    public function getName()
+    public function getGuest()
     {
-        return $this->name;
+        return $this->guest;
     }
 
     /**

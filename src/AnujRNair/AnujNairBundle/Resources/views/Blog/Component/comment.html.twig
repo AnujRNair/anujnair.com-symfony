@@ -15,7 +15,7 @@
                     {% if comment.getUser %}
                         {{ comment.getUser.getFirstName ~ ' ' ~ comment.getUser.getLastName }}
                     {% else %}
-                        {{ comment.getName }}
+                        {{ comment.getGuest.getName }}
                     {% endif %}
                     <span>
                         commented on

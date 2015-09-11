@@ -34,17 +34,7 @@ class CommentType extends AbstractType
     {
         $builder
             ->setAction($this->actionUrl)
-            ->add('name', 'text', [
-                'label'      => 'Name',
-                'label_attr' => [
-                    'class' => 'sr-only'
-                ],
-                'required'   => true,
-                'attr'       => [
-                    'placeholder' => 'Name',
-                    'maxlength'   => 100
-                ]
-            ])
+            ->add('guest', new GuestType())
             ->add('comment', 'textarea', [
                 'label'      => 'Comment',
                 'label_attr' => [
@@ -80,7 +70,8 @@ class CommentType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => 'AnujRNair\AnujNairBundle\Entity\Comment',
+            'data_class'         => 'AnujRNair\AnujNairBundle\Entity\Comment',
+            'cascade_validation' => true
         ]);
     }
 

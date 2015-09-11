@@ -212,7 +212,7 @@ class User
      */
     public function setRegistrationIp($registrationIp)
     {
-        $this->registrationIp = $registrationIp;
+        $this->registrationIp = ip2long($registrationIp);
         return $this;
     }
 
@@ -222,7 +222,7 @@ class User
      */
     public function getRegistrationIp()
     {
-        return $this->registrationIp;
+        return long2ip($this->registrationIp);
     }
 
     /**

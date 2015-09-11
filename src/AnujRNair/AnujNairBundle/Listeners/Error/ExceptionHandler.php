@@ -2,6 +2,7 @@
 
 namespace AnujRNair\AnujNairBundle\Listeners\Error;
 
+use Symfony\Component\Debug\Exception\FlattenException;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\Event\KernelEvent;
@@ -37,16 +38,20 @@ class ExceptionHandler
             $statusCode = 500;
         }
 
+        $error = FlattenException::create($exception);
+
         $baseDirectory = 'AnujNairBundle:Error:';
         try {
             $renderedView = $this->template->render("{$baseDirectory}error{$statusCode}.$format.twig", [
                 'statusCode' => $statusCode,
-                'message'    => $message
+                'message'    => $message,
+                'error'      => $error
             ]);
         } catch (\Exception $e) {
             $renderedView = $this->template->render("{$baseDirectory}error.html.twig", [
                 'statusCode' => $statusCode,
-                'message'    => $message
+                'message'    => $message,
+                'error'      => $error
             ]);
         }
         $response = Response::create($renderedView, $statusCode);

@@ -32,6 +32,8 @@ class AboutController extends Controller
         $contactForm->handleRequest($request);
 
         if ($contactForm->isValid()) {
+            $contact->setIp($request->getClientIp());
+
             /** @var \Swift_Mime_Message $message */
             $message = \Swift_Message::newInstance()
                 ->setSubject($contact->getSubject())
@@ -39,14 +41,9 @@ class AboutController extends Controller
                 ->addTo($this->container->getParameter('mailer_to'))
                 ->addReplyTo($contact->getEmail())
                 ->setBody(
-                    $this->renderView(
-                        'AnujNairBundle:Email:contactEmail.html.twig',
-                        [
-                            'name' => $contact->getName(),
-                            'email' => $contact->getEmail(),
-                            'contents' => $contact->getContents()
-                        ]
-                    ),
+                    $this->renderView('AnujNairBundle:Email:contactEmail.html.twig', [
+                        'contact' => $contact
+                    ]),
                     'text/html'
                 );
             $this->get('mailer')->send($message);

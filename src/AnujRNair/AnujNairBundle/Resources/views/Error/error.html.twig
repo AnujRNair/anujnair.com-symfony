@@ -15,6 +15,18 @@
             <h4 class="metadata text-center">
                 That's a {{ statusCode }}
             </h4>
+            {% if app.environment == 'dev' and error.trace is defined %}
+                <ul class="metadata list">
+                    {% for trace in error.trace %}
+                        {% if trace.file %}
+                            <li>
+                                <span class="icon-right-open"></span>
+                                <span>{{ trace.file }} (line {{ trace.line }})</span>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            {% endif %}
             <p>Let's get you back on the right track, Maybe one of the following can help you?</p>
             <div class="row">
                 <div class="col-sm-4">
