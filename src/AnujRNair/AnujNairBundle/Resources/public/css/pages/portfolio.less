@@ -1,9 +1,10 @@
 .portfolio {
     .portfolio-item-small {
-        padding: 15px;
+        padding: 15px 15px 0;
         margin-bottom: 15px;
         background: #f4f4f4;
         border-radius: @border-radius-large;
+        box-shadow: 0 0 10px -2px rgba(102, 102, 102, 0.5);
 
         h1 {
             font-size: @font-size-h4;
@@ -14,9 +15,17 @@
                 color: @gray;
             }
         }
+        .img-responsive {
+            transition: transform .1s ease-in-out;
+
+            &:hover {
+                transform: scale(0.98);
+                transition: transform .1s ease-in-out;
+            }
+        }
     }
     .portfolio-image {
-        // Each image should be 700px by 300px
+        // Each image should be 1400px by 800px
         margin-bottom: 15px;
     }
     .portfolio-contents {
