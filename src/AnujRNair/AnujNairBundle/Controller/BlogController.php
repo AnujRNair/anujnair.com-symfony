@@ -84,7 +84,7 @@ class BlogController extends Controller
                 ]), 301);
             }
         } catch (NoResultException $e) {
-            throw $this->createNotFoundException('I couldn\'t find that blog post!');
+            throw $this->createNotFoundException('The blog post doesn\'t exist.');
         }
 
         $actionUrl = $this->generateUrl('_an_blog_article', [

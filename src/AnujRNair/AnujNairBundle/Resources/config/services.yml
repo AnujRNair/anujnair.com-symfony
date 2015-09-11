@@ -4,3 +4,15 @@ services:
         class: AnujRNair\AnujNairBundle\Forms\SubmitTypeIconExtension
         tags:
             - { name: form.type_extension, alias: submit }
+
+    exception.handler:
+        class: AnujRNair\AnujNairBundle\Listeners\Error\ExceptionHandler
+        arguments:
+            - @templating
+
+    exception_listener:
+        class: AnujRNair\AnujNairBundle\Listeners\Error\ExceptionListener
+        tags:
+            - { name: kernel.event_listener, event: kernel.exception, method: onKernelException }
+        arguments:
+            - @exception.handler

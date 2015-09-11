@@ -65,7 +65,7 @@ class PortfolioController extends Controller
                 ]), 301);
             }
         } catch (NoResultException $e) {
-            throw $this->createNotFoundException('I couldn\'t find that portfolio article!');
+            throw $this->createNotFoundException('That portfolio article doesn\'t exist.');
         }
 
         $similarPortfolio = $em
