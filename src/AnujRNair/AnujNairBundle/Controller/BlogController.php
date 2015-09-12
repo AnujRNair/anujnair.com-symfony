@@ -130,6 +130,21 @@ class BlogController extends Controller
             $em->persist($guest);
             $em->flush();
 
+            // Send email
+            /** @var \Swift_Mime_Message $message */
+            $message = \Swift_Message::newInstance()
+                ->setSubject('AnujNair.com comment has been posted')
+                ->addFrom($this->container->getParameter('mailer_to'))
+                ->addTo($this->container->getParameter('mailer_to'))
+                ->addReplyTo($this->container->getParameter('mailer_to'))
+                ->setBody(
+                    $this->renderView('AnujNairBundle:Email:commentEmail.html.twig', [
+                        'comment' => $comment
+                    ]),
+                    'text/html'
+                );
+            $this->get('mailer')->send($message);
+
             return $this->redirect($actionUrl . '#comment' . $comment->getId());
         }
 

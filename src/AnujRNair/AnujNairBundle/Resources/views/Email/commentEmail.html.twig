@@ -1,0 +1,15 @@
+<html>
+    <head>
+        <title>AnujNair.com comment has been posted</title>
+    </head>
+    <body>
+        Dear Anuj,
+        <br /><br />A comment has been posted on AnujNair.com
+        <br />To view it, please visit the <a href="{{ url('_an_blog_article', {
+            id: comment.blog.getId,
+            title: comment.blog.getUrlSafeTitle
+        }) }}#comment{{ comment.getId }}">blog post</a> it has been posted on.
+        <br /><br />Regards,
+        <br />AnujNair.com
+    </body>
+</html>

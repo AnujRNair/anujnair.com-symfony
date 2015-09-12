@@ -12,5 +12,4 @@
 /bin/
 /composer.phar
 node_modules/
-tools/
 .idea/
