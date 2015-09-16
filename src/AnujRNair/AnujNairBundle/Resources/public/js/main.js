@@ -4,7 +4,8 @@ require(['config'], function () {
     require([
         'components/syntaxHighlighter',
         'bootstrap',
-        'components/bbcodePreview'
+        'components/bbcodePreview',
+        'components/analytics'
     ], function (syntaxHighlighter) {
         syntaxHighlighter.highlight(true);
     });

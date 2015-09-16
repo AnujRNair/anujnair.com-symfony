@@ -39,6 +39,15 @@
 
         {% block javascripts %}
             <script data-main="{{ asset('bundles/anujnair/js/main.js') }}" src="{{ asset('bower_components/requirejs/require.js') }}"></script>
+            <script>
+                requirejs.config({
+                    config: {
+                        'components/analytics': {
+                            'ga_tracking': "{{ ga_tracking }}"
+                        }
+                    }
+                });
+            </script>
         {% endblock %}
     </body>
 </html>

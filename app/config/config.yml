@@ -33,6 +33,8 @@ twig:
         resources:
             - 'bootstrap_3_layout.html.twig'
             - 'AnujNairBundle:Form:formLayout.html.twig'
+    globals:
+        ga_tracking: UA-16216873-1
 
 # Assetic Configuration
 assetic:

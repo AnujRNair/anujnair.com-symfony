@@ -12,4 +12,5 @@
 /bin/
 /composer.phar
 node_modules/
+/resources/
 .idea/
