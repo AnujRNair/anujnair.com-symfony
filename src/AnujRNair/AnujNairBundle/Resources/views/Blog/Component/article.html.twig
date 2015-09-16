@@ -1,5 +1,5 @@
 <article class="blog-article{% if mini %} mini{% endif %}" itemscope itemtype="http://schema.org/Article">
-    <h1 class="title-header" itemprop="name">
+    <h1 class="title-header" itemprop="headline">
         {% if mini %}
             <a href="{{ path('_an_blog_article', {id: blog.getId, title:blog.getUrlSafeTitle}) }}">
         {% endif %}
@@ -12,7 +12,7 @@
         <span class="icon-clock"></span>
         Posted by {{ blog.getUser.getFirstName ~ ' ' ~ blog.getUser.getLastName }}
         on
-        <time datetime="{{ blog.getDatePublished|date('Y-m-d H:i:s') }}">{{ blog.getDatePublished|date('jS M, Y') }}</time>
+        <time datetime="{{ blog.getDatePublished|date('Y-m-d H:i:s') }}" itemprop="datePublished">{{ blog.getDatePublished|date('jS M, Y') }}</time>
     </h3>
     <h3 class="metadata">
         <span class="icon-comment"></span>
