@@ -41,13 +41,11 @@
         {% block javascripts %}
             <script data-main="{{ asset('bundles/anujnair/js/main.js') }}" src="{{ asset('bower_components/requirejs/require.js') }}"></script>
             <script>
-                requirejs.config({
-                    config: {
-                        'components/analytics': {
-                            'ga_tracking': "{{ ga_tracking }}"
-                        }
-                    }
-                });
+                window.GoogleAnalyticsObject = "ga";
+                window.ga = {
+                    q: [["create", "{{ ga_tracking }}", "auto"]],
+                    l: 1 * new Date()
+                };
             </script>
         {% endblock %}
     </body>
