@@ -21,7 +21,7 @@ class Contact
      *  maxMessage="Your name should have 100 characters or less"
      * )
      * @Assert\Regex(
-     *  "/^[a-z\'\-\s]+$/",
+     *  "/^[a-z\'\-\s]+$/i",
      *  message="Your name should only contain alpha characters!"
      * )
      */

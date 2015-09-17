@@ -2,8 +2,8 @@ _an_default:
     path: /
     defaults:
         _controller: FrameworkBundle:Redirect:urlRedirect
-        path: /blog
-        permanant: true
+        path: /blog/
+        permanent: true
 
 _an_header:
     resource: "@AnujNairBundle/Controller/Components/HeaderController.php"
