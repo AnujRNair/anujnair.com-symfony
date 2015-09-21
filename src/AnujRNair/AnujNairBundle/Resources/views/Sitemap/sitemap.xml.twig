@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     {% for url in urls %}
         <url>{# check if hostname is not alreay in url#}
-            <loc>{% if url.loc|replace({hostname:''}) == url.loc %}{{ hostname }}{% endif %}{{ url.loc }}</loc>
+            <loc>{{ url.loc }}</loc>
             {% if url.lastmod is defined %}
                 <lastmod>{{ url.lastmod }}</lastmod>
             {% endif %}
