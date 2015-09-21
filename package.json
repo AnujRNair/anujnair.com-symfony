@@ -4,6 +4,7 @@
     "private": true,
     "description": "Dependencies needed to build AnujNair.com via the symfony app",
     "dependencies": {
-        "less": "^2.5.1"
+        "less": "^2.5.1",
+        "requirejs": "^2.1.20"
     }
 }

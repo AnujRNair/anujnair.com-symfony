@@ -35,7 +35,7 @@ define([
                 $.ajax('/bower_components/prism/plugins/line-numbers/prism-line-numbers.min.js', {
                     method: 'GET',
                     dataType: 'script',
-                    cache: false
+                    cache: true
                 })
             );
         }

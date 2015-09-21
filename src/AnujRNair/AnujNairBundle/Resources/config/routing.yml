@@ -28,3 +28,7 @@ _an_about:
 _an_admin:
     resource: "@AnujNairBundle/Controller/AdminController.php"
     type:     annotation
+
+_an_sitemap:
+    resource: "@AnujNairBundle/Controller/Components/SitemapController.php"
+    type:     annotation

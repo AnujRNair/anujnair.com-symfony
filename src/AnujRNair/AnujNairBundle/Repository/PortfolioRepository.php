@@ -2,6 +2,7 @@
 
 namespace AnujRNair\AnujNairBundle\Repository;
 
+use AnujRNair\AnujNairBundle\Entity\Portfolio;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
@@ -12,6 +13,13 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
 class PortfolioRepository extends EntityRepository
 {
 
+    /**
+     * Get a portfolio article by ID
+     * @param int $id
+     * @return Portfolio
+     * @throws \Doctrine\ORM\NoResultException
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
     public function getPortfolioById($id)
     {
         return $this->getEntityManager()
@@ -29,7 +37,7 @@ class PortfolioRepository extends EntityRepository
      * Get a paginated list of portfolio entries
      * @param int $page
      * @param int $numberPerPage
-     * @return Paginator
+     * @return Paginator|Portfolio[]
      */
     public function getPortfolioList($page, $numberPerPage)
     {
@@ -51,7 +59,7 @@ class PortfolioRepository extends EntityRepository
      * @param int $tagId
      * @param int $page
      * @param int $numberPerPage
-     * @return Paginator
+     * @return Paginator|Portfolio[]
      */
     public function getPortfolioListByTagId($tagId, $page, $numberPerPage)
     {

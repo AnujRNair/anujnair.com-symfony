@@ -21,7 +21,7 @@ class CommentType extends AbstractType
     /**
      * @param string $actionUrl
      */
-    public function __construct($actionUrl)
+    public function __construct($actionUrl = null)
     {
         $this->actionUrl = $actionUrl;
     }
