@@ -2,7 +2,7 @@
 require(['config'], function () {
     "use strict";
     require([
-        'ga',
+        'components/ga',
         'components/syntaxHighlighter',
         'bootstrap',
         'components/bbcodePreview'

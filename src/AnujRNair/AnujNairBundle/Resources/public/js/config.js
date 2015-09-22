@@ -17,9 +17,6 @@ requirejs.config({
         },
         'prism-components': {
             exports: "components"
-        },
-        ga: {
-            exports: 'ga'
         }
     },
     paths: {
@@ -27,7 +24,6 @@ requirejs.config({
         bootstrap: '/bower_components/bootstrap/dist/js/bootstrap.min',
         prism: '/bower_components/prism/prism',
         'prism-line-numbers': '/bower_components/prism/plugins/line-numbers/prism-line-numbers',
-        'prism-components': '/bower_components/prism/components',
-        ga: '//www.google-analytics.com/analytics'
+        'prism-components': '/bower_components/prism/components'
     }
 });
