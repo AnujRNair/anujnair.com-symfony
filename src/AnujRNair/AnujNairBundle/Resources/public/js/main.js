@@ -2,12 +2,11 @@
 require(['config'], function () {
     "use strict";
     require([
-        'components/ga',
         'components/syntaxHighlighter',
+        'components/ga',
         'bootstrap',
         'components/bbcodePreview'
-    ], function (ga, syntaxHighlighter) {
-        ga("send", "pageview");
+    ], function (syntaxHighlighter) {
         syntaxHighlighter.highlight(true);
     });
 });
