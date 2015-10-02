@@ -59,7 +59,7 @@ class BlogController extends Controller
     /**
      * @Route("/{id}", requirements={"id" : "[\d]+"})
      * @Route("/{id}-", requirements={"id" : "[\d]+"})
-     * @Route("/{id}-{title}", name="_an_blog_article", requirements={"id" : "[\d]+", "title" : "[\w\-]+"})
+     * @Route("/{id}-{title}", name="_an_blog_article", requirements={"id" : "[\d]+"})
      * @Template("AnujNairBundle:Blog:post.html.twig")
      * @param Request $request
      * @param int $id
@@ -162,7 +162,7 @@ class BlogController extends Controller
     /**
      * @Route("/t/{tagId}", requirements={"tagId" : "[\d]+"})
      * @Route("/t/{tagId}-", requirements={"tagId" : "[\d]+"})
-     * @Route("/t/{tagId}-{name}", name="_an_blog_tag", requirements={"tagId" : "[\d]+", "name" : "[\w\-]+"})
+     * @Route("/t/{tagId}-{name}", name="_an_blog_tag", requirements={"tagId" : "[\d]+"})
      * @Template("AnujNairBundle:Blog:index.html.twig")
      * @param Request $request
      * @param int $tagId
@@ -229,8 +229,17 @@ class BlogController extends Controller
         // Posting the comment, parse and return!
         if ($commentForm->isValid()) {
             return JsonResponse::create(['parsed' => PostHelper::parseBBCode($comment->getComment())]);
+        } else {
+            $errors = [];
+            foreach ($commentForm->getErrors(true) as $error) {
+                $field = $error->getOrigin()->getName();
+                if ($field === 'name') {
+                    continue;
+                }
+                $errors[$field][] = $error->getMessage();
+            }
+            return JsonResponse::create(['parsed' => null, 'errors' => $errors]);
         }
-        return JsonResponse::create(['parsed' => null]);
     }
 
 }

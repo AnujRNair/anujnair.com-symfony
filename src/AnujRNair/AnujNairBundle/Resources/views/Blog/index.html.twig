@@ -48,7 +48,7 @@
                         {% for tagData in tagSummary %}
                             <li>
                                 <span class="icon-tag"></span>
-                                <a href="{{ path('_an_blog_tag', {tagId: tagData.id, name: tagData.name|lower}) }}">
+                                <a href="{{ path('_an_blog_tag', {tagId: tagData.id, name: tagData.name|lower|replace(' ', '-')}) }}">
                                     {% if tagId is defined and tagId == tagData.id %}<strong>{% endif %}
                                         {{ tagData['name'] }} <small class="tag-count">({{ tagData['tagCount'] }})</small>
                                     {% if tagId is defined and tagId == tagData.id %}</strong>{% endif %}

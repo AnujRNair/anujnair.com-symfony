@@ -12,9 +12,9 @@ require([
         $('[data-preview-src]').click(function () {
             // Where we should post to, to get the preview
             $previewUrl = $(this).data('preview-src');
-            // The DOM element to drop the preview into
+            // The DOM element to drop the preview into (href is an #id)
             $target = $($(this).attr('href'));
-            // The form to POST
+            // The form to POST (form is an #id)
             $form = $($(this).data('form'));
 
             $.ajax($previewUrl, {
@@ -32,10 +32,17 @@ require([
                     // Re-highlight the page
                     syntaxHighlighter.highlight(false);
                 } else {
-                    $target.html('There was nothing to parse!');
+                    var errorHtml = '<h4>There was an error parsing your comment!</h4><ul>';
+                    $.each(response.errors, function(key, errors) {
+                        $.each(errors, function (i, error) {
+                            errorHtml += '<li>' + key.charAt(0).toUpperCase() + key.slice(1) + ': ' + error + '</li>'
+                        });
+                    });
+                    errorHtml += '</ul>';
+                    $target.html(errorHtml);
                 }
             }).error(function () {
-                $target.html('There was an issue parsing your text!');
+                $target.html('<h4>There was an issue parsing your text!</h4>');
             });
         });
     });

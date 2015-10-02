@@ -42,7 +42,7 @@ class PortfolioController extends Controller
     /**
      * @Route("/{id}", requirements={"id" : "[\d]+"})
      * @Route("/{id}-", requirements={"id" : "[\d]+"})
-     * @Route("/{id}-{name}", name="_an_portfolio_article", requirements={"id" : "[\d]+", "name" : "[\w\-]+"})
+     * @Route("/{id}-{name}", name="_an_portfolio_article", requirements={"id" : "[\d]+"})
      * @Template("AnujNairBundle:Portfolio:article.html.twig")
      * @param int $id
      * @param string $name
@@ -86,7 +86,7 @@ class PortfolioController extends Controller
     /**
      * @Route("/t/{tagId}", requirements={"tagId" : "[\d]+"})
      * @Route("/t/{tagId}-", requirements={"tagId" : "[\d]+"})
-     * @Route("/t/{tagId}-{name}", name="_an_portfolio_tag", requirements={"tagId" : "[\d]+", "name" : "[\w\-]+"})
+     * @Route("/t/{tagId}-{name}", name="_an_portfolio_tag", requirements={"tagId" : "[\d]+"})
      * @Template("AnujNairBundle:Portfolio:index.html.twig")
      * @param Request $request
      * @param int $tagId
