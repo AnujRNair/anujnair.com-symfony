@@ -48,10 +48,10 @@ class BlogController extends Controller
             ->getBlogTagSummary();
 
         return [
-            'page'       => $page,
-            'noPerPage'  => $noPerPage,
-            'blogPosts'  => $blogPosts,
-            'archive'    => $archive,
+            'page' => $page,
+            'noPerPage' => $noPerPage,
+            'blogPosts' => $blogPosts,
+            'archive' => $archive,
             'tagSummary' => $tagSummary
         ];
     }
@@ -80,7 +80,7 @@ class BlogController extends Controller
             // Make sure URL points to correct place for SEO purposes
             if ($title !== $blog->getUrlSafeTitle()) {
                 return $this->redirect($this->generateUrl('_an_blog_article', [
-                    'id'    => $blog->getId(),
+                    'id' => $blog->getId(),
                     'title' => $blog->getUrlSafeTitle()
                 ]), 301);
             }
@@ -89,7 +89,7 @@ class BlogController extends Controller
         }
 
         $actionUrl = $this->generateUrl('_an_blog_article', [
-            'id'    => $blog->getId(),
+            'id' => $blog->getId(),
             'title' => $blog->getUrlSafeTitle()
         ]);
 
@@ -153,9 +153,9 @@ class BlogController extends Controller
             ->getSimilarBlogPosts($id, 1, 20);
 
         return [
-            'blog'             => $blog,
+            'blog' => $blog,
             'similarBlogPosts' => $similarBlogPosts,
-            'commentForm'      => $commentForm->createView()
+            'commentForm' => $commentForm->createView()
         ];
     }
 
@@ -186,7 +186,7 @@ class BlogController extends Controller
             if ($name !== $tag->getUrlSafeName()) {
                 return $this->redirect($this->generateUrl('_an_blog_tag', [
                     'tagId' => $tag->getId(),
-                    'name'  => $tag->getUrlSafeName()
+                    'name' => $tag->getUrlSafeName()
                 ]), 301);
             }
 
@@ -205,12 +205,12 @@ class BlogController extends Controller
             ->getBlogTagSummary();
 
         return [
-            'page'       => $page,
-            'noPerPage'  => $noPerPage,
-            'blogPosts'  => $blogPosts,
-            'archive'    => $archive,
+            'page' => $page,
+            'noPerPage' => $noPerPage,
+            'blogPosts' => $blogPosts,
+            'archive' => $archive,
             'tagSummary' => $tagSummary,
-            'tagId'      => $tagId
+            'tagId' => $tagId
         ];
     }
 
@@ -226,20 +226,23 @@ class BlogController extends Controller
         $commentForm = $this->createForm(new CommentType(), $comment);
         $commentForm->handleRequest($request);
 
-        // Posting the comment, parse and return!
-        if ($commentForm->isValid()) {
-            return JsonResponse::create(['parsed' => PostHelper::parseBBCode($comment->getComment())]);
-        } else {
-            $errors = [];
-            foreach ($commentForm->getErrors(true) as $error) {
-                $field = $error->getOrigin()->getName();
+        $errors = [];
+        $error = $commentForm->getErrors(true);
+        if (count($error) > 0) {
+            foreach ($error as $err) {
+                $field = $err->getOrigin()->getName();
                 if ($field === 'name') {
                     continue;
                 }
-                $errors[$field][] = $error->getMessage();
+                $errors[$field][] = $err->getMessage();
             }
+        }
+
+        if (count($errors) > 0) {
             return JsonResponse::create(['parsed' => null, 'errors' => $errors]);
         }
+
+        return JsonResponse::create(['parsed' => PostHelper::parseBBCode($comment->getComment())]);
     }
 
 }
