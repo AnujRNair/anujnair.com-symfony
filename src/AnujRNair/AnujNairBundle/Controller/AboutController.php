@@ -52,7 +52,8 @@ class AboutController extends Controller
         }
 
         return [
-            'contactForm' => $contactForm->createView()
+            'contactForm' => $contactForm->createView(),
+            'years' => intval(date('Y')) - 2002
         ];
     }
 
