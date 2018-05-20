@@ -36,15 +36,7 @@ module.exports = {
       {
         lodash: 'lodash-es',
         normalize: 'normalize.css/normalize.css',
-        '@anujnair': path.resolve(
-          __dirname,
-          '..',
-          'src',
-          'AnujRNair',
-          'AnujNairBundle',
-          'Resources',
-          'public'
-        )
+        '@anujnair': path.resolve(__dirname, '..', 'src', 'AnujRNair', 'AnujNairBundle', 'Resources', 'public')
       }
     ),
 

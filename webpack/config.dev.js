@@ -17,7 +17,7 @@ module.exports = merge(
       chunkFilename: '[name].bundle.js',
 
       // how they will be accessed through the browser locally
-      publicPath: '/assets/',
+      publicPath: 'http://127.0.0.1:3010/assets/',
 
       // tell webpack to include comments in the generated code with info on the contained bundles
       pathinfo: true
@@ -52,7 +52,7 @@ module.exports = merge(
       // Seems to be ignored as of webpack-dev-server 2.5.1
       // I suspect this is an issue with webpack-dev-middleware which was
       // introduced here: https://github.com/webpack/webpack-dev-middleware/commit/23a75095bda747d24f8b902a8114dc8034303871#diff-bbfe1200f066d4b0611fd44a7368c0d4R38
-      publicPath: '/assets/'
+      publicPath: 'http://127.0.0.1:3010/assets/'
     },
 
     module: {
