@@ -26,7 +26,7 @@ class BlogController extends Controller
 {
 
     /**
-     * @Route("/", name="_an_blog_index")
+     * @Route("/", name="_an_blog_index", defaults={"webpack" = "blog-index"})
      * @Template("AnujNairBundle:Blog:index.html.twig")
      * @param Request $request
      * @return array
@@ -48,18 +48,20 @@ class BlogController extends Controller
             ->getBlogTagSummary();
 
         return [
-            'page' => $page,
-            'noPerPage' => $noPerPage,
-            'blogPosts' => $blogPosts,
-            'archive' => $archive,
-            'tagSummary' => $tagSummary
+            'json' => json_encode([
+                'page' => $page,
+                'noPerPage' => $noPerPage,
+                'blogPosts' => $blogPosts,
+                'archive' => $archive,
+                'tagSummary' => $tagSummary
+            ])
         ];
     }
 
     /**
-     * @Route("/{id}", requirements={"id" : "[\d]+"})
-     * @Route("/{id}-", requirements={"id" : "[\d]+"})
-     * @Route("/{id}-{title}", name="_an_blog_article", requirements={"id" : "[\d]+"})
+     * @Route("/{id}", requirements={"id" : "[\d]+"}, defaults={"webpack" = "blog-post"})
+     * @Route("/{id}-", requirements={"id" : "[\d]+"}, defaults={"webpack" = "blog-post"})
+     * @Route("/{id}-{title}", name="_an_blog_article", requirements={"id" : "[\d]+"}, defaults={"webpack" = "blog-post"})
      * @Template("AnujNairBundle:Blog:post.html.twig")
      * @param Request $request
      * @param int $id
@@ -153,16 +155,18 @@ class BlogController extends Controller
             ->getSimilarBlogPosts($id, 1, 20);
 
         return [
-            'blog' => $blog,
-            'similarBlogPosts' => $similarBlogPosts,
+            'json' => json_encode([
+                'blog' => $blog,
+                'similarBlogPosts' => $similarBlogPosts
+            ]),
             'commentForm' => $commentForm->createView()
         ];
     }
 
     /**
-     * @Route("/t/{tagId}", requirements={"tagId" : "[\d]+"})
-     * @Route("/t/{tagId}-", requirements={"tagId" : "[\d]+"})
-     * @Route("/t/{tagId}-{name}", name="_an_blog_tag", requirements={"tagId" : "[\d]+"})
+     * @Route("/t/{tagId}", requirements={"tagId" : "[\d]+"}, defaults={"webpack" = "blog-tag"})
+     * @Route("/t/{tagId}-", requirements={"tagId" : "[\d]+"}, defaults={"webpack" = "blog-tag"})
+     * @Route("/t/{tagId}-{name}", name="_an_blog_tag", requirements={"tagId" : "[\d]+"}, defaults={"webpack" = "blog-tag"})
      * @Template("AnujNairBundle:Blog:index.html.twig")
      * @param Request $request
      * @param int $tagId
@@ -205,12 +209,14 @@ class BlogController extends Controller
             ->getBlogTagSummary();
 
         return [
-            'page' => $page,
-            'noPerPage' => $noPerPage,
-            'blogPosts' => $blogPosts,
-            'archive' => $archive,
-            'tagSummary' => $tagSummary,
-            'tagId' => $tagId
+            'json' => json_encode([
+                'page' => $page,
+                'noPerPage' => $noPerPage,
+                'blogPosts' => $blogPosts,
+                'archive' => $archive,
+                'tagSummary' => $tagSummary,
+                'tagId' => $tagId
+            ])
         ];
     }
 

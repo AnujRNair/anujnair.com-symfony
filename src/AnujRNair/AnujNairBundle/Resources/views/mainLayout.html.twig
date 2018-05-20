@@ -4,22 +4,18 @@
 {% block activeRoute '_an_none' %}
 
 {% block body %}
-
-    <div class="main-container">
+    <header>
         {% block header %}
             {{ render(path('_an_header_index', {activeRoute: block('activeRoute')})) }}
         {% endblock %}
+    </header>
 
-        <div class="container content-container {% block pageCss %}{% endblock %}">
-            {% block content %}
-            {% endblock %}
-        </div>
-
-        <div id="main-container-push"></div>
+    <div class="main-container">
     </div>
 
-    {% block footer %}
-        {{ render(path('_an_footer_index')) }}
-    {% endblock %}
-
+    <footer>
+        {% block footer %}
+            {{ render(path('_an_footer_index')) }}
+        {% endblock %}
+    </footer>
 {% endblock %}

@@ -10,30 +10,3 @@
     {{ keywords|join(', ') }}
 {% endblock %}
 {% block activeRoute '_an_blog_index' %}
-{% block pageCss 'blog' %}
-
-{% block content %}
-    <div class="row">
-        <section class="col-md-8">
-            {% include 'AnujNairBundle:Blog/Component:article.html.twig' with {'blog': blog, mini: false} %}
-        </section>
-        <aside class="col-md-4 blog-aside">
-            <div class="row">
-                <div class="col-md-12 col-sm-8">
-                    {% if similarBlogPosts|length > 0 %}
-                        <h2 class="title-header">You may also be interested in &hellip;</h2>
-                        {% include 'AnujNairBundle:Components:singleDimensionalList.html.twig' with {
-                            singleList: similarBlogPosts,
-                            itemLinkUrl: '_an_blog_article',
-                            itemLinkIdAttr: 'getId',
-                            itemLinkTitleAttr: 'getUrlSafeTitle',
-                            itemNameAttr: 'getTitle',
-                            itemIcon: 'icon-calendar'
-                        } %}
-                    {% endif %}
-                </div>
-            </div>
-        </aside>
-    </div>
-{% endblock %}
-

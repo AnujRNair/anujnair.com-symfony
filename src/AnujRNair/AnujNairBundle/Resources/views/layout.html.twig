@@ -24,7 +24,7 @@
 
         {% if app.environment == 'prod' %}
             <!-- needs hash -->
-            <link type="text/css" rel="stylesheet" href="bundles/webpack/{% block pageCss %}{% endblock %}.css"/>
+            <link type="text/css" rel="stylesheet" href="bundles/webpack/{{ app.request.attributes.get("_route") }}.css"/>
 
             <!-- manifest -->
         {% endif %}
@@ -38,6 +38,7 @@
             <!-- page -->
         {% else %}
             <!-- webpack dev server for page -->
+            <script src="http://127.0.0.1:3010/assets/{{ app.request.attributes.get("webpack") }}.bundle.js"></script>
         {% endif %}
     </body>
 </html>
