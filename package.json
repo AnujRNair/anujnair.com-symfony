@@ -1,10 +1,25 @@
 {
-    "name": "anujnaircom-symfony",
-    "version": "0.0.1",
-    "private": true,
-    "description": "Dependencies needed to build AnujNair.com via the symfony app",
-    "dependencies": {
-        "less": "^2.5.1",
-        "requirejs": "^2.1.20"
-    }
+  "name": "anujnaircom-symfony",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Dependencies needed to build AnujNair.com via the symfony app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AnujRNair/anujnair.com-symfony.git"
+  },
+  "keywords": [
+    "anujnair",
+    "symfony",
+    "webpack"
+  ],
+  "author": "Anuj Nair <anuj.r.nair@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/AnujRNair/anujnair.com-symfony/issues"
+  },
+  "homepage": "https://github.com/AnujRNair/anujnair.com-symfony#readme"
 }
