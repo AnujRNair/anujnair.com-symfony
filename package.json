@@ -5,7 +5,9 @@
   "description": "Dependencies needed to build AnujNair.com via the symfony app",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack-dev-server --hot --inline --config webpack/config.dev.js"
+    "dev": "webpack-dev-server --hot --inline --config webpack/config.dev.js",
+    "eslint": "eslint .",
+    "eslint:fix": "eslint . --fix"
   },
   "repository": {
     "type": "git",
