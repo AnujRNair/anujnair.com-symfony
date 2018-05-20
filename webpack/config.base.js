@@ -6,7 +6,7 @@ module.exports = {
 
 	// the entrypoints we want to build assets for
 	entry: {
-
+		blog: path.resolve('src', 'AnujRNair', 'AnujNairBundle', 'Resources', 'public', 'js', 'pages', 'blog')
 	},
 
 	// output configuration
@@ -52,23 +52,20 @@ module.exports = {
 				use: [
 					'file-loader',
 				],
+			},
+
+			// load images through url, try inlining
+			{
+				test: /\.(png|jpg)/,
+				use: [
+					{
+						loader: 'url-loader',
+						options: {
+							limit: 8192
+						}
+					}
+				]
 			}
 		],
-	},
-
-	loaders: [
-		{
-			test: /\.(png|jpg)/,
-			use: [
-				{
-					loader: 'url-loader',
-					options: {
-						limit: 8192
-					}
-				}
-			]
-		}
-	],
-
-	plugins: []
+	}
 };

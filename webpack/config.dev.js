@@ -1,7 +1,8 @@
+const path = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 
-const configBase = require('config.base');
+const configBase = require('./config.base');
 
 const cacheDirectory = path.resolve(__dirname, '..', 'node_modules', '.cache');
 
@@ -20,6 +21,8 @@ module.exports = merge({
 		// tell webpack to include comments in the generated code with info on the contained bundles
 		pathinfo: true,
 	},
+
+	mode: 'development',
 
 	devtool: false,
 
@@ -89,19 +92,9 @@ module.exports = merge({
 	},
 
 	plugins: [
-		new webpack.DefinePlugin({
-			'process.env': {
-				NODE_ENV: JSON.stringify('development'),
-			},
-		}),
-
 		// don't watch node modules as they should never change
 		new webpack.WatchIgnorePlugin([
 			path.resolve(__dirname, '..', 'node_modules'),
 		]),
-
-		// relative paths for modules when HMR is enabled
-		new webpack.NamedModulesPlugin(),
-		new webpack.NamedChunksPlugin(),
 	],
 }, configBase);
