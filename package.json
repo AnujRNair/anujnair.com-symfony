@@ -21,5 +21,6 @@
   "bugs": {
     "url": "https://github.com/AnujRNair/anujnair.com-symfony/issues"
   },
-  "homepage": "https://github.com/AnujRNair/anujnair.com-symfony#readme"
+  "homepage": "https://github.com/AnujRNair/anujnair.com-symfony#readme",
+  "devDependencies": {}
 }

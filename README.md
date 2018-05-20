@@ -8,7 +8,13 @@ AnujNair.com-symfony readme
 
 ## Development
 
+* `php app/console assets:install --symlink --relative`
 * `php app/console server:run`
+* `php app/console assetic:watch`
+
+## Production
+
+* `./tools/build.sh`
 
 ## Other
 

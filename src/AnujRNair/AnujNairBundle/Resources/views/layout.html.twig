@@ -23,32 +23,22 @@
         <link rel="author" href="https://plus.google.com/+AnujNair89/posts" />
         <link rel="publisher" href="https://plus.google.com/+AnujNair89" />
 
-        {% block stylesheets %}
-            {% stylesheets
-                'bundles/anujnair/css/anujnair.less'
-                'bower_components/prism/themes/prism-coy.css'
-                'bower_components/prism/plugins/line-numbers/prism-line-numbers.css'
-                output='bundles/anujnair/css/anujnair.css'
-            %}
-                <link rel="stylesheet" href="{{ asset_url }}" />
-            {% endstylesheets %}
-        {% endblock %}
+        {% if app.environment == 'prod' %}
+            <!-- needs hash -->
+            <link type="text/css" rel="stylesheet" href="bundles/webpack/{% block pageCss %}{% endblock %}.css"/>
+
+            <!-- manifest -->
+        {% endif %}
     </head>
     <body>
         {% block body %}
         {% endblock %}
 
-        {% block javascripts %}
-            <script data-main="{{ asset('bundles/anujnair/js/main.js') }}" src="{{ asset('bower_components/requirejs/require.js') }}"></script>
-            <script>
-                requirejs.config({
-                    config: {
-                        'components/ga': {
-                            'ga_tracking': "{{ ga_tracking }}"
-                        }
-                    }
-                });
-            </script>
-        {% endblock %}
+        {% if app.environment == 'prod' %}
+            <!-- vendor -->
+            <!-- page -->
+        {% else %}
+            <!-- webpack dev server for page -->
+        {% endif %}
     </body>
 </html>
