@@ -1,0 +1,13 @@
+.header {
+  font-family: $font-family-header;
+}
+
+.footer {
+  border-top: $border-dotted;
+  font-family: $font-family-header;
+  font-size: $font-size-small;
+
+  a {
+    padding-left: 5px;
+  }
+}

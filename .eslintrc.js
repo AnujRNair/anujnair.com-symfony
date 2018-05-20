@@ -13,17 +13,10 @@ module.exports = {
   globals: {
     document: true
   },
-  "settings": {
+  settings: {
     "import/resolver": {
       "webpack": {
-        "config": {
-          "resolve": {
-            "alias": Object.assign({}, {
-              '@anujnair': path.resolve(__dirname, 'src', 'AnujRNair', 'AnujNairBundle', 'Resources', 'public')
-            }),
-            "extensions": ['.js', '.json', '.jsx', '.svg', '.scss', '.jpg', '.png'],
-          }
-        }
+        "config": path.resolve('webpack', 'config.dev.js')
       }
     }
   },

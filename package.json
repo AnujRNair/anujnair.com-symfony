@@ -6,8 +6,9 @@
   "main": "index.js",
   "scripts": {
     "dev": "webpack-dev-server --hot --inline --config webpack/config.dev.js",
-    "eslint": "eslint .",
-    "eslint:fix": "eslint . --fix"
+    "eslint": "eslint src/AnujRNair/AnujNairBundle/Resources/public/js",
+    "eslint:fix": "eslint src/AnujRNair/AnujNairBundle/Resources/public/js --fix",
+    "scss-lint": "sass-lint --config .sass-lint.yml 'src/AnujRNair/AnujNairBundle/Resources/public/**/*.scss' --verbose --no-exit"
   },
   "repository": {
     "type": "git",
@@ -38,6 +39,7 @@
     "eslint": "^4.19.1",
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-config-prettier": "^2.9.0",
+    "eslint-import-resolver-webpack": "^0.10.0",
     "eslint-plugin-import": "^2.12.0",
     "eslint-plugin-prettier": "^2.6.0",
     "eslint-plugin-react": "^7.8.2",
@@ -49,6 +51,7 @@
     "prettier": "^1.12.1",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
+    "sass-lint": "^1.12.1",
     "sass-loader": "^7.0.1",
     "style-loader": "^0.21.0",
     "url-loader": "^1.0.1",

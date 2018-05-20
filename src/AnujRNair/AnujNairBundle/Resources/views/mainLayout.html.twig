@@ -4,19 +4,25 @@
 {% block activeRoute '_an_none' %}
 
 {% block body %}
-<header class="grid__body-header">
+<div class="grid__body-header header">
     {% block header %}
         {{ render(path('_an_header_index', {activeRoute: block('activeRoute')})) }}
     {% endblock %}
-</header>
-
-<div class="grid__body-container">
-    Hello
 </div>
 
-<footer class="grid__body-footer">
+<div class="grid__body-main">
+    <div class="main-content">
+        Hello
+    </div>
+
+    <aside class="aside-content">
+        Hello again
+    </aside>
+</div>
+
+<div class="grid__body-footer footer">
     {% block footer %}
         {{ render(path('_an_footer_index')) }}
     {% endblock %}
-</footer>
+</div>
 {% endblock %}

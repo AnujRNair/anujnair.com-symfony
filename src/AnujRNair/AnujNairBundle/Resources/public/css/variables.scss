@@ -1,10 +1,13 @@
-$font-family-header: "Delicious-Bold", Helvetica, Arial, sans-serif;
-$font-family-body: "Helvetica Neue", Helvetica, Arial, sans-serif;
+$font-family-header: 'Delicious-Bold', Helvetica, Arial, sans-serif;
+$font-family-body: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 
 $font-size-base: 16px;
+$font-size-small: $font-size-base * 0.75;
 
 $font-weight-thin: 300;
 $font-weight-normal: 400;
 $font-weight-bold: 600;
 
 $line-height-base: 1.412em;
+
+$border-dotted: 1px dotted $color-grey-light;
