@@ -11,10 +11,10 @@
             <a href="{{ absolute_url('https://github.com/AnujRNair/') }}" class="icon icon-gh-full" target="_blank">GitHub</a>
         </p>
         <p>
-            <a href="{{ absolute_url('https://www.linkedin.com/in/anujrnair') }}" target="_blank">LinkedIn</a>
+            <a href="{{ absolute_url('https://www.linkedin.com/in/anujrnair') }}" class="icon icon-li" target="_blank">LinkedIn</a>
         </p>
         <p>
-            <a href="{{ url('_an_about_index') }}">Contact Me</a>
+            <a href="{{ url('_an_about_index') }}" class="icon icon-email">Contact Me</a>
         </p>
     </div>
 </header>
@@ -23,8 +23,7 @@
     <ul>
         {% for section in nav.getSections %}
             <li{% if nav.isActive(section) %} class="active"{% endif %}>
-                <a href="{{ url(section['route']) }}">
-                    <span class="{{ section['icon'] }}"></span>
+                <a href="{{ url(section['route']) }}" class="icon {{ section['icon'] }}">
                     {{ section['name'] }}
                 </a>
             </li>

@@ -3,149 +3,148 @@
   src: url('../fonts/flaticon/Flaticon.eot');
   src: url("../fonts/flaticon/Flaticon.eot?#iefix") format("embedded-opentype"),
     url('../fonts/flaticon/Flaticon.woff') format('woff'),
-    url('../fonts/flaticon/Flaticon.ttf') format('truetype'),
-    url('../fonts/flaticon/Flaticon.svg#Flaticon') format('svg');
+    url('../fonts/flaticon/Flaticon.ttf') format('truetype');
   font-style: normal;
   font-weight: normal;
 }
 
-@media screen and (-webkit-min-device-pixel-ratio: 0) {
-  @font-face {
+.icon {
+  &:before {
+    display: inline-block;
+    margin-right: 10px;
+    text-transform: none;
+    text-decoration: inherit;
+    text-rendering: optimizeLegibility;
+    line-height: 1;
     font-family: 'Flaticon';
-    src: url('../fonts/flaticon/Flaticon.svg#Flaticon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-variant: normal;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
   }
-}
 
-.icon:before {
-  display: inline-block;
-  text-transform: none;
-  text-decoration: inherit;
-  text-rendering: optimizeLegibility;
-  line-height: 1;
-  font-family: 'Flaticon';
-  font-weight: normal;
-  font-style: normal;
-  font-variant: normal;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-}
+  &:hover:before {
+    text-decoration: none;
+  }
 
-.icon-mail-full:before {
-  content: '\f100';
-}
+  &-mail-full:before {
+    content: '\f100';
+  }
 
-.icon-man:before {
-  content: '\f101';
-}
+  &-man:before {
+    content: '\f101';
+  }
 
-.icon-location:before {
-  content: '\f102';
-}
+  &-location:before {
+    content: '\f102';
+  }
 
-.icon-calendar:before {
-  content: '\f103';
-}
+  &-calendar:before {
+    content: '\f103';
+  }
 
-.icon-thumbs-up:before {
-  content: '\f104';
-}
+  &-thumbs-up:before {
+    content: '\f104';
+  }
 
-.icon-spanner:before {
-  content: '\f105';
-}
+  &-spanner:before {
+    content: '\f105';
+  }
 
-.icon-pencil:before {
-  content: '\f106';
-}
+  &-pencil:before {
+    content: '\f106';
+  }
 
-.icon-earth-full:before {
-  content: '\f107';
-}
+  &-earth-full:before {
+    content: '\f107';
+  }
 
-.icon-earth:before {
-  content: '\f108';
-}
+  &-earth:before {
+    content: '\f108';
+  }
 
-.icon-star-full:before {
-  content: '\f109';
-}
+  &-star-full:before {
+    content: '\f109';
+  }
 
-.icon-heart:before {
-  content: '\f10a';
-}
+  &-heart:before {
+    content: '\f10a';
+  }
 
-.icon-tag:before {
-  content: '\f10b';
-}
+  &-tag:before {
+    content: '\f10b';
+  }
 
-.icon-tags:before {
-  content: '\f10c';
-}
+  &-tags:before {
+    content: '\f10c';
+  }
 
-.icon-li:before {
-  content: '\f10d';
-}
+  &-li:before {
+    content: '\f10d';
+  }
 
-.icon-star:before {
-  content: '\f10e';
-}
+  &-star:before {
+    content: '\f10e';
+  }
 
-.icon-tags-full:before {
-  content: '\f10f';
-}
+  &-tags-full:before {
+    content: '\f10f';
+  }
 
-.icon-tag-full:before {
-  content: '\f110';
-}
+  &-tag-full:before {
+    content: '\f110';
+  }
 
-.icon-heart-full:before {
-  content: '\f111';
-}
+  &-heart-full:before {
+    content: '\f111';
+  }
 
-.icon-chat:before {
-  content: '\f112';
-}
+  &-chat:before {
+    content: '\f112';
+  }
 
-.icon-gp:before {
-  content: '\f113';
-}
+  &-gp:before {
+    content: '\f113';
+  }
 
-.icon-email:before {
-  content: '\f114';
-}
+  &-email:before {
+    content: '\f114';
+  }
 
-.icon-chats-full:before {
-  content: '\f115';
-}
+  &-chats-full:before {
+    content: '\f115';
+  }
 
-.icon-li-full:before {
-  content: '\f116';
-}
+  &-li-full:before {
+    content: '\f116';
+  }
 
-.icon-fb-full:before {
-  content: '\f117';
-}
+  &-fb-full:before {
+    content: '\f117';
+  }
 
-.icon-fb:before {
-  content: '\f118';
-}
+  &-fb:before {
+    content: '\f118';
+  }
 
-.icon-gp-full:before {
-  content: '\f119';
-}
+  &-gp-full:before {
+    content: '\f119';
+  }
 
-.icon-t-full:before {
-  content: '\f11a';
-}
+  &-t-full:before {
+    content: '\f11a';
+  }
 
-.icon-t:before {
-  content: '\f11b';
-}
+  &-t:before {
+    content: '\f11b';
+  }
 
-.icon-gh-full:before {
-  content: '\f11c';
-}
+  &-gh-full:before {
+    content: '\f11c';
+  }
 
-.icon-so:before {
-  content: '\f11d';
+  &-so:before {
+    content: '\f11d';
+  }
 }
