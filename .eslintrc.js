@@ -1,12 +1,11 @@
 const path = require('path');
 
 module.exports = {
-  extends: ['airbnb-base', 'prettier'],
-  plugins: ['prettier'],
   parser: 'babel-eslint',
+  extends: ['airbnb-base', 'plugin:react/recommended', 'prettier', 'prettier/react'],
+  plugins: ['react', 'import', 'prettier'],
   env: {
-    browser: true,
-    node: false
+    browser: true
   },
   rules: {
     'prettier/prettier': ['error', { singleQuote: true }],
@@ -15,7 +14,8 @@ module.exports = {
       {
         devDependencies: true
       }
-    ]
+    ],
+    'class-methods-use-this': 'off'
   },
   globals: {
     document: true

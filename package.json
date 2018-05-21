@@ -6,8 +6,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "webpack-dev-server --hot --inline --config webpack/config.dev.js",
-    "eslint": "eslint src/AnujRNair/AnujNairBundle/Resources/public/js",
-    "eslint:fix": "eslint src/AnujRNair/AnujNairBundle/Resources/public/js --fix",
+    "eslint": "eslint --ext .jsx --ext .js src/AnujRNair/AnujNairBundle/Resources/public/js",
+    "eslint:fix": "eslint --ext .jsx --ext .js src/AnujRNair/AnujNairBundle/Resources/public/js --fix",
     "scss-lint": "sass-lint --config .sass-lint.yml 'src/AnujRNair/AnujNairBundle/Resources/public/**/*.scss' --verbose --no-exit"
   },
   "repository": {
