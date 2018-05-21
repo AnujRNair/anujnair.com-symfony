@@ -5,6 +5,7 @@
 
 body {
   text-align: left;
+  line-height: $line-height-base;
   color: $color-body;
   font-family: $font-family-body;
   font-size: $font-size-base;
@@ -14,11 +15,9 @@ body {
   font-display: swap;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: $font-family-header;
+@each $font-header, $font-props in $font-headers {
+  #{$font-header} {
+    font-family: $font-family-header;
+    font-size: map-get($font-props, font-size);
+  }
 }
