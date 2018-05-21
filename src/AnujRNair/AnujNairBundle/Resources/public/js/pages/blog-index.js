@@ -1,1 +1,1 @@
-import '@anujnair/css/toolkit';
+import '@anujnair/css/toolkit.scss';
