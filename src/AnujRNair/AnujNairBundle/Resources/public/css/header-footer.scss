@@ -1,6 +1,5 @@
 .header {
   background: url('../images/bg/header.png') #101318 no-repeat center top;
-  padding-top: 100px;
   font-family: $font-family-header;
 
   nav {
@@ -64,6 +63,10 @@
       p {
         margin: 0;
         padding: 10px 0 0;
+
+        a:before {
+          color: $color-body;
+        }
       }
     }
   }

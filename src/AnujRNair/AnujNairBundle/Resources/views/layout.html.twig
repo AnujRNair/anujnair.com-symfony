@@ -33,6 +33,10 @@
         {% block body %}
         {% endblock %}
 
+        <script type="application/javascript">
+            window.reactProps = {{ json|raw }};
+        </script>
+
         {% if app.environment == 'prod' %}
             <!-- vendor -->
             <!-- page -->
