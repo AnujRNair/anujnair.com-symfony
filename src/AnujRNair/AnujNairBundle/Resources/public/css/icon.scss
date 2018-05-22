@@ -28,6 +28,11 @@
     text-decoration: none;
   }
 
+  &--absolute:before {
+    position: absolute;
+    top: 6px;
+  }
+
   &-mail-full:before {
     content: '\f100';
   }

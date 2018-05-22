@@ -1,0 +1,21 @@
+.multi-dimensional-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  ul {
+    margin-bottom: 10px;
+    padding-left: 20px;
+    list-style: none;
+  }
+
+  li {
+    position: relative;
+    padding: 3px 0;
+
+    &.icon a {
+      display: inline-block;
+      padding-left: 30px;
+    }
+  }
+}

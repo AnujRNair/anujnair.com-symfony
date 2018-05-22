@@ -415,7 +415,8 @@ class Blog implements JsonSerializable
             'title' => $this->title,
             'contents' => $this->contents,
             'datePublished' => $this->datePublished,
-            'dateUpdated' => $this->dateUpdated
+            'dateUpdated' => $this->dateUpdated,
+            'urlTitle' => $this->getUrlSafeTitle()
         ];
     }
 

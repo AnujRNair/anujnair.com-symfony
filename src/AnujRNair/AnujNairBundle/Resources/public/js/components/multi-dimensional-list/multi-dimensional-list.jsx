@@ -1,30 +1,31 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import './multidimensional-list.scss';
+import { Archive } from '@anujnair/js/types/blog';
 
-export default class MultidimensionalList extends Component {
+import './multi-dimensional-list.scss';
+
+export default class MultiDimensionalList extends Component {
   static propTypes = {
-    list: PropTypes.objectOf(
-      PropTypes.objectOf(
-        PropTypes.shape({
-          id: PropTypes.number.isRequired,
-          title: PropTypes.string.isRequired,
-          url: PropTypes.string.isRequired
-        }).isRequired
-      ).isRequired
-    )
+    icon: PropTypes.string,
+    list: Archive,
+    urlPath: PropTypes.string.isRequired
+  };
+
+  static defaultProps = {
+    icon: null
   };
 
   renderList() {
     const firstKeys = Object.keys(this.props.list);
+    const icon = this.props.icon ? `icon ${this.props.icon} icon--absolute` : '';
 
     return firstKeys.map(f => {
       const secondKeys = Object.keys(this.props.list[f]);
       const second = secondKeys.map(s => {
         const items = this.props.list[f][s].map(item => (
-          <li key={item.id}>
-            <a href={item.url}>{item.title}</a>
+          <li key={item.id} className={icon}>
+            <a href={`/${this.props.urlPath}/${item.id}-${item.urlTitle}`}>{item.title}</a>
           </li>
         ));
 
@@ -37,7 +38,7 @@ export default class MultidimensionalList extends Component {
       });
 
       return (
-        <ul key={f}>
+        <ul key={f} className="multi-dimensional-list">
           <li>{f}</li>
           {second}
         </ul>
