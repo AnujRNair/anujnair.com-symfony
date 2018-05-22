@@ -2,6 +2,7 @@
 
 namespace AnujRNair\AnujNairBundle\Entity;
 
+use JsonSerializable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\Mapping as ORM;
@@ -14,7 +15,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="guest", uniqueConstraints={@UniqueConstraint(name="name_unique", columns={"name", "ip_created", "ip_last_visited", "useragent"})})
  * @ORM\Entity(repositoryClass="AnujRNair\AnujNairBundle\Repository\GuestRepository")
  */
-class Guest
+class Guest implements JsonSerializable
 {
     /**
      * @var integer
@@ -262,5 +263,13 @@ class Guest
     public function prePersist()
     {
         $this->dateCreated = new \DateTime();
+    }
+
+    public function jsonSerialize()
+    {
+        return [
+            'id' => $this->id,
+            'name' => $this->name
+        ];
     }
 }

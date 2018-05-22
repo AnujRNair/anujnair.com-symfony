@@ -37,7 +37,7 @@ class BlogController extends Controller
         $noPerPage = min($request->get('noPerPage', 10), 100);
 
         $em = $this->getDoctrine()->getManager();
-        $blogPosts = $em
+        $posts = $em
             ->getRepository('AnujNairBundle:Blog')
             ->getBlogPosts($page, $noPerPage);
         $archive = $em
@@ -47,11 +47,20 @@ class BlogController extends Controller
             ->getRepository('AnujNairBundle:Tag')
             ->getBlogTagSummary();
 
+        $userIds = array_unique(array_map(function($post) {
+            return $post->getUser()->getId();
+        }, $posts));
+
+        $users = $em
+            ->getRepository('AnujNairBundle:User')
+            ->getUsersByIds($userIds);
+
         return [
             'json' => json_encode([
                 'page' => $page,
                 'noPerPage' => $noPerPage,
-                'blogPosts' => $blogPosts,
+                'posts' => $posts,
+                'users' => $users,
                 'archive' => $archive,
                 'tagSummary' => $tagSummary
             ])

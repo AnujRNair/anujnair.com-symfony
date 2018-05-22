@@ -2,6 +2,7 @@
 
 namespace AnujRNair\AnujNairBundle\Entity;
 
+use JsonSerializable;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\UniqueConstraint;
 
@@ -11,7 +12,7 @@ use Doctrine\ORM\Mapping\UniqueConstraint;
  * @ORM\Table(name="tag_map", uniqueConstraints={@UniqueConstraint(name="tag_blog_unique", columns={"tag_id", "blog_id"}), @UniqueConstraint(name="tag_portfolio_unique", columns={"tag_id", "portfolio_id"})})
  * @ORM\Entity
  */
-class TagMap
+class TagMap implements JsonSerializable
 {
 
     /**
@@ -111,5 +112,15 @@ class TagMap
     public function getPortfolio()
     {
         return $this->portfolio;
+    }
+
+    public function jsonSerialize()
+    {
+        return [
+            'id' => $this->id,
+            'tag' => $this->tag,
+            'blog' => $this->blog,
+            'portfolio' => $this->portfolio
+        ];
     }
 }

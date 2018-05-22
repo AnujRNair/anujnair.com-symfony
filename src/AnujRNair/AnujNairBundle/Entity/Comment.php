@@ -2,6 +2,7 @@
 
 namespace AnujRNair\AnujNairBundle\Entity;
 
+use JsonSerializable;
 use AnujRNair\AnujNairBundle\Helper\PostHelper;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -13,7 +14,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\HasLifecycleCallbacks()
  * @ORM\Entity(repositoryClass="AnujRNair\AnujNairBundle\Repository\CommentRepository")
  */
-class Comment
+class Comment implements JsonSerializable
 {
     /**
      * @var integer
@@ -249,5 +250,15 @@ class Comment
     public function preUpdate()
     {
         $this->dateUpdated = new \DateTime();
+    }
+
+    public function jsonSerialize()
+    {
+        return [
+            'id' => $this->id,
+            'comment' => $this->comment,
+            'datePosted' => $this->datePosted,
+            'dateUpdated' => $this->dateUpdated
+        ];
     }
 }

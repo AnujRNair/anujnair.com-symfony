@@ -41,7 +41,7 @@ class BlogRepository extends EntityRepository
      */
     public function getBlogPosts($page, $numberPerPage)
     {
-        $query = $this->getEntityManager()
+        return $this->getEntityManager()
             ->createQuery('
                 select b
                 from AnujNairBundle:Blog as b
@@ -49,7 +49,8 @@ class BlogRepository extends EntityRepository
                 order by b.datePublished desc
             ')
             ->setFirstResult(($page - 1) * $numberPerPage)
-            ->setMaxResults($numberPerPage);
+            ->setMaxResults($numberPerPage)
+            ->getResult();
 
         return new Paginator($query, false);
     }
@@ -64,7 +65,8 @@ class BlogRepository extends EntityRepository
     {
         $blogPosts = $this->getEntityManager()
             ->createQuery('
-                select b
+                select 
+                  partial b.{id, title, datePublished}
                 from AnujNairBundle:Blog as b
                 where b.deleted = 0
                 order by b.datePublished desc

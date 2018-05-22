@@ -2,6 +2,7 @@
 
 namespace AnujRNair\AnujNairBundle\Entity;
 
+use JsonSerializable;
 use AnujRNair\AnujNairBundle\Helper\PostHelper;
 use AnujRNair\AnujNairBundle\Helper\URLHelper;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -14,7 +15,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\HasLifecycleCallbacks()
  * @ORM\Entity(repositoryClass="AnujRNair\AnujNairBundle\Repository\PortfolioRepository")
  */
-class Portfolio
+class Portfolio implements JsonSerializable
 {
 
     /**
@@ -306,5 +307,19 @@ class Portfolio
     public function preUpdate()
     {
         $this->dateUpdated = new \DateTime();
+    }
+
+    public function jsonSerialize()
+    {
+        return [
+            'id' => $this->id,
+            'tagMap' => $this->tagMap,
+            'name' => $this->name,
+            'contents' => $this->contents,
+            'image' => $this->image,
+            'link' => $this->link,
+            'dateCreated' => $this->dateCreated,
+            'dateUpdated' => $this->dateUpdated
+        ];
     }
 }

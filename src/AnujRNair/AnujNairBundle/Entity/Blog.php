@@ -2,6 +2,7 @@
 
 namespace AnujRNair\AnujNairBundle\Entity;
 
+use JsonSerializable;
 use AnujRNair\AnujNairBundle\Helper\PostHelper;
 use AnujRNair\AnujNairBundle\Helper\URLHelper;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -15,7 +16,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\HasLifecycleCallbacks()
  * @ORM\Entity(repositoryClass="AnujRNair\AnujNairBundle\Repository\BlogRepository")
  */
-class Blog
+class Blog implements JsonSerializable
 {
     /**
      * @var integer
@@ -390,6 +391,19 @@ class Blog
     public function preUpdate()
     {
         $this->dateUpdated = new \DateTime();
+    }
+
+    public function jsonSerialize()
+    {
+        return [
+            'id' => $this->id,
+            'userId' => $this->user->getId(),
+            'tagMap' => $this->tagMap,
+            'title' => $this->title,
+            'contents' => $this->contents,
+            'datePublished' => $this->datePublished,
+            'dateUpdated' => $this->dateUpdated
+        ];
     }
 
 }
