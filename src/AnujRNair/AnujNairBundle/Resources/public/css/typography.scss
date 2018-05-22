@@ -21,3 +21,10 @@ body {
     font-size: map-get($font-props, font-size);
   }
 }
+
+h2,
+h3 {
+  margin: 1em 0 0.5em;
+  border-bottom: $border-dotted;
+  padding-bottom: 0.5em;
+}

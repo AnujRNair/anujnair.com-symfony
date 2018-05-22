@@ -1,0 +1,44 @@
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
+import { TagSummary as TagSummaryProps } from '@anujnair/js/types/blog';
+
+import './tag-summary.scss';
+
+export default class TagSummary extends Component {
+  static propTypes = {
+    icon: PropTypes.string,
+    list: TagSummaryProps,
+    urlPath: PropTypes.string.isRequired
+  };
+
+  static defaultProps = {
+    icon: null
+  };
+
+  render() {
+    if (Object.keys(this.props.list).length === 0) {
+      return null;
+    }
+
+    const icon = this.props.icon ? `icon ${this.props.icon}` : '';
+    const items = Object.keys(this.props.list).map(idx => {
+      const item = this.props.list[idx];
+
+      return (
+        <li key={idx} className={icon}>
+          <a
+            href={`/${this.props.urlPath}/${
+              item.id
+            }-${item.name.toLowerCase().replace(' ', '-')}`}
+          >
+            {item.name}
+            <em>({item.tagCount})</em>
+          </a>
+        </li>
+      );
+    });
+
+    return <ul className={'list'}>{items}</ul>;
+  }
+}

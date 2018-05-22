@@ -35,7 +35,8 @@ const Archive = PropTypes.objectOf(
 const TagSummary = PropTypes.arrayOf(
   PropTypes.shape({
     id: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired
+    name: PropTypes.string.isRequired,
+    tagCount: PropTypes.string.isRequired
   })
 );
 
