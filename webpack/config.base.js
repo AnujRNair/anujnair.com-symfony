@@ -7,7 +7,9 @@ module.exports = {
   // the entrypoints we want to build assets for
   /* eslint-disable */
   entry: {
-    'blog-index': path.resolve('src', 'AnujRNair', 'AnujNairBundle', 'Resources', 'public', 'js', 'entrypoints', 'blog-index')
+    'blog-index': path.resolve('src', 'AnujRNair', 'AnujNairBundle', 'Resources', 'public', 'js', 'entrypoints', 'blog-index'),
+    'blog-post': path.resolve('src', 'AnujRNair', 'AnujNairBundle', 'Resources', 'public', 'js', 'entrypoints', 'blog-post'),
+    'blog-tag': path.resolve('src', 'AnujRNair', 'AnujNairBundle', 'Resources', 'public', 'js', 'entrypoints', 'blog-tag')
   },
   /* eslint-enable */
 

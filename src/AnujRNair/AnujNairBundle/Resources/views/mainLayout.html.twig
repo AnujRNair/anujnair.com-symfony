@@ -16,6 +16,9 @@
     <aside class="aside-content" />
 </div>
 
+{% block content %}
+{% endblock %}
+
 <div class="grid__body-footer footer">
     {% block footer %}
         {{ render(path('_an_footer_index')) }}

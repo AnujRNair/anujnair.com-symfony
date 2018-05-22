@@ -33,9 +33,11 @@
         {% block body %}
         {% endblock %}
 
-        <script type="application/javascript">
-            window.reactProps = {{ json|raw }};
-        </script>
+        {% if json is defined %}
+            <script type="application/javascript">
+                window.reactProps = {{ json|raw }};
+            </script>
+        {% endif %}
 
         {% if app.environment == 'prod' %}
             <!-- vendor -->

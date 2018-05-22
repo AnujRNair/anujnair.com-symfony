@@ -1,3 +1,18 @@
 {% extends 'AnujNairBundle::mainLayout.html.twig' %}
 
 {% block htmlTitle 'I couldn\'t find what you were looking for! &raquo; AnujNair.com' %}
+
+{% block content %}
+    <h1>{{ message }}</h1>
+    {% if app.environment == 'dev' and error.trace is defined %}
+        <ul class="metadata list">
+            {% for trace in error.trace %}
+                {% if trace.file %}
+                    <li>
+                        <span>{{ trace.file }} (line {{ trace.line }})</span>
+                    </li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endblock %}

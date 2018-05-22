@@ -47,31 +47,13 @@ class BlogController extends Controller
             ->getRepository('AnujNairBundle:Tag')
             ->getBlogTagSummary();
 
-        $userIds = array_unique(array_map(function($post) {
-            return $post->getUser()->getId();
-        }, $posts));
-        $users = $em
-            ->getRepository('AnujNairBundle:User')
-            ->getUsersByIds($userIds);
-
-        $tagIds = [];
-        $multiTagIds = array_map(function($post) {
-            return $post->getTagIds();
-        }, $posts);
-        array_walk_recursive($multiTagIds, function($v) use (&$tagIds) {
-            $tagIds[] = $v;
-        });
-        $tags = $em
-            ->getRepository('AnujNairBundle:Tag')
-            ->getTagsByIds($tagIds);
-
         return [
             'json' => json_encode([
                 'page' => $page,
                 'noPerPage' => $noPerPage,
                 'posts' => $posts,
-                'users' => $users,
-                'tags' => $tags,
+                'users' => $this->getUsersForPosts($posts),
+                'tags' => $this->getTagsForPosts($posts),
                 'archive' => $archive,
                 'tagSummary' => $tagSummary
             ])
@@ -87,6 +69,8 @@ class BlogController extends Controller
      * @param int $id
      * @param string $title
      * @return array
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function postAction(Request $request, $id, $title = null)
     {
@@ -179,6 +163,7 @@ class BlogController extends Controller
                 'blog' => $blog,
                 'similarBlogPosts' => $similarBlogPosts
             ]),
+            'blog' => $blog,
             'commentForm' => $commentForm->createView()
         ];
     }
@@ -218,7 +203,7 @@ class BlogController extends Controller
             throw $this->createNotFoundException('I couldn\'t find that tag!');
         }
 
-        $blogPosts = $em
+        $posts = $em
             ->getRepository('AnujNairBundle:Blog')
             ->getBlogPostsByTagId($tag->getId(), $page, $noPerPage);
         $archive = $em
@@ -232,7 +217,9 @@ class BlogController extends Controller
             'json' => json_encode([
                 'page' => $page,
                 'noPerPage' => $noPerPage,
-                'blogPosts' => $blogPosts,
+                'posts' => $posts,
+                'users' => $this->getUsersForPosts($posts),
+                'tags' => $this->getTagsForPosts($posts),
                 'archive' => $archive,
                 'tagSummary' => $tagSummary,
                 'tagId' => $tagId
@@ -271,4 +258,43 @@ class BlogController extends Controller
         return JsonResponse::create(['parsed' => PostHelper::parseBBCode($comment->getComment())]);
     }
 
+    /**
+     * Get an array of tag ids from an array of posts
+     * @param Blog[] $posts
+     * @return Integer[]
+     */
+    private function getTagsForPosts($posts)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $tagIds = [];
+        $multiTagIds = array_map(function ($post) {
+            return $post->getTagIds();
+        }, $posts);
+        array_walk_recursive($multiTagIds, function ($v) use (&$tagIds) {
+            $tagIds[] = $v;
+        });
+
+        return $em
+            ->getRepository('AnujNairBundle:Tag')
+            ->getTagsByIds($tagIds);
+    }
+
+    /**
+     * Get an array of user ids from an array of posts
+     * @param Blog[] $posts
+     * @return Integer[]
+     */
+    private function getUsersForPosts($posts)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $userIds = array_unique(array_map(function ($post) {
+            return $post->getUser()->getId();
+        }, $posts));
+
+        return $em
+            ->getRepository('AnujNairBundle:User')
+            ->getUsersByIds($userIds);
+    }
 }

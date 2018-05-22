@@ -51,8 +51,6 @@ class BlogRepository extends EntityRepository
             ->setFirstResult(($page - 1) * $numberPerPage)
             ->setMaxResults($numberPerPage)
             ->getResult();
-
-        return new Paginator($query, false);
     }
 
     /**
@@ -95,7 +93,7 @@ class BlogRepository extends EntityRepository
      */
     public function getBlogPostsByTagId($tagId, $page, $numberPerPage)
     {
-        $query = $this->getEntityManager()
+        return $this->getEntityManager()
             ->createQuery('
                 select b
                 from AnujNairBundle:Blog as b
@@ -108,9 +106,8 @@ class BlogRepository extends EntityRepository
             ')
             ->setParameters(['tagId' => $tagId])
             ->setFirstResult(($page - 1) * $numberPerPage)
-            ->setMaxResults($numberPerPage);
-
-        return new Paginator($query, false);
+            ->setMaxResults($numberPerPage)
+            ->getResult();
     }
 
     /**

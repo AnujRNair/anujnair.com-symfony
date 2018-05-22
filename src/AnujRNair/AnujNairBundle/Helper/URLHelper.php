@@ -20,7 +20,7 @@ class URLHelper
         // Convert special chars
         $string = iconv("UTF-8", "ASCII//TRANSLIT", $string);
         // Replace unwanted with blank
-        $string = preg_replace("/[^a-z0-9_-\s]/i", "", $string);
+        $string = preg_replace("/[^a-z0-9_\-\s]/i", "", $string);
         // Replace multiple dash / space with single space
         $string = preg_replace("/[\s-]+/", " ", $string);
         // Replace space with dashes
