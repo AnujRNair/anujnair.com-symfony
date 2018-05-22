@@ -316,6 +316,19 @@ class Blog implements JsonSerializable
     }
 
     /**
+     * Get Tags for the blog post
+     * @return Integer[]
+     */
+    public function getTagIds()
+    {
+        $tagIds = [];
+        foreach ($this->tagMap as $map) {
+            $tagIds[] = $map->getTag()->getId();
+        }
+        return $tagIds;
+    }
+
+    /**
      * Add comment
      * @param \AnujRNair\AnujNairBundle\Entity\Comment $comment
      * @return Blog
@@ -398,7 +411,7 @@ class Blog implements JsonSerializable
         return [
             'id' => $this->id,
             'userId' => $this->user->getId(),
-            'tagMap' => $this->tagMap,
+            'tagIds' => $this->getTagIds(),
             'title' => $this->title,
             'contents' => $this->contents,
             'datePublished' => $this->datePublished,

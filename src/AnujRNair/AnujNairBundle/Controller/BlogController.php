@@ -50,10 +50,20 @@ class BlogController extends Controller
         $userIds = array_unique(array_map(function($post) {
             return $post->getUser()->getId();
         }, $posts));
-
         $users = $em
             ->getRepository('AnujNairBundle:User')
             ->getUsersByIds($userIds);
+
+        $tagIds = [];
+        $multiTagIds = array_map(function($post) {
+            return $post->getTagIds();
+        }, $posts);
+        array_walk_recursive($multiTagIds, function($v) use (&$tagIds) {
+            $tagIds[] = $v;
+        });
+        $tags = $em
+            ->getRepository('AnujNairBundle:Tag')
+            ->getTagsByIds($tagIds);
 
         return [
             'json' => json_encode([
@@ -61,6 +71,7 @@ class BlogController extends Controller
                 'noPerPage' => $noPerPage,
                 'posts' => $posts,
                 'users' => $users,
+                'tags' => $tags,
                 'archive' => $archive,
                 'tagSummary' => $tagSummary
             ])

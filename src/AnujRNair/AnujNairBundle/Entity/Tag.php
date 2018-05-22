@@ -178,7 +178,6 @@ class Tag implements JsonSerializable
     {
         return [
             'id' => $this->id,
-            'tagMap' => $this->tagMap,
             'name' => $this->name
         ];
     }
