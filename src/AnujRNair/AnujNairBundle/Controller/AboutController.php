@@ -18,7 +18,7 @@ class AboutController extends Controller
 {
 
     /**
-     * @Route("/", name="_an_about_index")
+     * @Route("/", name="_an_about_index", defaults={"webpack" = "about-index"})
      * @Template()
      * @param Request $request
      * @return array

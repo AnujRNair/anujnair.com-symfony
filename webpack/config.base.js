@@ -7,9 +7,13 @@ module.exports = {
   // the entrypoints we want to build assets for
   /* eslint-disable */
   entry: {
+    'about-index': path.resolve('src', 'AnujRNair', 'AnujNairBundle', 'Resources', 'public', 'js', 'entrypoints', 'about-index'),
     'blog-index': path.resolve('src', 'AnujRNair', 'AnujNairBundle', 'Resources', 'public', 'js', 'entrypoints', 'blog-index'),
     'blog-post': path.resolve('src', 'AnujRNair', 'AnujNairBundle', 'Resources', 'public', 'js', 'entrypoints', 'blog-post'),
-    'blog-tag': path.resolve('src', 'AnujRNair', 'AnujNairBundle', 'Resources', 'public', 'js', 'entrypoints', 'blog-tag')
+    'blog-tag': path.resolve('src', 'AnujRNair', 'AnujNairBundle', 'Resources', 'public', 'js', 'entrypoints', 'blog-tag'),
+    'portfolio-index': path.resolve('src', 'AnujRNair', 'AnujNairBundle', 'Resources', 'public', 'js', 'entrypoints', 'portfolio-index'),
+    'portfolio-article': path.resolve('src', 'AnujRNair', 'AnujNairBundle', 'Resources', 'public', 'js', 'entrypoints', 'portfolio-article'),
+    'portfolio-tag': path.resolve('src', 'AnujRNair', 'AnujNairBundle', 'Resources', 'public', 'js', 'entrypoints', 'portfolio-tag')
   },
   /* eslint-enable */
 

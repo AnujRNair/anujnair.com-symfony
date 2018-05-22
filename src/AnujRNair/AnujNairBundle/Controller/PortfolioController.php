@@ -19,7 +19,7 @@ class PortfolioController extends Controller
 {
 
     /**
-     * @Route("/", name="_an_portfolio_index")
+     * @Route("/", name="_an_portfolio_index", defaults={"webpack" = "portfolio-index"})
      * @Template()
      */
     public function indexAction()
@@ -40,9 +40,9 @@ class PortfolioController extends Controller
     }
 
     /**
-     * @Route("/{id}", requirements={"id" : "[\d]+"})
-     * @Route("/{id}-", requirements={"id" : "[\d]+"})
-     * @Route("/{id}-{name}", name="_an_portfolio_article", requirements={"id" : "[\d]+"})
+     * @Route("/{id}", requirements={"id" : "[\d]+"}, defaults={"webpack" = "portfolio-article"})
+     * @Route("/{id}-", requirements={"id" : "[\d]+"}, defaults={"webpack" = "portfolio-article"})
+     * @Route("/{id}-{name}", name="_an_portfolio_article", requirements={"id" : "[\d]+"}, defaults={"webpack" = "portfolio-article"})
      * @Template("AnujNairBundle:Portfolio:article.html.twig")
      * @param int $id
      * @param string $name
@@ -84,9 +84,9 @@ class PortfolioController extends Controller
     }
 
     /**
-     * @Route("/t/{tagId}", requirements={"tagId" : "[\d]+"})
-     * @Route("/t/{tagId}-", requirements={"tagId" : "[\d]+"})
-     * @Route("/t/{tagId}-{name}", name="_an_portfolio_tag", requirements={"tagId" : "[\d]+"})
+     * @Route("/t/{tagId}", requirements={"tagId" : "[\d]+"}, defaults={"webpack" = "portfolio-tag"})
+     * @Route("/t/{tagId}-", requirements={"tagId" : "[\d]+"}, defaults={"webpack" = "portfolio-tag"})
+     * @Route("/t/{tagId}-{name}", name="_an_portfolio_tag", requirements={"tagId" : "[\d]+"}, defaults={"webpack" = "portfolio-tag"})
      * @Template("AnujNairBundle:Portfolio:index.html.twig")
      * @param Request $request
      * @param int $tagId
