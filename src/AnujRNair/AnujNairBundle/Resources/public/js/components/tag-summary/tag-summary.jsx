@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { TagSummary as TagSummaryProps } from '@anujnair/js/types/blog';
+import { TagSummary as TagSummaryProps } from '@anujnair/js/types/post';
 
 import './tag-summary.scss';
 

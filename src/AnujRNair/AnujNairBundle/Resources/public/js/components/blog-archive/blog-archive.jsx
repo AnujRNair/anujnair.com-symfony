@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { Archive } from '@anujnair/js/types/blog';
+import { Archive } from '@anujnair/js/types/post';
 
-import './multi-dimensional-list.scss';
+import './blog-archive.scss';
 
-export default class MultiDimensionalList extends Component {
+export default class BlogArchive extends Component {
   static propTypes = {
     icon: PropTypes.string,
     list: Archive,
@@ -18,14 +18,18 @@ export default class MultiDimensionalList extends Component {
 
   renderList() {
     const firstKeys = Object.keys(this.props.list);
-    const icon = this.props.icon ? `icon ${this.props.icon} icon--absolute` : '';
+    const icon = this.props.icon
+      ? `icon ${this.props.icon} icon--absolute`
+      : '';
 
     return firstKeys.map(f => {
       const secondKeys = Object.keys(this.props.list[f]);
       const second = secondKeys.map(s => {
         const items = this.props.list[f][s].map(item => (
           <li key={item.id} className={icon}>
-            <a href={`/${this.props.urlPath}/${item.id}-${item.urlTitle}`}>{item.title}</a>
+            <a href={`/${this.props.urlPath}/${item.id}-${item.urlTitle}`}>
+              {item.title}
+            </a>
           </li>
         ));
 
@@ -38,7 +42,7 @@ export default class MultiDimensionalList extends Component {
       });
 
       return (
-        <ul key={f} className="multi-dimensional-list">
+        <ul key={f} className="blog-archive">
           <li>{f}</li>
           {second}
         </ul>

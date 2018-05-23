@@ -1,0 +1,27 @@
+.article {
+  &__metadata {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    li {
+      padding-bottom: 5px;
+    }
+
+    &-tags {
+      display: inline-block;
+      padding: 0 0 0 10px;
+      list-style: none;
+
+      li {
+        display: inline-block;
+
+        &:not(:first-child):before {
+          display: inline-block;
+          margin: 0 10px;
+          content: '\2022';
+        }
+      }
+    }
+  }
+}

@@ -4,7 +4,7 @@
     width: 100vw;
     height: 100vh;
     grid-template-rows: 150px auto 30px;
-    grid-gap: 15px;
+    grid-gap: 20px;
     grid-template-areas: 'body-header' 'body-main' 'body-footer';
 
     &-header {
@@ -12,7 +12,7 @@
       padding-top: 100px;
       grid-area: body-header;
       grid-template-columns: 1fr 2fr 2fr 2fr 1fr;
-      grid-gap: 15px;
+      grid-gap: 20px;
       grid-template-areas: '. header-main header-main header-nav .';
 
       header {
@@ -29,7 +29,7 @@
       padding-top: 100px;
       grid-area: body-main;
       grid-template-columns: 1fr 2fr 2fr 2fr 1fr;
-      grid-gap: 15px;
+      grid-gap: 20px;
       grid-template-areas: '. main-content main-content main-aside .';
 
       .main-content {
@@ -45,7 +45,7 @@
       display: grid;
       grid-area: body-footer;
       grid-template-columns: 1fr 6fr 1fr;
-      grid-gap: 15px;
+      grid-gap: 20px;
       grid-template-areas: '. footer-main .';
 
       footer {
