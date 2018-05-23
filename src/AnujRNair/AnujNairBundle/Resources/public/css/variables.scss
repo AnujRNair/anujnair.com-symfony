@@ -4,7 +4,8 @@ $font-family-header: 'Delicious-Bold', Helvetica, Arial, sans-serif;
 $font-family-body: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 
 $font-size-base: 16px;
-$font-size-small: $font-size-base * 0.75;
+$font-size-small: $font-size-base * 0.8;
+$font-size-smaller: $font-size-base * 0.75;
 
 $font-weight-thin: 300;
 $font-weight-normal: 400;
@@ -21,7 +22,7 @@ $font-headers: (
     font-size: 1.5em,
   ),
   h4: (
-    font-size: 1.125em,
+    font-size: 1.25em,
   ),
   h5: (
     font-size: 1em,

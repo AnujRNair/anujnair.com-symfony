@@ -1,5 +1,7 @@
 // Resets
 @import '~normalize';
+@import '~prismjs/themes/prism-coy.css';
+@import '~prismjs/plugins/line-numbers/prism-line-numbers.css';
 
 @import 'colors';
 @import 'variables';
@@ -10,5 +12,6 @@
 @import 'grid';
 @import 'typography';
 @import 'icon';
+@import 'code';
 
 @import 'header-footer';

@@ -1,0 +1,10 @@
+@import 'variables.scss';
+
+pre[class*='language-'] {
+  margin: 1em 0 1.5em;
+  font-size: $font-size-small;
+}
+
+:not(pre) > code[class*='language-'] {
+  font-size: $font-size-small;
+}

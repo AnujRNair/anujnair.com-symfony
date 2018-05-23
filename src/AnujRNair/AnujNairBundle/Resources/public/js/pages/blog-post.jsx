@@ -1,4 +1,6 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
+import Prism from 'prismjs';
+import 'prismjs/plugins/line-numbers/prism-line-numbers';
 
 import { Post, Similar } from '@anujnair/js/types/post';
 import { Tags } from '@anujnair/js/types/tag';
@@ -13,6 +15,10 @@ export default class BlogPost extends Component {
     tags: Tags,
     users: Users
   };
+
+  componentDidMount() {
+    Prism.highlightAll();
+  }
 
   findUserByUserId(userId) {
     return this.props.users.find(user => user.id === userId);

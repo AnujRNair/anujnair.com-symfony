@@ -80,7 +80,10 @@ export default class Article extends Component {
           </a>
         </h2>
         {this.renderMetaData()}
-        <p dangerouslySetInnerHTML={{ __html: this.props.post.contents }} />
+        <p
+          className={'article__contents'}
+          dangerouslySetInnerHTML={{ __html: this.props.post.contents }}
+        />
         {this.renderShowMore()}
       </article>
     );

@@ -87,7 +87,7 @@ class PostHelper
                 ? '</code></pre>'
                 : '</code>'
             );
-            $converted = preg_replace($bbCodeRegex, $opening . htmlspecialchars($fullMatches[3][$i]) . $closing, $converted, 1);
+            $converted = preg_replace($bbCodeRegex, $opening . htmlspecialchars(trim($fullMatches[3][$i])) . $closing, $converted, 1);
         }
 
         return $converted;
