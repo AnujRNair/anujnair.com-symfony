@@ -90,68 +90,10 @@ class BlogController extends Controller
                     'title' => $blog->getUrlSafeTitle()
                 ]), 301);
             }
+
+            $blog->setWantLong(true);
         } catch (NoResultException $e) {
             throw $this->createNotFoundException('The blog post doesn\'t exist.');
-        }
-
-        $actionUrl = $this->generateUrl('_an_blog_article', [
-            'id' => $blog->getId(),
-            'title' => $blog->getUrlSafeTitle()
-        ]);
-
-        $comment = new Comment();
-        $commentForm = $this->createForm(new CommentType($actionUrl . '#post-comment'), $comment);
-        $commentForm->handleRequest($request);
-
-        // Posting a comment, let's save it!
-        if ($commentForm->isValid()) {
-            // Get details that we will need
-            $ip = $request->getClientIp();
-            $userAgent = substr($request->headers->get('User-Agent'), 0, 255);
-            $datetime = new \DateTime();
-            $guest = $comment->getGuest();
-
-            // Try and find an existing guest
-            /** @var Guest $existingGuest */
-            $existingGuest = $em
-                ->getRepository('AnujNairBundle:Guest')
-                ->getGuestByNameIpUserAgent($guest->getName(), $ip, $userAgent);
-
-            if ($existingGuest !== null) {
-                $guest = $existingGuest;
-            } else {
-                $guest
-                    ->setDateCreated($datetime)
-                    ->setIpCreated($ip)
-                    ->setUserAgent($userAgent);
-            }
-            $guest
-                ->setDateLastVisited($datetime)
-                ->setIpLastVisited($ip);
-
-            // Save to the database
-            $comment->setBlog($blog);
-            $comment->setGuest($guest);
-            $em->persist($comment);
-            $em->persist($guest);
-            $em->flush();
-
-            // Send email
-            /** @var \Swift_Mime_Message $message */
-            $message = \Swift_Message::newInstance()
-                ->setSubject('AnujNair.com comment has been posted')
-                ->addFrom($this->container->getParameter('mailer_to'))
-                ->addTo($this->container->getParameter('mailer_to'))
-                ->addReplyTo($this->container->getParameter('mailer_to'))
-                ->setBody(
-                    $this->renderView('AnujNairBundle:Email:commentEmail.html.twig', [
-                        'comment' => $comment
-                    ]),
-                    'text/html'
-                );
-            $this->get('mailer')->send($message);
-
-            return $this->redirect($actionUrl . '#comment' . $comment->getId());
         }
 
         $similarBlogPosts = $em
@@ -161,10 +103,11 @@ class BlogController extends Controller
         return [
             'json' => json_encode([
                 'blog' => $blog,
+                'users' => $this->getUsersForPosts([$blog]),
+                'tags' => $this->getTagsForPosts([$blog]),
                 'similarBlogPosts' => $similarBlogPosts
             ]),
-            'blog' => $blog,
-            'commentForm' => $commentForm->createView()
+            'blog' => $blog
         ];
     }
 

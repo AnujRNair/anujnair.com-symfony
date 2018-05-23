@@ -6,8 +6,8 @@ import {
   Posts,
   TagSummary as TagSummaryProps
 } from '@anujnair/js/types/post';
-import { Users } from '@anujnair/js/types/user';
 import { Tags } from '@anujnair/js/types/tag';
+import { Users } from '@anujnair/js/types/user';
 
 import Article from '@anujnair/js/components/article/article.jsx';
 import BlogArchive from '@anujnair/js/components/blog-archive/blog-archive.jsx';
@@ -18,8 +18,8 @@ export default class BlogIndex extends Component {
     page: PropTypes.number.isRequired,
     noPerPage: PropTypes.number.isRequired,
     posts: Posts,
-    users: Users,
-    tags: Tags
+    tags: Tags,
+    users: Users
   };
 
   findUserByUserId(userId) {
@@ -45,6 +45,7 @@ export default class BlogIndex extends Component {
           key={post.id}
           post={post}
           user={user}
+          showMore
           tags={this.findTagsByPost(post)}
         />
       );

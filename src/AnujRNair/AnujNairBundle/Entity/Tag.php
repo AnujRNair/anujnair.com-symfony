@@ -177,8 +177,8 @@ class Tag implements JsonSerializable
     public function jsonSerialize()
     {
         return [
-            'id' => $this->id,
-            'name' => $this->name,
+            'id' => $this->getId(),
+            'name' => $this->getName(),
             'urlName' => $this->getUrlSafeName()
         ];
     }

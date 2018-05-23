@@ -312,14 +312,13 @@ class Portfolio implements JsonSerializable
     public function jsonSerialize()
     {
         return [
-            'id' => $this->id,
-            'tagMap' => $this->tagMap,
-            'name' => $this->name,
-            'contents' => $this->contents,
-            'image' => $this->image,
-            'link' => $this->link,
-            'dateCreated' => $this->dateCreated,
-            'dateUpdated' => $this->dateUpdated
+            'id' => $this->getId(),
+            'name' => $this->getName(),
+            'contents' => $this->getContents(),
+            'image' => $this->getImage(),
+            'link' => $this->getLink(),
+            'dateCreated' => $this->getDateCreated(),
+            'dateUpdated' => $this->getDateUpdated()
         ];
     }
 }

@@ -357,9 +357,9 @@ class User implements JsonSerializable
     public function jsonSerialize()
     {
         return [
-            'id' => $this->id,
-            'firstName' => $this->firstName,
-            'lastName' => $this->lastName
+            'id' => $this->getId(),
+            'firstName' => $this->getFirstName(),
+            'lastName' => $this->getLastName()
         ];
     }
 }

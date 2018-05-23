@@ -82,6 +82,19 @@ class Blog implements JsonSerializable
      */
     private $hasComments;
 
+    /**
+     * @var bool
+     */
+    private $wantLong = false;
+
+
+    /**
+     * Set whether we want the contents (long) or the abstract (short)
+     * @param boolean $wantLong
+     */
+    public function setWantLong($wantLong) {
+        $this->wantLong = $wantLong;
+    }
 
     /**
      * Set up the One to Many relationships
@@ -409,13 +422,12 @@ class Blog implements JsonSerializable
     public function jsonSerialize()
     {
         return [
-            'id' => $this->id,
+            'id' => $this->getId(),
             'userId' => $this->user->getId(),
             'tagIds' => $this->getTagIds(),
-            'title' => $this->title,
-            'contents' => $this->contents,
-            'datePublished' => $this->datePublished,
-            'dateUpdated' => $this->dateUpdated,
+            'title' => $this->getTitle(),
+            'contents' => $this->wantLong ? $this->getContents() : $this->getAbstract(),
+            'datePublished' => $this->getDatePublished()->format('jS F Y'),
             'urlTitle' => $this->getUrlSafeTitle()
         ];
     }

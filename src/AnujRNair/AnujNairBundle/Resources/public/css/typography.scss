@@ -1,3 +1,5 @@
+@import 'variables.scss';
+
 @font-face {
   font-family: Delicious-Bold;
   src: url('../fonts/delicious/Delicious-Bold.otf') format('opentype');
@@ -24,7 +26,8 @@ body {
 
 h2,
 h3 {
-  margin: 1em 0 0.5em;
+  margin: 1.25em 0 0.5em;
   border-bottom: $border-dotted;
   padding-bottom: 0.5em;
+  line-height: $line-height-headers;
 }

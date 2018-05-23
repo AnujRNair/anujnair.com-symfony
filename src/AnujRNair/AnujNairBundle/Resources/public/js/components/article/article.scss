@@ -1,8 +1,24 @@
+@import 'variables.scss';
+
 .article {
+  position: relative;
+
+  &__title {
+    a {
+      color: $color-headers;
+
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  }
+
   &__metadata {
     margin: 0;
-    padding: 0;
+    border-bottom: $border-dotted;
+    padding: 0 0 4px;
     list-style: none;
+    font-size: $font-size-small;
 
     li {
       padding-bottom: 5px;
@@ -10,7 +26,7 @@
 
     &-tags {
       display: inline-block;
-      padding: 0 0 0 10px;
+      padding: 0 0 0 5px;
       list-style: none;
 
       li {
@@ -23,5 +39,15 @@
         }
       }
     }
+  }
+
+  &__show-more {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0, #fff 50%);
+    padding: 35px 0 10px;
+    width: 100%;
+    text-align: center;
   }
 }

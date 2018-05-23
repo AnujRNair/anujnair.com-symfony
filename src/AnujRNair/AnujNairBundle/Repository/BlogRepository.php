@@ -121,7 +121,7 @@ class BlogRepository extends EntityRepository
         $blogPosts = $this->getEntityManager()
             ->createQuery('
                 select
-                    b,
+                    partial b.{id, title, datePublished},
                     count(b.id) as tagCount
                 from AnujNairBundle:Blog as b
                 left join b.tagMap as tm
