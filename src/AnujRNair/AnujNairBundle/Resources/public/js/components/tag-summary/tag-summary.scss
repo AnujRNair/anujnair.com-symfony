@@ -1,4 +1,6 @@
-.list {
+@import 'variables.scss';
+
+.tag-summary {
   margin: 0;
   padding: 0;
   list-style: none;
@@ -10,5 +12,9 @@
       margin-left: 7px;
       font-size: 12px;
     }
+  }
+
+  &--highlighted {
+    font-weight: $font-weight-bold;
   }
 }

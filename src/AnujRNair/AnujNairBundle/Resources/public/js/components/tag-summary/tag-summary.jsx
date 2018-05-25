@@ -7,12 +7,14 @@ import './tag-summary.scss';
 
 export default class TagSummary extends Component {
   static propTypes = {
+    highlightTagId: PropTypes.number,
     icon: PropTypes.string,
     list: TagSummaryProps,
     urlPath: PropTypes.string.isRequired
   };
 
   static defaultProps = {
+    highlightTagId: null,
     icon: null
   };
 
@@ -24,9 +26,11 @@ export default class TagSummary extends Component {
     const icon = this.props.icon ? `icon ${this.props.icon}` : '';
     const items = Object.keys(this.props.list).map(idx => {
       const item = this.props.list[idx];
+      const highlightClass =
+        this.props.highlightTagId === item.id ? 'tag-summary--highlighted' : '';
 
       return (
-        <li key={idx} className={icon}>
+        <li key={idx} className={`${icon} ${highlightClass}`}>
           <a
             href={`/${this.props.urlPath}/${
               item.id
@@ -39,6 +43,6 @@ export default class TagSummary extends Component {
       );
     });
 
-    return <ul className={'list'}>{items}</ul>;
+    return <ul className={'tag-summary'}>{items}</ul>;
   }
 }

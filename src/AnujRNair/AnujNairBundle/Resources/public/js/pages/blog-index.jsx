@@ -66,7 +66,12 @@ export default class BlogIndex extends Component {
 export class BlogAside extends Component {
   static propTypes = {
     archive: Archive,
+    tagId: PropTypes.number,
     tagSummary: TagSummaryProps
+  };
+
+  static defaultProps = {
+    tagId: null
   };
 
   renderArchive() {
@@ -87,6 +92,7 @@ export class BlogAside extends Component {
       <Fragment>
         <h3>Blog Tags</h3>
         <TagSummary
+          highlightTagId={this.props.tagId}
           icon={'icon-tag'}
           list={this.props.tagSummary}
           urlPath={'blog/t'}

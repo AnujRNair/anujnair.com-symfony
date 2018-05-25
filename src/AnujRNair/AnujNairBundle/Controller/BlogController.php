@@ -165,7 +165,7 @@ class BlogController extends Controller
                 'tags' => $this->getTagsForPosts($posts),
                 'archive' => $archive,
                 'tagSummary' => $tagSummary,
-                'tagId' => $tagId
+                'tagId' => (int)$tagId
             ])
         ];
     }
