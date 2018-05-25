@@ -1,10 +1,19 @@
 @import 'variables.scss';
 
+code {
+  font-variant-ligatures: none;
+}
+
 pre[class*='language-'] {
   margin: 1em 0 1.5em;
   font-size: $font-size-small;
 }
 
-:not(pre) > code[class*='language-'] {
+:not(pre) > code {
+  border: 1px solid $color-grey-light;
+  border-radius: 3px;
+  background-color: $color-code-background;
+  padding: 2px 3px;
+  color: $color-code-color;
   font-size: $font-size-small;
 }
