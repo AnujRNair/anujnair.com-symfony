@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 
 import { Similar } from '@anujnair/js/types/post';
 
-import './similar-posts.scss';
-
 export default class SimilarPosts extends Component {
   static propTypes = {
     icon: PropTypes.string,
@@ -51,7 +49,7 @@ export default class SimilarPosts extends Component {
     return (
       <Fragment>
         <h3>You may also be interested in &hellip;</h3>
-        <ul className={'similar-posts'}>
+        <ul className={'list'}>
           {this.renderSection('Extra Reading')}
           {this.renderSection('Similar Blog Posts')}
         </ul>

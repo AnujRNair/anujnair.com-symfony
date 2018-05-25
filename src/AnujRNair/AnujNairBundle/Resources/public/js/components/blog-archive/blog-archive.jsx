@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 
 import { Archive } from '@anujnair/js/types/post';
 
-import './blog-archive.scss';
-
 export default class BlogArchive extends Component {
   static propTypes = {
     icon: PropTypes.string,
@@ -42,7 +40,7 @@ export default class BlogArchive extends Component {
       });
 
       return (
-        <ul key={f} className="blog-archive">
+        <ul key={f} className="list">
           <li>{f}</li>
           {second}
         </ul>

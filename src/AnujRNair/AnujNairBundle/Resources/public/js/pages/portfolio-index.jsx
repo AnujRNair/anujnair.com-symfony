@@ -54,6 +54,43 @@ export class PortfolioAside extends Component {
     tagId: null
   };
 
+  renderAbout() {
+    return (
+      <Fragment>
+        <h3>About</h3>
+        <p>
+          Listed here are the open source sites and projects that I have
+          designed and developed over the years.
+        </p>
+        <p>
+          My portfolio ranges from sites created in different frameworks, to
+          helpful libraries, and are mostly listed on my GitHub page for
+          reference.
+        </p>
+        <p>
+          Click on any one of the websites or projects to view more information
+          on what it was about and how I went about completing each task.
+        </p>
+      </Fragment>
+    );
+  }
+
+  renderLearnMore() {
+    return (
+      <Fragment>
+        <h3>Learn More</h3>
+        <ul className={'list'}>
+          <li className={'icon icon-pencil icon--absolute'}>
+            <a href={'/blog'}>View my blog posts</a>
+          </li>
+          <li className={'icon icon-man icon--absolute'}>
+            <a href={'/contact'}>Learn more about me and contact me</a>
+          </li>
+        </ul>
+      </Fragment>
+    );
+  }
+
   renderTagSummary() {
     return (
       <Fragment>
@@ -71,6 +108,8 @@ export class PortfolioAside extends Component {
   render() {
     return (
       <Fragment>
+        {this.renderAbout()}
+        {this.renderLearnMore()}
         {this.renderTagSummary()}
       </Fragment>
     );
