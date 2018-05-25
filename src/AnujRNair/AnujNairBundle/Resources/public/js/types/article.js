@@ -7,7 +7,8 @@ const Article = PropTypes.shape({
   image: PropTypes.string.isRequired,
   link: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  tagIds: PropTypes.arrayOf(PropTypes.number.isRequired)
+  tagIds: PropTypes.arrayOf(PropTypes.number.isRequired),
+  urlTitle: PropTypes.string.isRequired
 });
 
 const Articles = PropTypes.arrayOf(Article);

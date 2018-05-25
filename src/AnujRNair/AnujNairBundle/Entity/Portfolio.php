@@ -360,6 +360,7 @@ class Portfolio implements JsonSerializable
             'link' => $this->getLink(),
             'dateCreated' => $this->getDateCreated(),
             'tagIds' => $this->getTagIds(),
+            'urlTitle' => $this->getUrlSafeName()
         ];
     }
 }

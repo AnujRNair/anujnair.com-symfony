@@ -33,123 +33,127 @@
     top: 6px;
   }
 
-  &-mail-full:before {
+  &-link:before {
     content: '\f100';
   }
 
-  &-man:before {
+  &-mail-full:before {
     content: '\f101';
   }
 
-  &-location:before {
+  &-man:before {
     content: '\f102';
   }
 
-  &-calendar:before {
+  &-location:before {
     content: '\f103';
   }
 
-  &-thumbs-up:before {
+  &-calendar:before {
     content: '\f104';
   }
 
-  &-spanner:before {
+  &-thumbs-up:before {
     content: '\f105';
   }
 
-  &-pencil:before {
+  &-spanner:before {
     content: '\f106';
   }
 
-  &-earth-full:before {
+  &-pencil:before {
     content: '\f107';
   }
 
-  &-earth:before {
+  &-earth-full:before {
     content: '\f108';
   }
 
-  &-star-full:before {
+  &-earth:before {
     content: '\f109';
   }
 
-  &-heart:before {
+  &-star-full:before {
     content: '\f10a';
   }
 
-  &-tag:before {
+  &-heart:before {
     content: '\f10b';
   }
 
-  &-tags:before {
+  &-tag:before {
     content: '\f10c';
   }
 
-  &-li:before {
+  &-tags:before {
     content: '\f10d';
   }
 
-  &-star:before {
+  &-li:before {
     content: '\f10e';
   }
 
-  &-tags-full:before {
+  &-star:before {
     content: '\f10f';
   }
 
-  &-tag-full:before {
+  &-tags-full:before {
     content: '\f110';
   }
 
-  &-heart-full:before {
+  &-tag-full:before {
     content: '\f111';
   }
 
-  &-chat:before {
+  &-heart-full:before {
     content: '\f112';
   }
 
-  &-gp:before {
+  &-chat:before {
     content: '\f113';
   }
 
-  &-email:before {
+  &-gp:before {
     content: '\f114';
   }
 
-  &-chats-full:before {
+  &-email:before {
     content: '\f115';
   }
 
-  &-li-full:before {
+  &-chats-full:before {
     content: '\f116';
   }
 
-  &-fb-full:before {
+  &-li-full:before {
     content: '\f117';
   }
 
-  &-fb:before {
+  &-fb-full:before {
     content: '\f118';
   }
 
-  &-gp-full:before {
+  &-fb:before {
     content: '\f119';
   }
 
-  &-t-full:before {
+  &-gp-full:before {
     content: '\f11a';
   }
 
-  &-t:before {
+  &-t-full:before {
     content: '\f11b';
   }
 
-  &-gh-full:before {
+  &-t:before {
     content: '\f11c';
   }
 
-  &-so:before {
+  &-gh-full:before {
     content: '\f11d';
+  }
+
+  &-so:before {
+    content: '\f11e';
   }
 }

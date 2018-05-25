@@ -30,7 +30,7 @@ class PortfolioController extends BaseController
             ->getPortfolioList(1, 50);
         $tagSummary = $em
             ->getRepository('AnujNairBundle:Tag')
-            ->getPortfolioTagSummary(3);
+            ->getPortfolioTagSummary(20);
 
         return [
             'json' => json_encode([
@@ -131,13 +131,14 @@ class PortfolioController extends BaseController
             ->getPortfolioListByTagId($tag->getId(), $page, $noPerPage);
         $tagSummary = $em
             ->getRepository('AnujNairBundle:Tag')
-            ->getPortfolioTagSummary(3);
+            ->getPortfolioTagSummary(20);
 
         return [
             'json' => json_encode([
                 'articles' => $articles,
                 'tags' => $this->getTagsForObj($articles),
-                'tagSummary' => $tagSummary
+                'tagSummary' => $tagSummary,
+                'tagId' => (int)$tagId
             ]),
         ];
     }

@@ -34,7 +34,7 @@ export default class BlogIndex extends Component {
     );
   }
 
-  renderArticles() {
+  renderPosts() {
     if (this.props.posts.length === 0) {
       return <h2>No articles currently exist</h2>;
     }
@@ -55,7 +55,7 @@ export default class BlogIndex extends Component {
   }
 
   render() {
-    return this.renderArticles();
+    return this.renderPosts();
   }
 }
 
