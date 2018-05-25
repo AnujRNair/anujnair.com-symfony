@@ -26,7 +26,7 @@ class PortfolioController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $portfolioList = $em
+        $articles = $em
             ->getRepository('AnujNairBundle:Portfolio')
             ->getPortfolioList(1, 50);
         $tagSummary = $em
@@ -34,8 +34,10 @@ class PortfolioController extends Controller
             ->getPortfolioTagSummary(3);
 
         return [
-            'portfolioList' => $portfolioList,
-            'tagSummary'    => $tagSummary
+            'json' => json_encode([
+                'articles' => $articles,
+                'tagSummary' => $tagSummary
+            ])
         ];
     }
 
@@ -60,7 +62,7 @@ class PortfolioController extends Controller
             // Make sure URL points to correct place for SEO purposes
             if ($name !== $portfolio->getUrlSafeName()) {
                 return $this->redirect($this->generateUrl('_an_portfolio_article', [
-                    'id'   => $portfolio->getId(),
+                    'id' => $portfolio->getId(),
                     'name' => $portfolio->getUrlSafeName()
                 ]), 301);
             }
@@ -77,9 +79,9 @@ class PortfolioController extends Controller
             ->getBlogPostsByYearMonth(1, 10);
 
         return [
-            'portfolio'                => $portfolio,
+            'portfolio' => $portfolio,
             'similarPortfolioArticles' => $similarPortfolio,
-            'blogArchive'              => $blogArchive
+            'blogArchive' => $blogArchive
         ];
     }
 
@@ -110,7 +112,7 @@ class PortfolioController extends Controller
             if ($name !== $tag->getUrlSafeName()) {
                 return $this->redirect($this->generateUrl('_an_portfolio_tag', [
                     'tagId' => $tag->getId(),
-                    'name'  => $tag->getUrlSafeName()
+                    'name' => $tag->getUrlSafeName()
                 ]), 301);
             }
 
@@ -127,7 +129,7 @@ class PortfolioController extends Controller
 
         return [
             'portfolioList' => $portfolioList,
-            'tagSummary'    => $tagSummary
+            'tagSummary' => $tagSummary
         ];
     }
 

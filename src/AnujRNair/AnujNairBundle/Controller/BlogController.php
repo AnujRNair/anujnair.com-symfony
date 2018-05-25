@@ -3,18 +3,11 @@
 namespace AnujRNair\AnujNairBundle\Controller;
 
 use AnujRNair\AnujNairBundle\Entity\Blog;
-use AnujRNair\AnujNairBundle\Entity\Comment;
-use AnujRNair\AnujNairBundle\Entity\Guest;
 use AnujRNair\AnujNairBundle\Entity\Tag;
-use AnujRNair\AnujNairBundle\Forms\Blog\CommentType;
-use AnujRNair\AnujNairBundle\Helper\PostHelper;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\NoResultException;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -22,7 +15,7 @@ use Symfony\Component\HttpFoundation\Request;
  * @package AnujRNair\AnujNairBundle\Controller
  * @Route("/blog")
  */
-class BlogController extends Controller
+class BlogController extends BaseController
 {
 
     /**
@@ -52,8 +45,8 @@ class BlogController extends Controller
                 'page' => $page,
                 'noPerPage' => $noPerPage,
                 'posts' => $posts,
-                'users' => $this->getUsersForPosts($posts),
-                'tags' => $this->getTagsForPosts($posts),
+                'users' => $this->getUsersForObj($posts),
+                'tags' => $this->getTagsForObj($posts),
                 'archive' => $archive,
                 'tagSummary' => $tagSummary
             ])
@@ -103,8 +96,8 @@ class BlogController extends Controller
         return [
             'json' => json_encode([
                 'blog' => $blog,
-                'users' => $this->getUsersForPosts([$blog]),
-                'tags' => $this->getTagsForPosts([$blog]),
+                'users' => $this->getUsersForObj([$blog]),
+                'tags' => $this->getTagsForObj([$blog]),
                 'similarBlogPosts' => $similarBlogPosts
             ]),
             'blog' => $blog
@@ -161,83 +154,12 @@ class BlogController extends Controller
                 'page' => $page,
                 'noPerPage' => $noPerPage,
                 'posts' => $posts,
-                'users' => $this->getUsersForPosts($posts),
-                'tags' => $this->getTagsForPosts($posts),
+                'users' => $this->getUsersForObj($posts),
+                'tags' => $this->getTagsForObj($posts),
                 'archive' => $archive,
                 'tagSummary' => $tagSummary,
                 'tagId' => (int)$tagId
             ])
         ];
-    }
-
-    /**
-     * @Route("/preview", name="_an_blog_preview")
-     * @Method({"POST"})
-     * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\Response|static
-     */
-    public function previewPostAction(Request $request)
-    {
-        $comment = new Comment();
-        $commentForm = $this->createForm(new CommentType(), $comment);
-        $commentForm->handleRequest($request);
-
-        $errors = [];
-        $error = $commentForm->getErrors(true);
-        if (count($error) > 0) {
-            foreach ($error as $err) {
-                $field = $err->getOrigin()->getName();
-                if ($field === 'name') {
-                    continue;
-                }
-                $errors[$field][] = $err->getMessage();
-            }
-        }
-
-        if (count($errors) > 0) {
-            return JsonResponse::create(['parsed' => null, 'errors' => $errors]);
-        }
-
-        return JsonResponse::create(['parsed' => PostHelper::parseBBCode($comment->getComment())]);
-    }
-
-    /**
-     * Get an array of tag ids from an array of posts
-     * @param Blog[] $posts
-     * @return Integer[]
-     */
-    private function getTagsForPosts($posts)
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $tagIds = [];
-        $multiTagIds = array_map(function ($post) {
-            return $post->getTagIds();
-        }, $posts);
-        array_walk_recursive($multiTagIds, function ($v) use (&$tagIds) {
-            $tagIds[] = $v;
-        });
-
-        return $em
-            ->getRepository('AnujNairBundle:Tag')
-            ->getTagsByIds($tagIds);
-    }
-
-    /**
-     * Get an array of user ids from an array of posts
-     * @param Blog[] $posts
-     * @return Integer[]
-     */
-    private function getUsersForPosts($posts)
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $userIds = array_unique(array_map(function ($post) {
-            return $post->getUser()->getId();
-        }, $posts));
-
-        return $em
-            ->getRepository('AnujNairBundle:User')
-            ->getUsersByIds($userIds);
     }
 }

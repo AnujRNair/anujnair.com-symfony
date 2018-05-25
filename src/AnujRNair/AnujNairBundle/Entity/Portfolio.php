@@ -2,6 +2,7 @@
 
 namespace AnujRNair\AnujNairBundle\Entity;
 
+use Parsedown;
 use JsonSerializable;
 use AnujRNair\AnujNairBundle\Helper\PostHelper;
 use AnujRNair\AnujNairBundle\Helper\URLHelper;
@@ -74,6 +75,11 @@ class Portfolio implements JsonSerializable
      */
     private $deleted;
 
+    /**
+     * @var Parsedown
+     */
+    private $parsedown = null;
+
 
     /**
      * Set up the One to Many relationships
@@ -81,6 +87,18 @@ class Portfolio implements JsonSerializable
     public function __construct()
     {
         $this->tagMap = new ArrayCollection();
+    }
+
+    /**
+     * Get the Parsedown instance
+     * @return Parsedown
+     */
+    private function getParsedown() {
+        if ($this->parsedown === null) {
+            $this->parsedown = new Parsedown();
+        }
+
+        return $this->parsedown;
     }
 
     /**
@@ -147,7 +165,7 @@ class Portfolio implements JsonSerializable
      */
     public function getContents()
     {
-        return PostHelper::parseBBCode($this->contents);
+        return $this->getParsedown()->text($this->contents);
     }
 
     /**
@@ -253,7 +271,7 @@ class Portfolio implements JsonSerializable
     /**
      * Add TagMap
      * @param \AnujRNair\AnujNairBundle\Entity\TagMap $tagMap
-     * @return User
+     * @return Portfolio
      */
     public function addTagMap(TagMap $tagMap)
     {
@@ -293,6 +311,19 @@ class Portfolio implements JsonSerializable
     }
 
     /**
+     * Get Tags for the blog post
+     * @return Integer[]
+     */
+    public function getTagIds()
+    {
+        $tagIds = [];
+        foreach ($this->tagMap as $map) {
+            $tagIds[] = $map->getTag()->getId();
+        }
+        return $tagIds;
+    }
+
+    /**
      * @ORM\PrePersist
      */
     public function prePersist()
@@ -317,8 +348,8 @@ class Portfolio implements JsonSerializable
             'contents' => $this->getContents(),
             'image' => $this->getImage(),
             'link' => $this->getLink(),
-            'dateCreated' => $this->getDateCreated(),
-            'dateUpdated' => $this->getDateUpdated()
+            'dateCreated' => $this->getDateCreated()->format('jS F Y'),
+            'tagIds' => $this->getTagIds(),
         ];
     }
 }

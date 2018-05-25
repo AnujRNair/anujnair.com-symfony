@@ -2,14 +2,13 @@
 
 namespace AnujRNair\AnujNairBundle\Entity;
 
+use Parsedown;
 use JsonSerializable;
 use AnujRNair\AnujNairBundle\Helper\PostHelper;
 use AnujRNair\AnujNairBundle\Helper\URLHelper;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\Mapping as ORM;
-use Parsedown;
-use Symfony\Component\DependencyInjection\Compiler\PassConfig;
 
 /**
  * Blog
@@ -112,6 +111,10 @@ class Blog implements JsonSerializable
         $this->comments = new ArrayCollection();
     }
 
+    /**
+     * Get the Parsedown instance
+     * @return Parsedown
+     */
     private function getParsedown() {
         if ($this->parsedown === null) {
             $this->parsedown = new Parsedown();
