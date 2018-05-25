@@ -44,10 +44,16 @@ export default class BlogPost extends Component {
 
 export class BlogAside extends Component {
   static propTypes = {
-    similarBlogPosts: Similar
+    similar: Similar
   };
 
   render() {
-    return <SimilarPosts icon={'icon-calendar'} list={this.props.similarBlogPosts} urlPath={'blog'} />;
+    return (
+      <SimilarPosts
+        icon={'icon-calendar'}
+        list={this.props.similar}
+        urlPath={'blog'}
+      />
+    );
   }
 }

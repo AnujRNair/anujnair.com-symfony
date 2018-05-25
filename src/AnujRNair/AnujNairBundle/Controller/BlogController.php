@@ -89,7 +89,7 @@ class BlogController extends BaseController
             throw $this->createNotFoundException('The blog post doesn\'t exist.');
         }
 
-        $similarBlogPosts = $em
+        $similar = $em
             ->getRepository('AnujNairBundle:Blog')
             ->getSimilarBlogPosts($id, 1, 20);
 
@@ -98,7 +98,7 @@ class BlogController extends BaseController
                 'blog' => $blog,
                 'users' => $this->getUsersForObj([$blog]),
                 'tags' => $this->getTagsForObj([$blog]),
-                'similarBlogPosts' => $similarBlogPosts
+                'similar' => $similar
             ]),
             'blog' => $blog
         ];
@@ -113,6 +113,7 @@ class BlogController extends BaseController
      * @param int $tagId
      * @param string $name
      * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
+     * @throws \Doctrine\ORM\NonUniqueResultException
      */
     public function tagAction(Request $request, $tagId, $name = null)
     {

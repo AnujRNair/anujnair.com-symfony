@@ -221,11 +221,15 @@ class Portfolio implements JsonSerializable
 
     /**
      * Get dateCreated
-     * @return \DateTime
+     * @return String
      */
     public function getDateCreated()
     {
-        return $this->dateCreated;
+        if ($this->dateCreated instanceof \DateTime) {
+            return $this->dateCreated->format('jS F Y');
+        }
+
+        return null;
     }
 
     /**
@@ -241,11 +245,15 @@ class Portfolio implements JsonSerializable
 
     /**
      * Get dateUpdated
-     * @return \DateTime
+     * @return String
      */
     public function getDateUpdated()
     {
-        return $this->dateUpdated;
+        if ($this->dateUpdated instanceof \DateTime) {
+            return $this->dateUpdated->format('jS F Y');
+        }
+
+        return null;
     }
 
     /**
@@ -348,7 +356,7 @@ class Portfolio implements JsonSerializable
             'contents' => $this->getContents(),
             'image' => $this->getImage(),
             'link' => $this->getLink(),
-            'dateCreated' => $this->getDateCreated()->format('jS F Y'),
+            'dateCreated' => $this->getDateCreated(),
             'tagIds' => $this->getTagIds(),
         ];
     }

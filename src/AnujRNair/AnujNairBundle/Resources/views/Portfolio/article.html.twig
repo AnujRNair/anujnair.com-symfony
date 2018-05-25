@@ -1,10 +1,10 @@
 {% extends 'AnujNairBundle::mainLayout.html.twig' %}
 
-{% block htmlTitle %}{{ portfolio.getName}} &raquo; Anuj Nair's Portfolio &raquo; AnujNair.com{% endblock %}
-{% block htmlDescription %}More information about the {{ portfolio.getName }} project by Anuj Nair{% endblock %}
+{% block htmlTitle %}{{ article.getName}} &raquo; Anuj Nair's Portfolio &raquo; AnujNair.com{% endblock %}
+{% block htmlDescription %}More information about the {{ article.getName }} project by Anuj Nair{% endblock %}
 {% block htmlKeywords %}
-    {% set keywords = [portfolio.getName] %}
-    {% for tag in portfolio.getTags %}
+    {% set keywords = [article.getName] %}
+    {% for tag in article.getTags %}
         {% set keywords = keywords|merge([tag.getName]) %}
     {% endfor %}
     {{ keywords|join(', ') }}

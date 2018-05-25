@@ -245,11 +245,15 @@ class Blog implements JsonSerializable
 
     /**
      * Get datePublished
-     * @return \DateTime
+     * @return String
      */
     public function getDatePublished()
     {
-        return $this->datePublished;
+        if ($this->datePublished instanceof \DateTime) {
+            return $this->datePublished->format('jS F Y');
+        }
+
+        return null;
     }
 
     /**
@@ -265,11 +269,15 @@ class Blog implements JsonSerializable
 
     /**
      * Get dateUpdated
-     * @return \DateTime
+     * @return String
      */
     public function getDateUpdated()
     {
-        return $this->dateUpdated;
+        if ($this->dateUpdated instanceof \DateTime) {
+            return $this->dateUpdated->format('jS F Y');
+        }
+
+        return null;
     }
 
     /**
@@ -445,7 +453,7 @@ class Blog implements JsonSerializable
             'tagIds' => $this->getTagIds(),
             'title' => $this->getTitle(),
             'contents' => $this->wantLong ? $this->getContents() : $this->getAbstract(),
-            'datePublished' => $this->getDatePublished()->format('jS F Y'),
+            'datePublished' => $this->getDatePublished(),
             'urlTitle' => $this->getUrlSafeTitle()
         ];
     }

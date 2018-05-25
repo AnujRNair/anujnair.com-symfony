@@ -7,7 +7,6 @@ use AnujRNair\AnujNairBundle\Entity\Tag;
 use Doctrine\ORM\NoResultException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -15,7 +14,7 @@ use Symfony\Component\HttpFoundation\Request;
  * @package AnujRNair\AnujNairBundle\Controller
  * @Route("/portfolio")
  */
-class PortfolioController extends Controller
+class PortfolioController extends BaseController
 {
 
     /**
@@ -36,6 +35,7 @@ class PortfolioController extends Controller
         return [
             'json' => json_encode([
                 'articles' => $articles,
+                'tags' => $this->getTagsForObj($articles),
                 'tagSummary' => $tagSummary
             ])
         ];
@@ -49,39 +49,44 @@ class PortfolioController extends Controller
      * @param int $id
      * @param string $name
      * @return array
+     * @throws \Doctrine\ORM\NonUniqueResultException
      */
     public function articleAction($id, $name = null)
     {
         $em = $this->getDoctrine()->getManager();
         try {
-            /** @var Portfolio $portfolio */
-            $portfolio = $em
+            /** @var Portfolio $article */
+            $article = $em
                 ->getRepository('AnujNairBundle:Portfolio')
                 ->getPortfolioById($id);
 
             // Make sure URL points to correct place for SEO purposes
-            if ($name !== $portfolio->getUrlSafeName()) {
+            if ($name !== $article->getUrlSafeName()) {
                 return $this->redirect($this->generateUrl('_an_portfolio_article', [
-                    'id' => $portfolio->getId(),
-                    'name' => $portfolio->getUrlSafeName()
+                    'id' => $article->getId(),
+                    'name' => $article->getUrlSafeName()
                 ]), 301);
             }
         } catch (NoResultException $e) {
             throw $this->createNotFoundException('That portfolio article doesn\'t exist.');
         }
 
-        $similarPortfolio = $em
+        $similar = $em
             ->getRepository('AnujNairBundle:Portfolio')
             ->getSimilarPortfolioArticles($id, 1, 20);
 
-        $blogArchive = $em
+        $archive = $em
             ->getRepository('AnujNairBundle:Blog')
             ->getBlogPostsByYearMonth(1, 10);
 
         return [
-            'portfolio' => $portfolio,
-            'similarPortfolioArticles' => $similarPortfolio,
-            'blogArchive' => $blogArchive
+            'json' => json_encode([
+                'article' => $article,
+                'similar' => $similar,
+                'archive' => $archive,
+                'tags' => $this->getTagsForObj([$article]),
+            ]),
+            'article' => $article
         ];
     }
 
@@ -94,6 +99,7 @@ class PortfolioController extends Controller
      * @param int $tagId
      * @param string $name
      * @return array
+     * @throws \Doctrine\ORM\NonUniqueResultException
      */
     public function tagAction(Request $request, $tagId, $name = null)
     {
@@ -120,7 +126,7 @@ class PortfolioController extends Controller
             throw $this->createNotFoundException('I couldn\'t find that tag!');
         }
 
-        $portfolioList = $em
+        $articles = $em
             ->getRepository('AnujNairBundle:Portfolio')
             ->getPortfolioListByTagId($tag->getId(), $page, $noPerPage);
         $tagSummary = $em
@@ -128,8 +134,11 @@ class PortfolioController extends Controller
             ->getPortfolioTagSummary(3);
 
         return [
-            'portfolioList' => $portfolioList,
-            'tagSummary' => $tagSummary
+            'json' => json_encode([
+                'articles' => $articles,
+                'tags' => $this->getTagsForObj($articles),
+                'tagSummary' => $tagSummary
+            ]),
         ];
     }
 
