@@ -8,6 +8,8 @@ use AnujRNair\AnujNairBundle\Helper\URLHelper;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\Mapping as ORM;
+use Parsedown;
+use Symfony\Component\DependencyInjection\Compiler\PassConfig;
 
 /**
  * Blog
@@ -87,6 +89,11 @@ class Blog implements JsonSerializable
      */
     private $wantLong = false;
 
+    /**
+     * @var Parsedown
+     */
+    private $parsedown = null;
+
 
     /**
      * Set whether we want the contents (long) or the abstract (short)
@@ -103,6 +110,14 @@ class Blog implements JsonSerializable
     {
         $this->tagMap = new ArrayCollection();
         $this->comments = new ArrayCollection();
+    }
+
+    private function getParsedown() {
+        if ($this->parsedown === null) {
+            $this->parsedown = new Parsedown();
+        }
+
+        return $this->parsedown;
     }
 
     /**
@@ -189,7 +204,7 @@ class Blog implements JsonSerializable
      */
     public function getContents()
     {
-        return PostHelper::parseBBCode($this->contents);
+        return $this->getParsedown()->text($this->contents);
     }
 
     /**
@@ -200,7 +215,7 @@ class Blog implements JsonSerializable
      */
     public function getNoHTMLAbstract($length = 150, $truncationIndicator = '...')
     {
-        return PostHelper::safeShorten(PostHelper::stripBBCode($this->contents), $length, $truncationIndicator);
+        return PostHelper::safeShorten(strip_tags($this->contents), $length, $truncationIndicator);
     }
 
     /**
@@ -211,7 +226,7 @@ class Blog implements JsonSerializable
      */
     public function getAbstract($length = 500, $truncationIndicator = '...')
     {
-        return PostHelper::safeShorten(PostHelper::parseBBCode($this->contents), $length, $truncationIndicator);
+        return PostHelper::safeShorten($this->getParsedown()->text($this->contents), $length, $truncationIndicator);
     }
 
     /**
