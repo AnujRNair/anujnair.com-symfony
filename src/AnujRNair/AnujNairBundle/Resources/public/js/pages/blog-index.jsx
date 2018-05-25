@@ -3,15 +3,11 @@ import PropTypes from 'prop-types';
 import Prism from 'prismjs';
 import 'prismjs/plugins/line-numbers/prism-line-numbers';
 
-import {
-  Archive,
-  Posts,
-  TagSummary as TagSummaryProps
-} from '@anujnair/js/types/post';
-import { Tags } from '@anujnair/js/types/tag';
+import { Archive, Posts } from '@anujnair/js/types/post';
+import { Tags, TagSummary as TagSummaryProps } from '@anujnair/js/types/tag';
 import { Users } from '@anujnair/js/types/user';
 
-import Article from '@anujnair/js/components/article/article.jsx';
+import Post from '@anujnair/js/components/post/post.jsx';
 import BlogArchive from '@anujnair/js/components/blog-archive/blog-archive.jsx';
 import TagSummary from '@anujnair/js/components/tag-summary/tag-summary.jsx';
 
@@ -47,7 +43,7 @@ export default class BlogIndex extends Component {
       const user = this.findUserByUserId(post.userId);
 
       return (
-        <Article
+        <Post
           key={post.id}
           post={post}
           user={user}

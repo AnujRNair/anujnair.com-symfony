@@ -2,16 +2,16 @@ import React, { Component } from 'react';
 import Prism from 'prismjs';
 import 'prismjs/plugins/line-numbers/prism-line-numbers';
 
-import { Post, Similar } from '@anujnair/js/types/post';
+import { Post as PostProps, Similar } from '@anujnair/js/types/post';
 import { Tags } from '@anujnair/js/types/tag';
 import { Users } from '@anujnair/js/types/user';
 
-import Article from '@anujnair/js/components/article/article.jsx';
+import Post from '@anujnair/js/components/post/post.jsx';
 import SimilarPosts from '@anujnair/js/components/similar-posts/similar-posts.jsx';
 
 export default class BlogPost extends Component {
   static propTypes = {
-    blog: Post,
+    blog: PostProps,
     tags: Tags,
     users: Users
   };
@@ -32,7 +32,7 @@ export default class BlogPost extends Component {
 
   render() {
     return (
-      <Article
+      <Post
         post={this.props.blog}
         user={this.findUserByUserId(this.props.blog.userId)}
         showMore={false}

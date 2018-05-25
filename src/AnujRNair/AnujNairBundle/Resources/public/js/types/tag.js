@@ -8,4 +8,12 @@ const Tag = PropTypes.shape({
 
 const Tags = PropTypes.arrayOf(Tag);
 
-export { Tag, Tags };
+const TagSummary = PropTypes.arrayOf(
+  PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    tagCount: PropTypes.string.isRequired
+  })
+);
+
+export { Tag, Tags, TagSummary };

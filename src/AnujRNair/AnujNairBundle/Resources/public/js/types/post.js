@@ -24,17 +24,9 @@ const Archive = PropTypes.objectOf(
   ).isRequired
 );
 
-const TagSummary = PropTypes.arrayOf(
-  PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    tagCount: PropTypes.string.isRequired
-  })
-);
-
 const Similar = PropTypes.shape({
   'Extra Reading': Posts,
   'Similar Blog Posts': Posts
 });
 
-export { Archive, Post, Posts, Similar, TagSummary };
+export { Archive, Post, Posts, Similar };

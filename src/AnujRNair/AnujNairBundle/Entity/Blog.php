@@ -245,12 +245,13 @@ class Blog implements JsonSerializable
 
     /**
      * Get datePublished
-     * @return String
+     * @param string $format
+     * @return string
      */
-    public function getDatePublished()
+    public function getDatePublished($format = 'jS F Y')
     {
         if ($this->datePublished instanceof \DateTime) {
-            return $this->datePublished->format('jS F Y');
+            return $this->datePublished->format($format);
         }
 
         return null;
@@ -269,12 +270,13 @@ class Blog implements JsonSerializable
 
     /**
      * Get dateUpdated
-     * @return String
+     * @param string $format
+     * @return string
      */
-    public function getDateUpdated()
+    public function getDateUpdated($format = 'jS F Y')
     {
         if ($this->dateUpdated instanceof \DateTime) {
-            return $this->dateUpdated->format('jS F Y');
+            return $this->dateUpdated->format($format);
         }
 
         return null;

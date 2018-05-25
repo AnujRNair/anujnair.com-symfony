@@ -221,12 +221,13 @@ class Portfolio implements JsonSerializable
 
     /**
      * Get dateCreated
-     * @return String
+     * @param string $format
+     * @return string
      */
-    public function getDateCreated()
+    public function getDateCreated($format = 'jS F Y')
     {
         if ($this->dateCreated instanceof \DateTime) {
-            return $this->dateCreated->format('jS F Y');
+            return $this->dateCreated->format($format);
         }
 
         return null;
@@ -245,12 +246,13 @@ class Portfolio implements JsonSerializable
 
     /**
      * Get dateUpdated
-     * @return String
+     * @param string $format
+     * @return string
      */
-    public function getDateUpdated()
+    public function getDateUpdated($format = 'jS F Y')
     {
         if ($this->dateUpdated instanceof \DateTime) {
-            return $this->dateUpdated->format('jS F Y');
+            return $this->dateUpdated->format($format);
         }
 
         return null;

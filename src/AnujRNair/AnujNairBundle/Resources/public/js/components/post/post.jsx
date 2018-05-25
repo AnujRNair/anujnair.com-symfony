@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { Post } from '@anujnair/js/types/post';
+import { Post as PostProps } from '@anujnair/js/types/post';
 import { User } from '@anujnair/js/types/user';
 import { Tags } from '@anujnair/js/types/tag';
 
-import './article.scss';
+import './post.scss';
 
-export default class Article extends Component {
+export default class Post extends Component {
   static propTypes = {
-    post: Post,
+    post: PostProps,
     user: User,
     showMore: PropTypes.bool,
     tags: Tags
@@ -33,14 +33,14 @@ export default class Article extends Component {
     return (
       <li className={'icon icon-tags'}>
         Tags:
-        <ul className={'article__metadata-tags'}>{items}</ul>
+        <ul className={'post__metadata-tags'}>{items}</ul>
       </li>
     );
   }
 
   renderMetaData() {
     return (
-      <ul className={'article__metadata'}>
+      <ul className={'post__metadata'}>
         <li className={'icon icon-man'}>
           Author: {this.props.user.firstName} {this.props.user.lastName}
         </li>
@@ -60,7 +60,7 @@ export default class Article extends Component {
     return (
       <a
         href={`/blog/${this.props.post.id}-${this.props.post.urlTitle}`}
-        className={'article__show-more'}
+        className={'post__show-more'}
       >
         Show more
       </a>
@@ -70,18 +70,18 @@ export default class Article extends Component {
   render() {
     return (
       <article
-        className={'article'}
+        className={'post'}
         itemScope
         itemType={'http://schema.org/Article'}
       >
-        <h2 className={'article__title'}>
+        <h2 className={'post__title'}>
           <a href={`/blog/${this.props.post.id}-${this.props.post.urlTitle}`}>
             {this.props.post.title}
           </a>
         </h2>
         {this.renderMetaData()}
         <p
-          className={'article__contents'}
+          className={'post__contents'}
           dangerouslySetInnerHTML={{ __html: this.props.post.contents }}
         />
         {this.renderShowMore()}

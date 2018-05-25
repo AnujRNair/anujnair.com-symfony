@@ -77,7 +77,7 @@ class BlogRepository extends EntityRepository
         if (count($blogPosts) > 0) {
             foreach ($blogPosts as $post) {
                 /** @var Blog $post */
-                $results[$post->getDatePublished()->format('Y')][$post->getDatePublished()->format('F')][] = $post;
+                $results[$post->getDatePublished('Y')][$post->getDatePublished('F')][] = $post;
             }
         }
 
