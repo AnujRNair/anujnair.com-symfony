@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import classNames from 'classnames';
 
 import { Article as ArticleProps } from '@anujnair/js/types/article';
 import { Tags } from '@anujnair/js/types/tag';
@@ -8,8 +10,40 @@ import './article.scss';
 export default class Article extends Component {
   static propTypes = {
     article: ArticleProps,
+    mini: PropTypes.bool,
     tags: Tags
   };
+
+  static defaultProps = {
+    mini: false
+  };
+
+  renderTitle() {
+    return (
+      <h2 className={'article__title'}>
+        <a
+          href={`/portfolio/${this.props.article.id}-${
+            this.props.article.urlTitle
+          }`}
+        >
+          {this.props.article.name}
+        </a>
+      </h2>
+    );
+  }
+
+  renderImage() {
+    return (
+      <a
+        className={'article__img'}
+        href={`/portfolio/${this.props.article.id}-${
+          this.props.article.urlTitle
+        }`}
+      >
+        <img src={this.props.article.image} alt={this.props.article.title} />
+      </a>
+    );
+  }
 
   renderTagsMetaData() {
     if (this.props.tags.length === 0) {
@@ -45,17 +79,15 @@ export default class Article extends Component {
   }
 
   render() {
+    const classes = classNames({
+      article: true,
+      'article--mini': this.props.mini
+    });
+
     return (
-      <article className={'article'}>
-        <h2 className={'article__title'}>
-          <a
-            href={`/portfolio/${this.props.article.id}-${
-              this.props.article.urlTitle
-            }`}
-          >
-            {this.props.article.name}
-          </a>
-        </h2>
+      <article className={classes}>
+        {this.renderImage()}
+        {this.renderTitle()}
         {this.renderMetaData()}
       </article>
     );

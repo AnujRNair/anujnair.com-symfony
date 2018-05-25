@@ -26,8 +26,9 @@ export default class PortfolioIndex extends Component {
 
     return this.props.articles.map(article => (
       <Article
-        key={article.id}
         article={article}
+        key={article.id}
+        mini
         tags={this.findTagsByArticle(article)}
       />
     ));
