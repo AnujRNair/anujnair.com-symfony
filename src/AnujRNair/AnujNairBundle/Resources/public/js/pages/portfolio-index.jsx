@@ -84,7 +84,7 @@ export class PortfolioAside extends Component {
             <a href={'/blog'}>View my blog posts</a>
           </li>
           <li className={'icon icon-man icon--absolute'}>
-            <a href={'/contact'}>Learn more about me and contact me</a>
+            <a href={'/about'}>Learn more about me and contact me</a>
           </li>
         </ul>
       </Fragment>

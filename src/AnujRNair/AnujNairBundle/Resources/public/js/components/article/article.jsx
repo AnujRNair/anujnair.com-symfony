@@ -23,7 +23,17 @@ export default class Article extends Component {
       return null;
     }
 
-    return <h2>{this.props.article.name}</h2>;
+    return (
+      <h2 className={'article__header'}>
+        <a
+          href={`/portfolio/${this.props.article.id}-${
+            this.props.article.urlTitle
+          }`}
+        >
+          {this.props.article.name}
+        </a>
+      </h2>
+    );
   }
 
   renderTitle() {

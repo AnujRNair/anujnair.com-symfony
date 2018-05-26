@@ -4,6 +4,16 @@
   display: inline-block;
   vertical-align: top;
 
+  &__header {
+    a {
+      color: $color-body;
+
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  }
+
   &__title {
     margin-top: 0.5em;
     overflow: hidden;
