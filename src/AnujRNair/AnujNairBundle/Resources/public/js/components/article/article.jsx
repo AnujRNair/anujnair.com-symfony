@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
@@ -18,7 +18,19 @@ export default class Article extends Component {
     mini: false
   };
 
+  renderHeader() {
+    if (this.props.mini === true) {
+      return null;
+    }
+
+    return <h2>{this.props.article.name}</h2>;
+  }
+
   renderTitle() {
+    if (this.props.mini === false) {
+      return null;
+    }
+
     return (
       <h2 className={'article__title'}>
         <a
@@ -78,6 +90,19 @@ export default class Article extends Component {
     );
   }
 
+  renderContents() {
+    if (this.props.mini === true) {
+      return null;
+    }
+
+    return (
+      <p
+        className={'article__contents'}
+        dangerouslySetInnerHTML={{ __html: this.props.article.contents }}
+      />
+    );
+  }
+
   render() {
     const classes = classNames({
       article: true,
@@ -85,11 +110,15 @@ export default class Article extends Component {
     });
 
     return (
-      <article className={classes}>
-        {this.renderImage()}
-        {this.renderTitle()}
-        {this.renderMetaData()}
-      </article>
+      <Fragment>
+        {this.renderHeader()}
+        <article className={classes}>
+          {this.renderImage()}
+          {this.renderTitle()}
+          {this.renderMetaData()}
+          {this.renderContents()}
+        </article>
+      </Fragment>
     );
   }
 }

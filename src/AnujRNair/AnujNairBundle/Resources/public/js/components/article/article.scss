@@ -2,9 +2,6 @@
 
 .article {
   display: inline-block;
-  box-shadow: 0 0 10px -2px rgba($color-grey, 0.5);
-  background-color: $color-grey-lighter;
-  padding: 15px;
   vertical-align: top;
 
   &__title {
@@ -35,7 +32,7 @@
   }
 
   &__metadata {
-    margin: 0;
+    margin: 1em 0 0;
     padding: 0;
     list-style: none;
     font-size: $font-size-smaller;
@@ -66,9 +63,22 @@
     }
   }
 
+  &__contents {
+    margin-top: 0.5em;
+    border-top: $border-dotted;
+  }
+
   &--mini {
     margin: 0 8px 15px;
+    box-shadow: 0 0 10px -2px rgba($color-grey, 0.5);
+    background-color: $color-grey-lighter;
     padding: 15px 15px 5px;
     width: calc(50% - 16px);
+
+    .article {
+      &__metadata {
+        margin: 0;
+      }
+    }
   }
 }

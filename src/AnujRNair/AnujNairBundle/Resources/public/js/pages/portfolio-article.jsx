@@ -1,20 +1,26 @@
 import React, { Component, Fragment } from 'react';
 
 import { Tags } from '@anujnair/js/types/tag';
-import { Article } from '@anujnair/js/types/article';
+import { Article as ArticleProps } from '@anujnair/js/types/article';
 import { Archive, Similar } from '@anujnair/js/types/post';
 
-import BlogArchive from '@anujnair/js/components/blog-archive/blog-archive.jsx';
-import SimilarPosts from '@anujnair/js/components/similar-posts/similar-posts.jsx';
+import Article from '@anujnair/js/components/article/article';
+import BlogArchive from '@anujnair/js/components/blog-archive/blog-archive';
+import SimilarPosts from '@anujnair/js/components/similar-posts/similar-posts';
 
 export default class PortfolioArticle extends Component {
   static propTypes = {
-    article: Article,
+    article: ArticleProps,
     tags: Tags
   };
 
   render() {
-    return <div />;
+    return (
+      <Article
+        article={this.props.article}
+        tags={this.props.tags}
+      />
+    );
   }
 }
 

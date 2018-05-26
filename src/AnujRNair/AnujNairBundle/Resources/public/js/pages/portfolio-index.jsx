@@ -3,8 +3,8 @@ import React, { Component, Fragment } from 'react';
 import { Tags, TagSummary as TagSummaryProps } from '@anujnair/js/types/tag';
 import { Articles } from '@anujnair/js/types/article';
 
-import Article from '@anujnair/js/components/article/article.jsx';
-import TagSummary from '@anujnair/js/components/tag-summary/tag-summary.jsx';
+import Article from '@anujnair/js/components/article/article';
+import TagSummary from '@anujnair/js/components/tag-summary/tag-summary';
 import PropTypes from 'prop-types';
 
 export default class PortfolioIndex extends Component {

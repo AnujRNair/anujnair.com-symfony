@@ -7,9 +7,9 @@ import { Archive, Posts } from '@anujnair/js/types/post';
 import { Tags, TagSummary as TagSummaryProps } from '@anujnair/js/types/tag';
 import { Users } from '@anujnair/js/types/user';
 
-import Post from '@anujnair/js/components/post/post.jsx';
-import BlogArchive from '@anujnair/js/components/blog-archive/blog-archive.jsx';
-import TagSummary from '@anujnair/js/components/tag-summary/tag-summary.jsx';
+import Post from '@anujnair/js/components/post/post';
+import BlogArchive from '@anujnair/js/components/blog-archive/blog-archive';
+import TagSummary from '@anujnair/js/components/tag-summary/tag-summary';
 
 export default class BlogIndex extends Component {
   static propTypes = {

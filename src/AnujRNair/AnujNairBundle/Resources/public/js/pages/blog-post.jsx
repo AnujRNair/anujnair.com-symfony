@@ -6,8 +6,8 @@ import { Post as PostProps, Similar } from '@anujnair/js/types/post';
 import { Tags } from '@anujnair/js/types/tag';
 import { Users } from '@anujnair/js/types/user';
 
-import Post from '@anujnair/js/components/post/post.jsx';
-import SimilarPosts from '@anujnair/js/components/similar-posts/similar-posts.jsx';
+import Post from '@anujnair/js/components/post/post';
+import SimilarPosts from '@anujnair/js/components/similar-posts/similar-posts';
 
 export default class BlogPost extends Component {
   static propTypes = {
