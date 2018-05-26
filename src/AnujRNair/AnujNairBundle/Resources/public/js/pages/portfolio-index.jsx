@@ -93,15 +93,13 @@ export class PortfolioAside extends Component {
 
   renderTagSummary() {
     return (
-      <Fragment>
-        <h3>Portfolio Tags</h3>
-        <TagSummary
-          highlightTagId={this.props.tagId}
-          icon={'icon-tag'}
-          list={this.props.tagSummary}
-          urlPath={'portfolio/t'}
-        />
-      </Fragment>
+      <TagSummary
+        header={'Portfolio'}
+        highlightTagId={this.props.tagId}
+        icon={'icon-tag'}
+        list={this.props.tagSummary}
+        urlPath={'portfolio/t'}
+      />
     );
   }
 

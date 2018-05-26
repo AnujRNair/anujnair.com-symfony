@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 
 import { Archive } from '@anujnair/js/types/post';
@@ -53,6 +53,11 @@ export default class BlogArchive extends Component {
       return null;
     }
 
-    return this.renderList();
+    return (
+      <Fragment>
+        <h3>Past Blog Entries</h3>
+        {this.renderList()}
+      </Fragment>
+    );
   }
 }

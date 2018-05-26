@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 
 import { TagSummary as TagSummaryProps } from '@anujnair/js/types/tag';
@@ -7,6 +7,7 @@ import './tag-summary.scss';
 
 export default class TagSummary extends Component {
   static propTypes = {
+    header: PropTypes.string.isRequired,
     highlightTagId: PropTypes.number,
     icon: PropTypes.string,
     list: TagSummaryProps,
@@ -43,6 +44,11 @@ export default class TagSummary extends Component {
       );
     });
 
-    return <ul className={'tag-summary'}>{items}</ul>;
+    return (
+      <Fragment>
+        <h3>{this.props.header} Tags</h3>
+        <ul className={'tag-summary'}>{items}</ul>
+      </Fragment>
+    );
   }
 }

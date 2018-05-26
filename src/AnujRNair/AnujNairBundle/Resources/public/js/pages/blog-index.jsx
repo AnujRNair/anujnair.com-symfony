@@ -72,28 +72,23 @@ export class BlogAside extends Component {
 
   renderArchive() {
     return (
-      <Fragment>
-        <h3>Past Blog Entries</h3>
-        <BlogArchive
-          icon={'icon-calendar'}
-          list={this.props.archive}
-          urlPath={'blog'}
-        />
-      </Fragment>
+      <BlogArchive
+        icon={'icon-calendar'}
+        list={this.props.archive}
+        urlPath={'blog'}
+      />
     );
   }
 
   renderTagSummary() {
     return (
-      <Fragment>
-        <h3>Blog Tags</h3>
-        <TagSummary
-          highlightTagId={this.props.tagId}
-          icon={'icon-tag'}
-          list={this.props.tagSummary}
-          urlPath={'blog/t'}
-        />
-      </Fragment>
+      <TagSummary
+        header={'Blog'}
+        highlightTagId={this.props.tagId}
+        icon={'icon-tag'}
+        list={this.props.tagSummary}
+        urlPath={'blog/t'}
+      />
     );
   }
 

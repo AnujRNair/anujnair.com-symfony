@@ -26,13 +26,15 @@ export default class SimilarPosts extends Component {
     const items = this.props.list[section].map(post => {
       return (
         <li key={post.id} className={icon}>
-          <a href={`/${this.props.urlPath}/${post.id}-${post.urlTitle}`}>{post.title}</a>
+          <a href={`/${this.props.urlPath}/${post.id}-${post.urlTitle}`}>
+            {post.title || post.name}
+          </a>
         </li>
       );
     });
 
     return (
-      <Fragment>
+      <Fragment key={section}>
         <li>{section}</li>
         <ul>{items}</ul>
       </Fragment>
@@ -46,13 +48,12 @@ export default class SimilarPosts extends Component {
       return null;
     }
 
+    const sections = keys.map(key => this.renderSection(key));
+
     return (
       <Fragment>
         <h3>You may also be interested in &hellip;</h3>
-        <ul className={'list'}>
-          {this.renderSection('Extra Reading')}
-          {this.renderSection('Similar Blog Posts')}
-        </ul>
+        <ul className={'list'}>{sections}</ul>
       </Fragment>
     );
   }

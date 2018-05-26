@@ -90,7 +90,7 @@ class PortfolioRepository extends EntityRepository
         $articles = $this->getEntityManager()
             ->createQuery('
                 select
-                    partial p.{id, name, image},
+                    partial p.{id, name},
                     count(p.id) as tagCount
                 from AnujNairBundle:Portfolio as p
                 left join p.tagMap as tm
