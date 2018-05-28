@@ -1,0 +1,44 @@
+@import 'variables';
+
+.business-card {
+  position: relative;
+  border: 1px solid $color-red-orange;
+  border-radius: 5px;
+  box-shadow: 10px 10px 10px -5px rgba($color-grey-dark, 0.5);
+  background-color: $color-white;
+  padding: 20px;
+  max-width: 400px;
+  overflow: hidden;
+
+  &__name {
+    text-transform: uppercase;
+    font-family: $font-family-header;
+    font-size: $font-size-large;
+  }
+
+  &__profession {
+    margin: 4px 0 10px;
+    text-transform: uppercase;
+    font-family: $font-family-header;
+    font-size: $font-size-base;
+  }
+
+  &__details {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: $font-size-small;
+
+    li {
+      margin: 2px 0;
+      background: linear-gradient(
+        to right,
+        $color-grey-light 0,
+        $color-grey-light 7.3%,
+        $color-grey-lighter 7.3%,
+        $color-grey-lighter 100%
+      );
+      padding: 5px 5px 5px 7px;
+    }
+  }
+}

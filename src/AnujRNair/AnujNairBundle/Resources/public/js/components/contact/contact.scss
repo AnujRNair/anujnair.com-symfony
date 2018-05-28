@@ -1,0 +1,38 @@
+@import 'variables';
+
+.contact {
+  &__group {
+    display: table;
+    margin-bottom: 10px;
+    width: 100%;
+    vertical-align: middle;
+    white-space: nowrap;
+
+    .icon {
+      display: table-cell;
+      border: 1px solid $color-grey-light;
+      border-right: 0;
+      border-top-left-radius: 4px;
+      border-bottom-left-radius: 4px;
+      background-color: $color-grey-lighter;
+      padding: 6px 12px;
+      width: 1%;
+      vertical-align: middle;
+
+      &:before {
+        margin: 0;
+      }
+    }
+
+    input,
+    textarea {
+      display: table-cell;
+      border: 1px solid $color-grey-light;
+      border-top-right-radius: 4px;
+      border-bottom-right-radius: 4px;
+      padding: 8px 12px;
+      width: 100%;
+      vertical-align: middle;
+    }
+  }
+}
