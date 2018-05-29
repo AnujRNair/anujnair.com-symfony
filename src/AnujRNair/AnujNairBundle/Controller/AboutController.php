@@ -46,7 +46,7 @@ class AboutController extends Controller
                     ]),
                     'text/html'
                 );
-            // $this->get('mailer')->send($message);
+            $this->get('mailer')->send($message);
             $this->addFlash('success', 'Thanks for your email! I\'ll be in contact shortly.');
 
             return $this->redirect($actionUrl);

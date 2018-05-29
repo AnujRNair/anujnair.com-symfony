@@ -15,12 +15,7 @@ export default class PortfolioArticle extends Component {
   };
 
   render() {
-    return (
-      <Article
-        article={this.props.article}
-        tags={this.props.tags}
-      />
-    );
+    return <Article article={this.props.article} tags={this.props.tags} />;
   }
 }
 

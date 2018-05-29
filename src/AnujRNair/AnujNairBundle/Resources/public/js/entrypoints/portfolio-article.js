@@ -4,7 +4,9 @@ import '@anujnair/css/toolkit.scss';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import PortfolioArticle, { PortfolioAside } from '@anujnair/js/pages/portfolio-article';
+import PortfolioArticle, {
+  PortfolioAside
+} from '@anujnair/js/pages/portfolio-article';
 
 const mainContainer = document.querySelector('.main-content');
 ReactDOM.render(

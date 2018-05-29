@@ -23,11 +23,9 @@ export default class Contact extends Component {
   }
 
   updateContactFieldState = (prop, text) => {
-    this.setState(() => {
-      return {
-        [prop]: text
-      };
-    });
+    this.setState(() => ({
+      [prop]: text
+    }));
   };
 
   handleNameChange = e => this.updateContactFieldState('name', e.target.value);

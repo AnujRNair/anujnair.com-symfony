@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import BusinessCard from '@anujnair/js/components/business-card/business-card';
 
 import './jumbotron.scss';

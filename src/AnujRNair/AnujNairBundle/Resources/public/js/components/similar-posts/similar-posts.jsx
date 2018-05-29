@@ -23,15 +23,13 @@ export default class SimilarPosts extends Component {
       ? `icon ${this.props.icon} icon--absolute`
       : '';
 
-    const items = this.props.list[section].map(post => {
-      return (
-        <li key={post.id} className={icon}>
-          <a href={`/${this.props.urlPath}/${post.id}-${post.urlTitle}`}>
-            {post.title || post.name}
-          </a>
-        </li>
-      );
-    });
+    const items = this.props.list[section].map(post => (
+      <li key={post.id} className={icon}>
+        <a href={`/${this.props.urlPath}/${post.id}-${post.urlTitle}`}>
+          {post.title || post.name}
+        </a>
+      </li>
+    ));
 
     return (
       <Fragment key={section}>

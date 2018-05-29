@@ -7,7 +7,7 @@ const Post = PropTypes.shape({
   tagIds: PropTypes.arrayOf(PropTypes.number.isRequired),
   title: PropTypes.string.isRequired,
   userId: PropTypes.number.isRequired,
-  urlTitle: PropTypes.string.isRequired,
+  urlTitle: PropTypes.string.isRequired
 }).isRequired;
 
 const Posts = PropTypes.arrayOf(Post);

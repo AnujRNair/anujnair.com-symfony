@@ -17,4 +17,5 @@ const ContactForm = PropTypes.shape({
   }).isRequired
 });
 
+/* eslint-disable-next-line import/prefer-default-export */
 export { ContactForm };

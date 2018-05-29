@@ -1,11 +1,11 @@
 @font-face {
   font-family: 'Flaticon';
-  src: url('../fonts/flaticon/Flaticon.eot');
-  src: url("../fonts/flaticon/Flaticon.eot?#iefix") format("embedded-opentype"),
-    url('../fonts/flaticon/Flaticon.woff') format('woff'),
-    url('../fonts/flaticon/Flaticon.ttf') format('truetype');
-  font-style: normal;
   font-weight: normal;
+  font-style: normal;
+  src: url('../fonts/flaticon/Flaticon.eot');
+  src: url('../fonts/flaticon/Flaticon.eot?#iefix') format('embedded-opentype'), // sass-lint:disable-line no-duplicate-properties
+  url('../fonts/flaticon/Flaticon.woff') format('woff'),
+  url('../fonts/flaticon/Flaticon.ttf') format('truetype');
 }
 
 .icon {
