@@ -89,6 +89,15 @@
     }
   }
 
+  &__success {
+    margin-bottom: 10px;
+    border-radius: 4px;
+    background-color: $color-green;
+    padding: 10px;
+    text-align: center;
+    color: $color-white;
+  }
+
   &__error {
     display: block;
     margin: 0;

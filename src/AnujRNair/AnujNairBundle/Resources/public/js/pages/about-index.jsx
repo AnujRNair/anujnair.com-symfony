@@ -53,7 +53,8 @@ export default class AboutIndex extends Component {
 
 export class AboutAside extends Component {
   static propTypes = {
-    form: ContactForm
+    form: ContactForm,
+    success: PropTypes.arrayOf(PropTypes.string.isRequired)
   };
 
   renderFindMe() {
@@ -128,7 +129,7 @@ export class AboutAside extends Component {
   render() {
     return (
       <Fragment>
-        <Contact form={this.props.form} />
+        <Contact form={this.props.form} success={this.props.success} />
         {this.renderFindMe()}
         {this.renderLearnMore()}
       </Fragment>

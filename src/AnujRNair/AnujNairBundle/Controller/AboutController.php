@@ -59,7 +59,8 @@ class AboutController extends Controller
                     'csrf' => $contactForm->createView()['_token']->vars['value'],
                     'values' => $contact,
                     'errors' => $this->getErrorMessages($contactForm)
-                ]
+                ],
+                'success' => $this->container->get('session')->getFlashBag()->get('success')
             ])
         ];
     }

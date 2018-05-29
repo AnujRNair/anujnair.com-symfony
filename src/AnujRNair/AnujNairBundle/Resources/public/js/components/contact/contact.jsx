@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import PropTypes from 'prop-types';
 
 import { ContactForm } from '@anujnair/js/types/form';
 
@@ -6,7 +7,8 @@ import './contact.scss';
 
 export default class Contact extends Component {
   static propTypes = {
-    form: ContactForm
+    form: ContactForm,
+    success: PropTypes.arrayOf(PropTypes.string.isRequired)
   };
 
   constructor(props) {
@@ -55,10 +57,19 @@ export default class Contact extends Component {
     return <ul className={'contact__error'}>{errors}</ul>;
   }
 
+  renderSuccess() {
+    if (this.props.success.length === 0) {
+      return null;
+    }
+
+    return <div className={'contact__success'}>{this.props.success[0]}</div>;
+  }
+
   render() {
     return (
       <Fragment>
-        <h3>Let&apos;s Connect!</h3>
+        <h3 id={'contact-me'}>Let&apos;s Connect!</h3>
+        {this.renderSuccess()}
         <form
           className={'contact'}
           action={'/about/'}
