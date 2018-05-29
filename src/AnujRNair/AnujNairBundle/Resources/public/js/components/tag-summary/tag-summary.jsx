@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 
 import { TagSummary as TagSummaryProps } from '@anujnair/js/types/tag';
 
-import './tag-summary.scss';
-
 export default class TagSummary extends Component {
   static propTypes = {
     header: PropTypes.string.isRequired,
@@ -24,11 +22,11 @@ export default class TagSummary extends Component {
       return null;
     }
 
-    const icon = this.props.icon ? `icon ${this.props.icon}` : '';
+    const icon = this.props.icon ? `icon icon--absolute ${this.props.icon}` : '';
     const items = Object.keys(this.props.list).map(idx => {
       const item = this.props.list[idx];
       const highlightClass =
-        this.props.highlightTagId === item.id ? 'tag-summary--highlighted' : '';
+        this.props.highlightTagId === item.id ? 'list--highlighted' : '';
 
       return (
         <li className={`${icon} ${highlightClass}`} key={idx}>
@@ -47,7 +45,7 @@ export default class TagSummary extends Component {
     return (
       <Fragment>
         <h3>{this.props.header} Tags</h3>
-        <ul className="tag-summary">{items}</ul>
+        <ul className="list">{items}</ul>
       </Fragment>
     );
   }
