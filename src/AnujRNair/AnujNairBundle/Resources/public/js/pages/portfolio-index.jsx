@@ -59,17 +59,17 @@ export class PortfolioAside extends Component {
       <Fragment>
         <h3>About</h3>
         <p>
-          Listed here are the open source sites and projects that I have
-          designed and developed over the years.
+          Listed here are the open source projects that I have developed over
+          the years.
         </p>
         <p>
-          My portfolio ranges from sites created in different frameworks, to
-          helpful libraries, and are mostly listed on my GitHub page for
-          reference.
+          My portfolio includes open source plugins, sites created in different
+          frameworks, and helpful libraries. They are mostly listed on my GitHub
+          page for reference.
         </p>
         <p>
-          Click on any one of the websites or projects to view more information
-          on what it was about and how I went about completing each task.
+          Click on any one of the projects to view more information on what it
+          is.
         </p>
       </Fragment>
     );

@@ -18,23 +18,28 @@ export default class AboutIndex extends Component {
         <h3>About Anuj Nair</h3>
         <p>
           For the past {this.props.years} years, I have been a Frontend and
-          Backend engineer, creating websites and applications for a variety of
-          different industries, including eCommerce, media, social, & forums. My
-          role has evolved from being a Freelancer to a Senior Developer, to a
-          Software Engineering Lead & Manager.
+          Backend engineer, creating sites, applications and platforms for a
+          variety of different industries. My role has evolved from being a
+          Freelancer to a Senior Developer, to a Software Engineering Lead &
+          Manager.
         </p>
         <p>
-          Described as talented and as a tireless teacher, I have a passion for
-          delivering high quality results. I consider the bigger picture whilst
-          simultaneously paying exceptional attention to the little details, and
-          always strive to better the people around me.
+          I currently work at Slack Technologies as a Senior Software Engineer,
+          specializing in Frontend Performance and Architecture. My role is
+          focused around making the user and developer experience as smooth,
+          efficient and performant as can be.
+        </p>
+        <p>
+          I have a passion for the open web and diving into new web technologies
+          to deliver high quality applications. I always consider the bigger
+          picture whilst simultaneously paying exceptional attention to the
+          little details to make this happen.
         </p>
         <h3>About this site</h3>
         <p>
           AnujNair.com is my own personal website. It acts as an outlet for me
-          to blog about my latest findings, show off what I have been working
-          on, and act as a general playground for me to try new technologies and
-          implement my crazy new ideas!
+          to blog about some of my findings, and is a general playground for me
+          to try new technologies and implement new ideas.
         </p>
       </Fragment>
     );
