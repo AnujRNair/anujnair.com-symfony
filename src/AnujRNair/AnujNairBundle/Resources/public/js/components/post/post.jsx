@@ -44,7 +44,7 @@ export default class Post extends Component {
         <li className="icon icon-man">
           Author: {this.props.user.firstName} {this.props.user.lastName}
         </li>
-        <li className="icon icon-calendar">
+        <li className="icon icon-calendar" itemProp="datePublished">
           Published: {this.props.post.datePublished}
         </li>
         {this.renderTagsMetaData()}
@@ -70,7 +70,7 @@ export default class Post extends Component {
   render() {
     return (
       <article className="post" itemScope itemType="http://schema.org/Article">
-        <h2 className="post__title">
+        <h2 className="post__title" itemProp="headline">
           <a href={`/blog/${this.props.post.id}-${this.props.post.urlTitle}`}>
             {this.props.post.title}
           </a>
@@ -79,6 +79,7 @@ export default class Post extends Component {
         <p
           className="post__contents"
           dangerouslySetInnerHTML={{ __html: this.props.post.contents }}
+          itemProp="description"
         />
         {this.renderShowMore()}
       </article>

@@ -106,7 +106,12 @@ export class AboutAside extends Component {
     ];
 
     const jsxItems = items.map(item => (
-      <li className={`icon icon--absolute ${item.icon}`} key={item.name}>
+      <li
+        className={`icon icon--absolute ${item.icon}`}
+        itemProp={'sameAs'}
+        key={item.name}
+        rel={item.name === 'Google+' ? 'me' : null}
+      >
         <a href={item.link}>{item.name}</a>
       </li>
     ));
@@ -114,7 +119,13 @@ export class AboutAside extends Component {
     return (
       <Fragment>
         <h3>Also find me here:</h3>
-        <ul className="list">{jsxItems}</ul>
+        <ul
+          className="list"
+          itemScope
+          itemType="http://schema.org/Organization"
+        >
+          {jsxItems}
+        </ul>
       </Fragment>
     );
   }
