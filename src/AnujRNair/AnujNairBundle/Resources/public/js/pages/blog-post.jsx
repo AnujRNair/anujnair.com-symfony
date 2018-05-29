@@ -11,9 +11,9 @@ import SimilarPosts from '@anujnair/js/components/similar-posts/similar-posts';
 
 export default class BlogPost extends Component {
   static propTypes = {
-    blog: PostProps,
-    tags: Tags,
-    users: Users
+    blog: PostProps.isRequired,
+    tags: Tags.isRequired,
+    users: Users.isRequired
   };
 
   componentDidMount() {
@@ -34,9 +34,9 @@ export default class BlogPost extends Component {
     return (
       <Post
         post={this.props.blog}
-        user={this.findUserByUserId(this.props.blog.userId)}
         showMore={false}
         tags={this.findTagsByPost(this.props.blog)}
+        user={this.findUserByUserId(this.props.blog.userId)}
       />
     );
   }
@@ -44,15 +44,15 @@ export default class BlogPost extends Component {
 
 export class BlogAside extends Component {
   static propTypes = {
-    similar: Similar
+    similar: Similar.isRequired
   };
 
   render() {
     return (
       <SimilarPosts
-        icon={'icon-calendar'}
+        icon="icon-calendar"
         list={this.props.similar}
-        urlPath={'blog'}
+        urlPath="blog"
       />
     );
   }

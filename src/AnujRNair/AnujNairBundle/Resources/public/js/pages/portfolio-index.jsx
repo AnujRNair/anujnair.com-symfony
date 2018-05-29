@@ -9,8 +9,8 @@ import PropTypes from 'prop-types';
 
 export default class PortfolioIndex extends Component {
   static propTypes = {
-    articles: Articles,
-    tags: Tags
+    articles: Articles.isRequired,
+    tags: Tags.isRequired
   };
 
   findTagsByArticle(article) {
@@ -47,7 +47,7 @@ export default class PortfolioIndex extends Component {
 export class PortfolioAside extends Component {
   static propTypes = {
     tagId: PropTypes.number,
-    tagSummary: TagSummaryProps
+    tagSummary: TagSummaryProps.isRequired
   };
 
   static defaultProps = {
@@ -79,12 +79,12 @@ export class PortfolioAside extends Component {
     return (
       <Fragment>
         <h3>Learn More</h3>
-        <ul className={'list'}>
-          <li className={'icon icon-pencil icon--absolute'}>
-            <a href={'/blog'}>View my blog posts</a>
+        <ul className="list">
+          <li className="icon icon-pencil icon--absolute">
+            <a href="/blog">View my blog posts</a>
           </li>
-          <li className={'icon icon-man icon--absolute'}>
-            <a href={'/about'}>Learn more about me and contact me</a>
+          <li className="icon icon-man icon--absolute">
+            <a href="/about">Learn more about me and contact me</a>
           </li>
         </ul>
       </Fragment>
@@ -94,11 +94,11 @@ export class PortfolioAside extends Component {
   renderTagSummary() {
     return (
       <TagSummary
-        header={'Portfolio'}
+        header="Portfolio"
         highlightTagId={this.props.tagId}
-        icon={'icon-tag'}
+        icon="icon-tag"
         list={this.props.tagSummary}
-        urlPath={'portfolio/t'}
+        urlPath="portfolio/t"
       />
     );
   }

@@ -10,8 +10,8 @@ import SimilarPosts from '@anujnair/js/components/similar-posts/similar-posts';
 
 export default class PortfolioArticle extends Component {
   static propTypes = {
-    article: ArticleProps,
-    tags: Tags
+    article: ArticleProps.isRequired,
+    tags: Tags.isRequired
   };
 
   render() {
@@ -21,16 +21,16 @@ export default class PortfolioArticle extends Component {
 
 export class PortfolioAside extends Component {
   static propTypes = {
-    archive: Archive,
-    similar: Similar
+    archive: Archive.isRequired,
+    similar: Similar.isRequired
   };
 
   renderArchive() {
     return (
       <BlogArchive
-        icon={'icon-calendar'}
+        icon="icon-calendar"
         list={this.props.archive}
-        urlPath={'blog'}
+        urlPath="blog"
       />
     );
   }
@@ -38,9 +38,9 @@ export class PortfolioAside extends Component {
   renderSimilar() {
     return (
       <SimilarPosts
-        icon={'icon-calendar'}
+        icon="icon-calendar"
         list={this.props.similar}
-        urlPath={'portfolio'}
+        urlPath="portfolio"
       />
     );
   }

@@ -6,7 +6,7 @@ import { Archive } from '@anujnair/js/types/post';
 export default class BlogArchive extends Component {
   static propTypes = {
     icon: PropTypes.string,
-    list: Archive,
+    list: Archive.isRequired,
     urlPath: PropTypes.string.isRequired
   };
 
@@ -24,7 +24,7 @@ export default class BlogArchive extends Component {
       const secondKeys = Object.keys(this.props.list[f]);
       const second = secondKeys.map(s => {
         const items = this.props.list[f][s].map(item => (
-          <li key={item.id} className={icon}>
+          <li className={icon} key={item.id}>
             <a href={`/${this.props.urlPath}/${item.id}-${item.urlTitle}`}>
               {item.title}
             </a>
@@ -40,7 +40,7 @@ export default class BlogArchive extends Component {
       });
 
       return (
-        <ul key={f} className="list">
+        <ul className="list" key={f}>
           <li>{f}</li>
           {second}
         </ul>

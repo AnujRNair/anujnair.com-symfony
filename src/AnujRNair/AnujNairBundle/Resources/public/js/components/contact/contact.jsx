@@ -7,8 +7,12 @@ import './contact.scss';
 
 export default class Contact extends Component {
   static propTypes = {
-    form: ContactForm,
+    form: ContactForm.isRequired,
     success: PropTypes.arrayOf(PropTypes.string.isRequired)
+  };
+
+  static defaultProps = {
+    success: []
   };
 
   constructor(props) {
@@ -52,7 +56,7 @@ export default class Contact extends Component {
       <li key={item}>{item}</li>
     ));
 
-    return <ul className={'contact__error'}>{errors}</ul>;
+    return <ul className="contact__error">{errors}</ul>;
   }
 
   renderSuccess() {
@@ -60,34 +64,34 @@ export default class Contact extends Component {
       return null;
     }
 
-    return <div className={'contact__success'}>{this.props.success[0]}</div>;
+    return <div className="contact__success">{this.props.success[0]}</div>;
   }
 
   render() {
     return (
       <Fragment>
-        <h3 id={'contact-me'}>Let&apos;s Connect!</h3>
+        <h3 id="contact-me">Let&apos;s Connect!</h3>
         {this.renderSuccess()}
         <form
-          className={'contact'}
-          action={'/about/'}
-          name={'anujnair_contact_form'}
-          method={'post'}
+          action="/about/"
+          className="contact"
+          method="post"
+          name="anujnair_contact_form"
         >
           {this.renderError('name')}
           <label
             className={`contact__group ${
               this.hasError('name') ? 'contact__group--error' : ''
             }`}
-            htmlFor={'anujnair_contact_form[name]'}
+            htmlFor="anujnair_contact_form[name]"
           >
-            <span className={'icon icon-man'} />
+            <span className="icon icon-man" />
             <input
-              type={'text'}
-              id={'anujnair_contact_form[name]'}
-              name={'anujnair_contact_form[name]'}
-              placeholder={'Name'}
+              id="anujnair_contact_form[name]"
+              name="anujnair_contact_form[name]"
               onChange={this.handleNameChange}
+              placeholder="Name"
+              type="text"
               value={this.state.name}
             />
           </label>
@@ -97,15 +101,15 @@ export default class Contact extends Component {
             className={`contact__group ${
               this.hasError('email') ? 'contact__group--error' : ''
             }`}
-            htmlFor={'anujnair_contact_form[email]'}
+            htmlFor="anujnair_contact_form[email]"
           >
-            <span className={'icon icon-mail-full'} />
+            <span className="icon icon-mail-full" />
             <input
-              type={'text'}
-              id={'anujnair_contact_form[email]'}
-              name={'anujnair_contact_form[email]'}
-              placeholder={'Email'}
+              id="anujnair_contact_form[email]"
+              name="anujnair_contact_form[email]"
               onChange={this.handleEmailChange}
+              placeholder="Email"
+              type="text"
               value={this.state.email}
             />
           </label>
@@ -115,15 +119,15 @@ export default class Contact extends Component {
             className={`contact__group ${
               this.hasError('subject') ? 'contact__group--error' : ''
             }`}
-            htmlFor={'anujnair_contact_form[subject]'}
+            htmlFor="anujnair_contact_form[subject]"
           >
-            <span className={'icon icon-pencil-full'} />
+            <span className="icon icon-pencil-full" />
             <input
-              type={'text'}
-              id={'anujnair_contact_form[subject]'}
-              name={'anujnair_contact_form[subject]'}
-              placeholder={'Subject'}
+              id="anujnair_contact_form[subject]"
+              name="anujnair_contact_form[subject]"
               onChange={this.handleSubjectChange}
+              placeholder="Subject"
+              type="text"
               value={this.state.subject}
             />
           </label>
@@ -133,32 +137,32 @@ export default class Contact extends Component {
             className={`contact__group ${
               this.hasError('contents') ? 'contact__group--error' : ''
             }`}
-            htmlFor={'anujnair_contact_form[contents]'}
+            htmlFor="anujnair_contact_form[contents]"
           >
-            <span className={'icon icon-chats-full'} />
+            <span className="icon icon-chats-full" />
             <textarea
-              id={'anujnair_contact_form[contents]'}
-              name={'anujnair_contact_form[contents]'}
-              rows={4}
-              placeholder={'Write message here'}
+              id="anujnair_contact_form[contents]"
+              name="anujnair_contact_form[contents]"
               onChange={this.handleContentsChange}
+              placeholder="Write message here"
+              rows={4}
               value={this.state.contents}
             />
           </label>
 
           <input
-            type={'hidden'}
-            name={'anujnair_contact_form[_token]'}
+            name="anujnair_contact_form[_token]"
+            type="hidden"
             value={this.props.form.csrf}
           />
 
           <button
-            className={'contact__submit'}
-            type={'submit'}
-            name={'anujnair_contact_form[send]'}
+            className="contact__submit"
+            name="anujnair_contact_form[send]"
+            type="submit"
           >
             Send
-            <span className={'icon icon-plane'} />
+            <span className="icon icon-plane" />
           </button>
         </form>
       </Fragment>

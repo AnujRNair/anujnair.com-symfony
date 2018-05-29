@@ -9,10 +9,10 @@ import './post.scss';
 
 export default class Post extends Component {
   static propTypes = {
-    post: PostProps,
-    user: User,
+    post: PostProps.isRequired,
     showMore: PropTypes.bool,
-    tags: Tags
+    tags: Tags.isRequired,
+    user: User.isRequired
   };
 
   static defaultProps = {
@@ -31,20 +31,20 @@ export default class Post extends Component {
     ));
 
     return (
-      <li className={'icon icon-tags'}>
+      <li className="icon icon-tags">
         Tags:
-        <ul className={'post__metadata-tags'}>{items}</ul>
+        <ul className="post__metadata-tags">{items}</ul>
       </li>
     );
   }
 
   renderMetaData() {
     return (
-      <ul className={'post__metadata'}>
-        <li className={'icon icon-man'}>
+      <ul className="post__metadata">
+        <li className="icon icon-man">
           Author: {this.props.user.firstName} {this.props.user.lastName}
         </li>
-        <li className={'icon icon-calendar'}>
+        <li className="icon icon-calendar">
           Published: {this.props.post.datePublished}
         </li>
         {this.renderTagsMetaData()}
@@ -59,8 +59,8 @@ export default class Post extends Component {
 
     return (
       <a
+        className="post__show-more"
         href={`/blog/${this.props.post.id}-${this.props.post.urlTitle}`}
-        className={'post__show-more'}
       >
         Show more
       </a>
@@ -69,19 +69,15 @@ export default class Post extends Component {
 
   render() {
     return (
-      <article
-        className={'post'}
-        itemScope
-        itemType={'http://schema.org/Article'}
-      >
-        <h2 className={'post__title'}>
+      <article className="post" itemScope itemType="http://schema.org/Article">
+        <h2 className="post__title">
           <a href={`/blog/${this.props.post.id}-${this.props.post.urlTitle}`}>
             {this.props.post.title}
           </a>
         </h2>
         {this.renderMetaData()}
         <p
-          className={'post__contents'}
+          className="post__contents"
           dangerouslySetInnerHTML={{ __html: this.props.post.contents }}
         />
         {this.renderShowMore()}

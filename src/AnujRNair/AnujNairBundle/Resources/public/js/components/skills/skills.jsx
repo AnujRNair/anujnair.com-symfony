@@ -37,9 +37,9 @@ export default class Skills extends Component {
       ));
 
       return (
-        <div className={'skills'} key={section}>
+        <div className="skills" key={section}>
           <h4>{section}</h4>
-          <ul className={'list'}>{points}</ul>
+          <ul className="list">{points}</ul>
         </div>
       );
     });

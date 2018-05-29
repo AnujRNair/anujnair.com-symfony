@@ -13,11 +13,11 @@ import TagSummary from '@anujnair/js/components/tag-summary/tag-summary';
 
 export default class BlogIndex extends Component {
   static propTypes = {
-    page: PropTypes.number.isRequired,
     noPerPage: PropTypes.number.isRequired,
-    posts: Posts,
-    tags: Tags,
-    users: Users
+    page: PropTypes.number.isRequired,
+    posts: Posts.isRequired,
+    tags: Tags.isRequired,
+    users: Users.isRequired
   };
 
   componentDidMount() {
@@ -46,9 +46,9 @@ export default class BlogIndex extends Component {
         <Post
           key={post.id}
           post={post}
-          user={user}
           showMore
           tags={this.findTagsByPost(post)}
+          user={user}
         />
       );
     });
@@ -61,9 +61,9 @@ export default class BlogIndex extends Component {
 
 export class BlogAside extends Component {
   static propTypes = {
-    archive: Archive,
+    archive: Archive.isRequired,
     tagId: PropTypes.number,
-    tagSummary: TagSummaryProps
+    tagSummary: TagSummaryProps.isRequired
   };
 
   static defaultProps = {
@@ -73,9 +73,9 @@ export class BlogAside extends Component {
   renderArchive() {
     return (
       <BlogArchive
-        icon={'icon-calendar'}
+        icon="icon-calendar"
         list={this.props.archive}
-        urlPath={'blog'}
+        urlPath="blog"
       />
     );
   }
@@ -83,11 +83,11 @@ export class BlogAside extends Component {
   renderTagSummary() {
     return (
       <TagSummary
-        header={'Blog'}
+        header="Blog"
         highlightTagId={this.props.tagId}
-        icon={'icon-tag'}
+        icon="icon-tag"
         list={this.props.tagSummary}
-        urlPath={'blog/t'}
+        urlPath="blog/t"
       />
     );
   }

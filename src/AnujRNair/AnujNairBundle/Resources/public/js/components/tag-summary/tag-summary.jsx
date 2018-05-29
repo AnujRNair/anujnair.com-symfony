@@ -10,7 +10,7 @@ export default class TagSummary extends Component {
     header: PropTypes.string.isRequired,
     highlightTagId: PropTypes.number,
     icon: PropTypes.string,
-    list: TagSummaryProps,
+    list: TagSummaryProps.isRequired,
     urlPath: PropTypes.string.isRequired
   };
 
@@ -31,7 +31,7 @@ export default class TagSummary extends Component {
         this.props.highlightTagId === item.id ? 'tag-summary--highlighted' : '';
 
       return (
-        <li key={idx} className={`${icon} ${highlightClass}`}>
+        <li className={`${icon} ${highlightClass}`} key={idx}>
           <a
             href={`/${this.props.urlPath}/${
               item.id
@@ -47,7 +47,7 @@ export default class TagSummary extends Component {
     return (
       <Fragment>
         <h3>{this.props.header} Tags</h3>
-        <ul className={'tag-summary'}>{items}</ul>
+        <ul className="tag-summary">{items}</ul>
       </Fragment>
     );
   }

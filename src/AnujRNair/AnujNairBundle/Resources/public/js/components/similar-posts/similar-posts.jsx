@@ -6,7 +6,7 @@ import { Similar } from '@anujnair/js/types/post';
 export default class SimilarPosts extends Component {
   static propTypes = {
     icon: PropTypes.string,
-    list: Similar,
+    list: Similar.isRequired,
     urlPath: PropTypes.string.isRequired
   };
 
@@ -24,7 +24,7 @@ export default class SimilarPosts extends Component {
       : '';
 
     const items = this.props.list[section].map(post => (
-      <li key={post.id} className={icon}>
+      <li className={icon} key={post.id}>
         <a href={`/${this.props.urlPath}/${post.id}-${post.urlTitle}`}>
           {post.title || post.name}
         </a>
@@ -51,7 +51,7 @@ export default class SimilarPosts extends Component {
     return (
       <Fragment>
         <h3>You may also be interested in &hellip;</h3>
-        <ul className={'list'}>{sections}</ul>
+        <ul className="list">{sections}</ul>
       </Fragment>
     );
   }

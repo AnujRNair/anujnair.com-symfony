@@ -53,8 +53,12 @@ export default class AboutIndex extends Component {
 
 export class AboutAside extends Component {
   static propTypes = {
-    form: ContactForm,
+    form: ContactForm.isRequired,
     success: PropTypes.arrayOf(PropTypes.string.isRequired)
+  };
+
+  static defaultProps = {
+    success: []
   };
 
   renderFindMe() {
@@ -97,7 +101,7 @@ export class AboutAside extends Component {
     ];
 
     const jsxItems = items.map(item => (
-      <li key={item.name} className={`icon icon--absolute ${item.icon}`}>
+      <li className={`icon icon--absolute ${item.icon}`} key={item.name}>
         <a href={item.link}>{item.name}</a>
       </li>
     ));
@@ -105,7 +109,7 @@ export class AboutAside extends Component {
     return (
       <Fragment>
         <h3>Also find me here:</h3>
-        <ul className={'list'}>{jsxItems}</ul>
+        <ul className="list">{jsxItems}</ul>
       </Fragment>
     );
   }
@@ -114,12 +118,12 @@ export class AboutAside extends Component {
     return (
       <Fragment>
         <h3>Learn More</h3>
-        <ul className={'list'}>
-          <li className={'icon icon-pencil icon--absolute'}>
-            <a href={'/blog'}>View my blog posts</a>
+        <ul className="list">
+          <li className="icon icon-pencil icon--absolute">
+            <a href="/blog">View my blog posts</a>
           </li>
-          <li className={'icon icon-earth-full icon--absolute'}>
-            <a href={'/portfolio'}>View my work</a>
+          <li className="icon icon-earth-full icon--absolute">
+            <a href="/portfolio">View my work</a>
           </li>
         </ul>
       </Fragment>

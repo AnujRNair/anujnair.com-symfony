@@ -9,9 +9,9 @@ import './article.scss';
 
 export default class Article extends Component {
   static propTypes = {
-    article: ArticleProps,
+    article: ArticleProps.isRequired,
     mini: PropTypes.bool,
-    tags: Tags
+    tags: Tags.isRequired
   };
 
   static defaultProps = {
@@ -24,7 +24,7 @@ export default class Article extends Component {
     }
 
     return (
-      <h2 className={'article__header'}>
+      <h2 className="article__header">
         <a
           href={`/portfolio/${this.props.article.id}-${
             this.props.article.urlTitle
@@ -42,7 +42,7 @@ export default class Article extends Component {
     }
 
     return (
-      <h2 className={'article__title'}>
+      <h2 className="article__title">
         <a
           href={`/portfolio/${this.props.article.id}-${
             this.props.article.urlTitle
@@ -57,12 +57,12 @@ export default class Article extends Component {
   renderImage() {
     return (
       <a
-        className={'article__img'}
+        className="article__img"
         href={`/portfolio/${this.props.article.id}-${
           this.props.article.urlTitle
         }`}
       >
-        <img src={this.props.article.image} alt={this.props.article.title} />
+        <img alt={this.props.article.title} src={this.props.article.image} />
       </a>
     );
   }
@@ -79,20 +79,20 @@ export default class Article extends Component {
     ));
 
     return (
-      <li className={'icon icon-tags'}>
+      <li className="icon icon-tags">
         Tags:
-        <ul className={'article__metadata-tags'}>{items}</ul>
+        <ul className="article__metadata-tags">{items}</ul>
       </li>
     );
   }
 
   renderMetaData() {
     return (
-      <ul className={'article__metadata'}>
-        <li className={'icon icon-calendar'}>
+      <ul className="article__metadata">
+        <li className="icon icon-calendar">
           Created: {this.props.article.dateCreated}
         </li>
-        <li className={'icon icon-link'}>
+        <li className="icon icon-link">
           <a href={this.props.article.link}>{this.props.article.name}</a>
         </li>
         {this.renderTagsMetaData()}
@@ -107,7 +107,7 @@ export default class Article extends Component {
 
     return (
       <p
-        className={'article__contents'}
+        className="article__contents"
         dangerouslySetInnerHTML={{ __html: this.props.article.contents }}
       />
     );
