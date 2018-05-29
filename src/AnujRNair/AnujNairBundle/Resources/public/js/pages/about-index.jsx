@@ -108,7 +108,7 @@ export class AboutAside extends Component {
     const jsxItems = items.map(item => (
       <li
         className={`icon icon--absolute ${item.icon}`}
-        itemProp={'sameAs'}
+        itemProp="sameAs"
         key={item.name}
         rel={item.name === 'Google+' ? 'me' : null}
       >

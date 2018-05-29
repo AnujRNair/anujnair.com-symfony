@@ -22,7 +22,9 @@ export default class TagSummary extends Component {
       return null;
     }
 
-    const icon = this.props.icon ? `icon icon--absolute ${this.props.icon}` : '';
+    const icon = this.props.icon
+      ? `icon icon--absolute ${this.props.icon}`
+      : '';
     const items = Object.keys(this.props.list).map(idx => {
       const item = this.props.list[idx];
       const highlightClass =

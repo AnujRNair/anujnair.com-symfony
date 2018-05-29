@@ -161,8 +161,7 @@ export default class Contact extends Component {
             name="anujnair_contact_form[send]"
             type="submit"
           >
-            Send
-            <span className="icon icon-plane" />
+            Send <span className="icon icon-plane" />
           </button>
         </form>
       </Fragment>

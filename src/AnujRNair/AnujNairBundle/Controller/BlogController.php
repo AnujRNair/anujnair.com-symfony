@@ -23,6 +23,7 @@ class BlogController extends BaseController
      * @Template("AnujNairBundle:Blog:index.html.twig")
      * @param Request $request
      * @return array
+     * @throws \Doctrine\ORM\Query\QueryException
      */
     public function indexAction(Request $request)
     {
@@ -33,6 +34,9 @@ class BlogController extends BaseController
         $posts = $em
             ->getRepository('AnujNairBundle:Blog')
             ->getBlogPosts($page, $noPerPage);
+        $number = $em
+            ->getRepository('AnujNairBundle:Blog')
+            ->countBlogPosts();
         $archive = $em
             ->getRepository('AnujNairBundle:Blog')
             ->getBlogPostsByYearMonth(1, 20);
@@ -42,8 +46,9 @@ class BlogController extends BaseController
 
         return [
             'json' => json_encode([
-                'page' => $page,
-                'noPerPage' => $noPerPage,
+                'count' => (int)$number,
+                'page' => (int)$page,
+                'noPerPage' => (int)$noPerPage,
                 'posts' => $posts,
                 'users' => $this->getUsersForObj($posts),
                 'tags' => $this->getTagsForObj($posts),
@@ -61,7 +66,7 @@ class BlogController extends BaseController
      * @param Request $request
      * @param int $id
      * @param string $title
-     * @return array
+     * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
@@ -114,6 +119,7 @@ class BlogController extends BaseController
      * @param string $name
      * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
      * @throws \Doctrine\ORM\NonUniqueResultException
+     * @throws \Doctrine\ORM\Query\QueryException
      */
     public function tagAction(Request $request, $tagId, $name = null)
     {
@@ -143,6 +149,9 @@ class BlogController extends BaseController
         $posts = $em
             ->getRepository('AnujNairBundle:Blog')
             ->getBlogPostsByTagId($tag->getId(), $page, $noPerPage);
+        $count = $em
+            ->getRepository('AnujNairBundle:Blog')
+            ->countBlogPostsByTagId($tag->getId());
         $archive = $em
             ->getRepository('AnujNairBundle:Blog')
             ->getBlogPostsByYearMonth(1, 20);
@@ -152,8 +161,9 @@ class BlogController extends BaseController
 
         return [
             'json' => json_encode([
-                'page' => $page,
-                'noPerPage' => $noPerPage,
+                'count' => (int)$count,
+                'page' => (int)$page,
+                'noPerPage' => (int)$noPerPage,
                 'posts' => $posts,
                 'users' => $this->getUsersForObj($posts),
                 'tags' => $this->getTagsForObj($posts),

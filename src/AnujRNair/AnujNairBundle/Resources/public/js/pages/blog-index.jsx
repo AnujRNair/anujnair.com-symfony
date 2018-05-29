@@ -10,9 +10,11 @@ import { Users } from '@anujnair/js/types/user';
 import Post from '@anujnair/js/components/post/post';
 import BlogArchive from '@anujnair/js/components/blog-archive/blog-archive';
 import TagSummary from '@anujnair/js/components/tag-summary/tag-summary';
+import Pagination from '@anujnair/js/components/pagination/pagination';
 
 export default class BlogIndex extends Component {
   static propTypes = {
+    count: PropTypes.number.isRequired,
     noPerPage: PropTypes.number.isRequired,
     page: PropTypes.number.isRequired,
     posts: Posts.isRequired,
@@ -55,7 +57,17 @@ export default class BlogIndex extends Component {
   }
 
   render() {
-    return this.renderPosts();
+    return (
+      <Fragment>
+        {this.renderPosts()}
+        <Pagination
+          currentPage={this.props.page}
+          maxResults={this.props.count}
+          noPerPage={this.props.noPerPage}
+          slug={window.location.pathname}
+        />
+      </Fragment>
+    );
   }
 }
 
