@@ -39,6 +39,10 @@
         $color-grey-lighter 100%
       );
       padding: 5px 5px 5px 7px;
+
+      &:before {
+        margin-right: 15px;
+      }
     }
   }
 }

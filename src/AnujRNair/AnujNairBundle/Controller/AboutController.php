@@ -57,6 +57,7 @@ class AboutController extends Controller
                 'years' => intval(date('Y')) - 2002,
                 'form' => [
                     'csrf' => $contactForm->createView()['_token']->vars['value'],
+                    'values' => $contact,
                     'errors' => $this->getErrorMessages($contactForm)
                 ]
             ])
