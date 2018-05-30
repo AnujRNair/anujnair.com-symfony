@@ -1,3 +1,5 @@
+@import 'variables';
+
 .grid {
   &__body {
     display: grid;
@@ -10,6 +12,7 @@
     &-header {
       display: grid;
       padding-top: 100px;
+      white-space: nowrap;
       grid-area: body-header;
       grid-template-columns: 1fr 2fr 2fr 2fr 1fr;
       grid-gap: 20px;
@@ -21,6 +24,25 @@
 
       nav {
         grid-area: header-nav;
+      }
+
+      @media (max-width: $breakpoint-large) {
+        grid-template-columns: 1fr 2fr 2fr 1fr;
+        grid-template-areas: '. header-main header-nav header-nav';
+      }
+
+      @media (max-width: $breakpoint-medium) {
+        padding: 100px 20px 0;
+        grid-template-columns: 1fr;
+        grid-template-areas: 'header-main header-nav';
+      }
+
+      @media (max-width: $breakpoint-small) {
+        padding: 30px 20px 0;
+        white-space: normal;
+        grid-template-columns: 1fr;
+        grid-template-areas: 'header-main' 'header-nav';
+        grid-gap: 10px;
       }
     }
 
@@ -39,6 +61,21 @@
       aside {
         grid-area: main-aside;
       }
+
+      @media (max-width: $breakpoint-large) {
+        grid-template-columns: 1fr 2fr 2fr 1fr;
+        grid-template-areas: '. main-content main-content .' '. main-aside main-aside .';
+      }
+
+      @media (max-width: $breakpoint-medium) {
+        padding: 80px 20px 0;
+        grid-template-columns: 1fr;
+        grid-template-areas: 'main-content' 'main-aside';
+      }
+
+      @media (max-width: $breakpoint-small) {
+        padding: 120px 20px 0;
+      }
     }
 
     &-footer {
@@ -53,6 +90,16 @@
         align-items: center;
         grid-area: footer-main;
       }
+
+      @media (max-width: $breakpoint-medium) {
+        padding: 0 20px;
+        grid-template-columns: 1fr;
+        grid-template-areas: 'footer-main';
+      }
+    }
+
+    @media (max-width: $breakpoint-small) {
+      grid-template-rows: 80px auto 30px;
     }
   }
 }
