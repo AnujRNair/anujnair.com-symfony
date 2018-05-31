@@ -26,6 +26,10 @@ export default class BlogIndex extends Component {
     Prism.highlightAll();
   }
 
+  shouldComponentUpdate() {
+    return false;
+  }
+
   findUserByUserId(userId) {
     return this.props.users.find(user => user.id === userId);
   }
@@ -81,6 +85,10 @@ export class BlogAside extends Component {
   static defaultProps = {
     tagId: null
   };
+
+  shouldComponentUpdate() {
+    return false;
+  }
 
   renderArchive() {
     return (

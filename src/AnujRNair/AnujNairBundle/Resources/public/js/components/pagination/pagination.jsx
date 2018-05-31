@@ -11,6 +11,10 @@ export default class Pagination extends Component {
     slug: PropTypes.string.isRequired
   };
 
+  shouldComponentUpdate() {
+    return false;
+  }
+
   renderOlder() {
     if (this.props.currentPage * this.props.noPerPage > this.props.maxResults) {
       return null;

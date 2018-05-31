@@ -8,22 +8,26 @@ import Article from '@anujnair/js/components/article/article';
 import BlogArchive from '@anujnair/js/components/blog-archive/blog-archive';
 import SimilarPosts from '@anujnair/js/components/similar-posts/similar-posts';
 
-export default class PortfolioArticle extends Component {
-  static propTypes = {
-    article: ArticleProps.isRequired,
-    tags: Tags.isRequired
-  };
+const PortfolioArticle = ({ article, tags }) => (
+  <Article article={article} tags={tags} />
+);
 
-  render() {
-    return <Article article={this.props.article} tags={this.props.tags} />;
-  }
-}
+PortfolioArticle.propTypes = {
+  article: ArticleProps.isRequired,
+  tags: Tags.isRequired
+};
+
+export default PortfolioArticle;
 
 export class PortfolioAside extends Component {
   static propTypes = {
     archive: Archive.isRequired,
     similar: Similar.isRequired
   };
+
+  shouldComponentUpdate() {
+    return false;
+  }
 
   renderArchive() {
     return (

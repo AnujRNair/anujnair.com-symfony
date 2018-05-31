@@ -46,11 +46,11 @@
 
       @media (max-width: $breakpoint-small) {
         background: linear-gradient(
-            to right,
-            $color-grey-light 0,
-            $color-grey-light 9%,
-            $color-grey-lighter 9%,
-            $color-grey-lighter 100%
+          to right,
+          $color-grey-light 0,
+          $color-grey-light 9%,
+          $color-grey-lighter 9%,
+          $color-grey-lighter 100%
         );
       }
     }

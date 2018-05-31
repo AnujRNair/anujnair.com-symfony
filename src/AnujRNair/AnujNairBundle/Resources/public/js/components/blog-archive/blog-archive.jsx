@@ -14,6 +14,10 @@ export default class BlogArchive extends Component {
     icon: null
   };
 
+  shouldComponentUpdate() {
+    return false;
+  }
+
   renderList() {
     const firstKeys = Object.keys(this.props.list);
     const icon = this.props.icon

@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component, PureComponent, Fragment } from 'react';
 import PropTypes from 'prop-types';
 
 import { ContactForm } from '@anujnair/js/types/form';
@@ -11,6 +11,10 @@ export default class AboutIndex extends Component {
   static propTypes = {
     years: PropTypes.number.isRequired
   };
+
+  shouldComponentUpdate() {
+    return false;
+  }
 
   renderText() {
     return (
@@ -56,7 +60,7 @@ export default class AboutIndex extends Component {
   }
 }
 
-export class AboutAside extends Component {
+export class AboutAside extends PureComponent {
   static propTypes = {
     form: ContactForm.isRequired,
     success: PropTypes.arrayOf(PropTypes.string.isRequired)

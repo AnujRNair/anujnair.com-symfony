@@ -14,6 +14,10 @@ export default class SimilarPosts extends Component {
     icon: null
   };
 
+  shouldComponentUpdate() {
+    return false;
+  }
+
   renderSection(section) {
     if (!this.props.list[section] || this.props.list[section].length === 0) {
       return null;

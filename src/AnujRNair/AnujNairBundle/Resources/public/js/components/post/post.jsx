@@ -19,6 +19,10 @@ export default class Post extends Component {
     showMore: false
   };
 
+  shouldComponentUpdate() {
+    return false;
+  }
+
   renderTagsMetaData() {
     if (this.props.tags.length === 0) {
       return null;
@@ -78,7 +82,7 @@ export default class Post extends Component {
         {this.renderMetaData()}
         <p
           className="post__contents"
-          dangerouslySetInnerHTML={{ __html: this.props.post.contents }}
+          dangerouslySetInnerHTML={{ __html: this.props.post.contents }} // eslint-disable-line react/no-danger
           itemProp="description"
         />
         {this.renderShowMore()}

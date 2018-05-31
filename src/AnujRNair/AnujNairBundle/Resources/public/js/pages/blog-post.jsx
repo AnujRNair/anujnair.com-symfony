@@ -20,6 +20,10 @@ export default class BlogPost extends Component {
     Prism.highlightAll();
   }
 
+  shouldComponentUpdate() {
+    return false;
+  }
+
   findUserByUserId(userId) {
     return this.props.users.find(user => user.id === userId);
   }
@@ -42,18 +46,12 @@ export default class BlogPost extends Component {
   }
 }
 
-export class BlogAside extends Component {
-  static propTypes = {
-    similar: Similar.isRequired
-  };
+const BlogAside = ({ similar }) => (
+  <SimilarPosts icon="icon-calendar" list={similar} urlPath="blog" />
+);
 
-  render() {
-    return (
-      <SimilarPosts
-        icon="icon-calendar"
-        list={this.props.similar}
-        urlPath="blog"
-      />
-    );
-  }
-}
+BlogAside.propTypes = {
+  similar: Similar.isRequired
+};
+
+export { BlogAside };

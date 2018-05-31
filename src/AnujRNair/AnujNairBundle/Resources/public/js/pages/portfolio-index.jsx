@@ -13,6 +13,10 @@ export default class PortfolioIndex extends Component {
     tags: Tags.isRequired
   };
 
+  shouldComponentUpdate() {
+    return false;
+  }
+
   findTagsByArticle(article) {
     return article.tagIds.map(tagId =>
       this.props.tags.find(tag => tag.id === tagId)
@@ -53,6 +57,10 @@ export class PortfolioAside extends Component {
   static defaultProps = {
     tagId: null
   };
+
+  shouldComponentUpdate() {
+    return false;
+  }
 
   renderAbout() {
     return (

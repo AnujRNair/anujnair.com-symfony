@@ -18,6 +18,10 @@ export default class Article extends Component {
     mini: false
   };
 
+  shouldComponentUpdate() {
+    return false;
+  }
+
   renderHeader() {
     if (this.props.mini === true) {
       return null;
@@ -108,7 +112,7 @@ export default class Article extends Component {
     return (
       <p
         className="article__contents"
-        dangerouslySetInnerHTML={{ __html: this.props.article.contents }}
+        dangerouslySetInnerHTML={{ __html: this.props.article.contents }} // eslint-disable-line react/no-danger
       />
     );
   }

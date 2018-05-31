@@ -1,11 +1,11 @@
-import React, { Component, Fragment } from 'react';
+import React, { PureComponent, Fragment } from 'react';
 import PropTypes from 'prop-types';
 
 import { ContactForm } from '@anujnair/js/types/form';
 
 import './contact.scss';
 
-export default class Contact extends Component {
+export default class Contact extends PureComponent {
   static propTypes = {
     form: ContactForm.isRequired,
     success: PropTypes.arrayOf(PropTypes.string.isRequired)

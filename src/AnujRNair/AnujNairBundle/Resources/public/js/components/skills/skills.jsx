@@ -3,6 +3,10 @@ import React, { Component } from 'react';
 import './skills.scss';
 
 export default class Skills extends Component {
+  shouldComponentUpdate() {
+    return false;
+  }
+
   render() {
     const icon = ['icon-thumbs-up', 'icon-spanner', 'icon-heart'];
     const items = {

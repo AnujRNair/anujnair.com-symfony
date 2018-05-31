@@ -54,13 +54,13 @@
       grid-template-areas: '. main-content main-content main-aside .';
 
       .main-content {
-        grid-area: main-content;
         min-width: 0; // ensure we don't flow out of the grid
+        grid-area: main-content;
       }
 
       aside {
-        grid-area: main-aside;
         min-width: 0; // ensure we don't flow out of the grid
+        grid-area: main-aside;
 
         h3:first-child {
           @media (max-width: $breakpoint-large) {
