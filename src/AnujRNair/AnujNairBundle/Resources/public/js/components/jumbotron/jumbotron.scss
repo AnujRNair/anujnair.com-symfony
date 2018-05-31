@@ -10,6 +10,9 @@
   h2 {
     margin-top: 0.5em;
     border: 0;
+  }
 
+  @media (max-width: $breakpoint-small) {
+    padding: 20px;
   }
 }

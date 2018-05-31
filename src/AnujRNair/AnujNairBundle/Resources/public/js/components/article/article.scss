@@ -90,5 +90,10 @@
         margin: 0;
       }
     }
+
+    @media (max-width: $breakpoint-small) {
+      margin: 0 0 15px;
+      width: 100%;
+    }
   }
 }

@@ -3,7 +3,6 @@
 .grid {
   &__body {
     display: grid;
-    width: 100vw;
     height: 100vh;
     grid-template-rows: 150px auto 30px;
     grid-gap: 20px;
@@ -56,10 +55,18 @@
 
       .main-content {
         grid-area: main-content;
+        min-width: 0; // ensure we don't flow out of the grid
       }
 
       aside {
         grid-area: main-aside;
+        min-width: 0; // ensure we don't flow out of the grid
+
+        h3:first-child {
+          @media (max-width: $breakpoint-large) {
+            margin-top: 0.5em;
+          }
+        }
       }
 
       @media (max-width: $breakpoint-large) {
