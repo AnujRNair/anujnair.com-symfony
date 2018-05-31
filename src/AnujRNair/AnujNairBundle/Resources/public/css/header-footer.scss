@@ -28,6 +28,10 @@
         &:hover a {
           border-bottom: 2px solid $color-white;
           text-decoration: none;
+
+          @media (max-width: $breakpoint-small) {
+            border-bottom: 2px solid $color-body;
+          }
         }
       }
 
