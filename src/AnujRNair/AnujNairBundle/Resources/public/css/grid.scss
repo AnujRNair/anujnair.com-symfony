@@ -69,15 +69,27 @@
         }
       }
 
+      &--error {
+        grid-template-areas: '. main-content main-content main-content .';
+      }
+
       @media (max-width: $breakpoint-large) {
         grid-template-columns: 1fr 2fr 2fr 1fr;
         grid-template-areas: '. main-content main-content .' '. main-aside main-aside .';
+
+        &--error {
+          grid-template-areas: '. main-content main-content .';
+        }
       }
 
       @media (max-width: $breakpoint-medium) {
         padding: 80px 20px 0;
         grid-template-columns: 1fr;
         grid-template-areas: 'main-content' 'main-aside';
+
+        &--error {
+          grid-template-areas: 'main-content';
+        }
       }
 
       @media (max-width: $breakpoint-small) {

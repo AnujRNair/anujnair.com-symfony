@@ -24,9 +24,9 @@
 
         {% if app.environment == 'prod' %}
             <!-- needs hash -->
-            <link type="text/css" rel="stylesheet" href="bundles/webpack/{{ app.request.attributes.get("_route") }}.css"/>
+            <link type="text/css" rel="stylesheet" href="bundles/webpack/{{ app.request.attributes.get("_route")|default('error') }}.css"/>
 
-            <!-- manifest -->
+            <!-- webpack manifest -->
         {% endif %}
     </head>
     <body class="grid__body">
@@ -41,10 +41,19 @@
 
         {% if app.environment == 'prod' %}
             <!-- vendor -->
-            <!-- page -->
+
+            {% if error is defined %}
+                <!-- error -->
+            {% else %}
+                <!-- page, default back to error -->
+            {% endif %}
         {% else %}
-            <!-- webpack dev server for page -->
-            <script src="http://127.0.0.1:3010/assets/{{ app.request.attributes.get("webpack") }}.bundle.js"></script>
+            {% if error is defined %}
+                <script src="http://127.0.0.1:3010/assets/error.bundle.js"></script>
+            {% else %}
+                <!-- webpack dev server for page -->
+                <script src="http://127.0.0.1:3010/assets/{{ app.request.attributes.get("webpack")|default('error') }}.bundle.js"></script>
+            {% endif %}
         {% endif %}
     </body>
 </html>

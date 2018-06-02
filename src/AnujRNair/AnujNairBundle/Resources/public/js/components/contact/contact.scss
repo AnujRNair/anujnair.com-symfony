@@ -45,8 +45,8 @@
       &:visited {
         transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
         outline: 0;
-        border-color: $color-blue-light;
-        box-shadow: 0 0 8px rgba($color-blue-light, 0.6);
+        border-color: darken($color-blue-light, 20%);
+        box-shadow: 0 0 8px rgba(darken($color-blue-light, 20%), 0.6);
       }
     }
 

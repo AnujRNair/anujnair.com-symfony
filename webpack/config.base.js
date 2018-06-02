@@ -47,6 +47,16 @@ module.exports = {
       'entrypoints',
       'blog-tag'
     ),
+    'error': path.resolve(
+      'src',
+      'AnujRNair',
+      'AnujNairBundle',
+      'Resources',
+      'public',
+      'js',
+      'entrypoints',
+      'error'
+    ),
     'portfolio-index': path.resolve(
       'src',
       'AnujRNair',

@@ -44,14 +44,22 @@ class ExceptionHandler
         try {
             $renderedView = $this->template->render("{$baseDirectory}error{$statusCode}.$format.twig", [
                 'statusCode' => $statusCode,
-                'message'    => $message,
-                'error'      => $error
+                'message' => $message,
+                'error' => $error,
+                'json' => json_encode([
+                    'statusCode' => $statusCode,
+                    'message' => $message,
+                ])
             ]);
         } catch (\Exception $e) {
             $renderedView = $this->template->render("{$baseDirectory}error.html.twig", [
                 'statusCode' => $statusCode,
-                'message'    => $message,
-                'error'      => $error
+                'message' => $message,
+                'error' => $error,
+                'json' => json_encode([
+                    'statusCode' => $statusCode,
+                    'message' => $message,
+                ])
             ]);
         }
         $response = Response::create($renderedView, $statusCode);

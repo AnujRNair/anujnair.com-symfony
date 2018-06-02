@@ -10,7 +10,7 @@
     {% endblock %}
 </div>
 
-<div class="grid__body-main">
+<div class="grid__body-main {% if error is defined %}grid__body-main--error{% endif %}">
     <div class="main-content"></div>
 
     <aside class="aside-content" />
