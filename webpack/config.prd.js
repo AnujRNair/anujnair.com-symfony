@@ -5,6 +5,8 @@ const ManifestPlugin = require('webpack-manifest-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
+const configBase = require('./config.base');
+
 const cacheDirectory = path.resolve(__dirname, '..', 'node_modules', '.cache');
 
 module.exports = merge(
@@ -21,8 +23,34 @@ module.exports = merge(
       publicPath: '/web/bundles/assets/'
     },
 
+    mode: 'none',
+
     // no source maps on production - this greatly increases build time: https://webpack.js.org/configuration/devtool/#devtool
     devtool: false,
+
+    optimization: {
+      splitChunks: {
+        automaticNameDelimiter: '-',
+        chunks: 'all',
+        maxAsyncRequests: 3,
+        maxInitialRequests: 3,
+        minChunks: 1,
+        minSize: 10000,
+        name: true,
+        cacheGroups: {
+          default: false,
+          vendors: {
+            test: /[\\/]node_modules[\\/]/,
+            name: 'vendors',
+            chunks: 'all'
+          },
+          application: {
+            minChunks: 2,
+            name: 'application'
+          }
+        }
+      }
+    },
 
     module: {
       rules: [
@@ -49,7 +77,7 @@ module.exports = merge(
         // run css and less through less loader, post css (for vendor prefixes) and then css loader (with minification)
         // postcss will use `browserslist` in the root of webapp to choose what to prefix
         {
-          test: /\.(less|css)$/,
+          test: /\.(scss|css)$/,
           use: [
             {
               loader: 'cache-loader',
@@ -86,7 +114,8 @@ module.exports = merge(
                 ]
               }
             }
-          ]
+          ],
+          sideEffects: true
         }
       ]
     },
@@ -104,7 +133,7 @@ module.exports = merge(
       // This extracts css and less into a separate css file, one for each entry point
       new MiniCssExtractPlugin({
         filename: '[name].[contenthash:7].css',
-        chunkFilename: '[id].[contenthash:7].css'
+        chunkFilename: '[name].[contenthash:7].css'
       }),
 
       // tree shake, minimize, compress
@@ -116,27 +145,9 @@ module.exports = merge(
 
       // create a manifest file of assets so php knows where to find files
       new ManifestPlugin({
-        fileName: 'manifest.gantry.json'
-      }),
-
-      // 1. separate out vendor modules from the main entry chunks into their own asset
-      new webpack.optimize.CommonsChunkPlugin({
-        name: 'vendors',
-        minChunks: module => /node_modules/.test(module.resource)
-      }),
-
-      // 2. Put shared modules into a shared file
-      new webpack.optimize.CommonsChunkPlugin({
-        name: 'application',
-        minChunks: 3
-      }),
-
-      // 2. separate webpack manifest into separate file, so we can inline it in the html
-      new webpack.optimize.CommonsChunkPlugin({
-        name: 'manifest',
-        minChunks: Infinity
+        fileName: 'manifest.json'
       })
     ]
   },
-  gantryBase
+  configBase
 );
