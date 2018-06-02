@@ -23,11 +23,13 @@ module.exports = merge(
       publicPath: '/web/bundles/assets/'
     },
 
+    // disable webpack defaults
     mode: 'none',
 
     // no source maps on production - this greatly increases build time: https://webpack.js.org/configuration/devtool/#devtool
     devtool: false,
 
+    // chunk assets
     optimization: {
       splitChunks: {
         automaticNameDelimiter: '-',

@@ -23,8 +23,10 @@ module.exports = merge(
       pathinfo: true
     },
 
+    // disable webpack defaults
     mode: 'development',
 
+    // no source maps
     devtool: false,
 
     // dev server config
