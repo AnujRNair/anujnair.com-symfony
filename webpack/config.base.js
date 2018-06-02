@@ -93,7 +93,7 @@ module.exports = {
   // output configuration
   output: {
     // where to output assets on disk
-    path: path.resolve('assets')
+    path: path.resolve('web', 'bundles', 'assets')
   },
 
   // so we can run webpack from any inner directory, and all of the paths always resolve correctly: https://webpack.js.org/configuration/entry-context/#context

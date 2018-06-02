@@ -5,6 +5,8 @@
   "description": "Dependencies needed to build AnujNair.com via the symfony app",
   "main": "index.js",
   "scripts": {
+    "clean": "rf -rf ./web/bundles/assets/",
+    "build": "webpack --config=../webpack/config.prd.js",
     "dev": "webpack-dev-server --hot --inline --config webpack/config.dev.js",
     "eslint": "eslint --ext .jsx --ext .js src/AnujRNair/AnujNairBundle/Resources/public/js",
     "eslint:fix": "eslint --ext .jsx --ext .js src/AnujRNair/AnujNairBundle/Resources/public/js --fix",
