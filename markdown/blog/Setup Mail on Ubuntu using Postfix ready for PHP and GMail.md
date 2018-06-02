@@ -12,7 +12,7 @@ A few things I wanted:
 
 This allows us to send email from our account
 
-```
+```bash
 sudo apt-get install postfix mailutils libsasl2-2 ca-certificates libsasl2-modules
 ```
 
@@ -28,7 +28,7 @@ You'll be taken through some setup.
 
 That's the basic config done. Now we have to add the extra GMail config:
 
-```
+```bash
 vim /etc/postfix/main.cf
 
 relayhost = [smtp.gmail.com]:587
@@ -58,7 +58,7 @@ If you already have a key for one of them, just update it to point to the correc
 
 First let's create a user:
 
-```
+```bash
 sudo useradd -m -s /bin/bash admin
 sudo passwd admin
 ```
@@ -67,13 +67,13 @@ So we can have a mail account for "admin@domain.com" - this should be the same a
 
 Now let's authenticate the user so that postfix can send email via GMail using that account
 
-```
+```bash
 vim /etc/postfix/sasl_passwd
 ```
 
 Add:
 
-```
+```bash
 [smtp.gmail.com]:587    admin@domain.com:PASSWORD
 ```
 
@@ -81,7 +81,7 @@ Obviously, replace admin@domain.com and PASSWORD with your own details. Save and
 
 Now we want to set the correct permissions for this file, and turn it into a DB file so that postfix can read it:
 
-```
+```bash
 sudo chmod 400 /etc/postfix/sasl_passwd
 sudo postmap /etc/postfix/sasl_passwd
 ```
@@ -90,7 +90,7 @@ You can remove the sasl_passwd file if you prefer after running postmap on it
 
 Create a "generic" file, add a basic mapping, and the postmap into a file postfix can read. This is so internal mail can be redirected to the correct location:
 
-```
+```bash
 vim /etc/postfix/generic
 
 admin@localhost         admin@domain.com
@@ -101,19 +101,19 @@ sudo postmap /etc/postfix/generic
 
 Create your cert file:
 
-```
+```bash
 cat /etc/ssl/certs/Thawte_Premium_Server_CA.pem | sudo tee -a /etc/postfix/cacert.pem
 ```
 
 Finally, reload postfix config for changes to take effect:
 
-```
+```bash
 sudo /etc/init.d/postfix restart
 ```
 
 You can test to see if you're able to send mail by using the following command:
 
-```
+```bash
 echo "Test to see if mail is working" | mail -s "Test email" you@example.com
 ```
 
@@ -124,25 +124,25 @@ If so, success!
 
 #### Enable PHP to send email using Postfix
 
-```
+```bash
 vim /etc/php5/apache2/php.ini
 ```
 
 Find "send_mailpath", uncomment it and add the following command:
 
-```
+```bash
 sendmail_path = "/usr/sbin/sendmail -t -i"
 ```
 
 Save, and restart Apache.
 
-```
+```bash
 /etc/init.d/apache2 restart
 ```
 
 Add an alias to your root account, for your email account:
 
-```
+```bash
 vim /etc/aliases
 root    admin@domain.com
 ```

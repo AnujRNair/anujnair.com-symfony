@@ -8,7 +8,7 @@ I had included it in my project by running `npm install webpack --save`.
 
 However, on running the `webpack` command, I was seeing the following output:
 
-```
+```bash
 Output filename not configured.
 ```
 
@@ -16,7 +16,7 @@ Output filename not configured.
 
 Turns out it was simple. I had missed the **s** from my `module.exports` line:
 
-```
+```js
 module.export = App;
 
 //Should be

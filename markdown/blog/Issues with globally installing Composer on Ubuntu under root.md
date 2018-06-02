@@ -4,7 +4,7 @@ Whilst trying to install composer globally, using my root account, I was running
 
 At first, I was only seeing the following:
 
-```
+```bash
 root@machine:/home/websites$ curl -sS https://getcomposer.org/installer | php
 #!/usr/bin/env php
 All settings correct for using Composer
@@ -15,7 +15,7 @@ PHP was hiding any errors I was meant to see, as I had set my system to use prod
 
 Running `curl -sS https://getcomposer.org/installer | php` then gave me the following errors:
 
-```
+```bash
 root@machine:/home/websites$ curl -sS https://getcomposer.org/installer | php
 #!/usr/bin/env php
 All settings correct for using Composer

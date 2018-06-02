@@ -27,23 +27,16 @@ $hashed_password = password_hash("ThisIsMyPassword", PASSWORD_DEFAULT, $options)
 This function has generated us a unique salt, and has set the optional parameter "cost" to be 10. It's all been hashed using our chosen algorithm and stored as a 60 character string. Everything we need to verify the password is stored in those 60 characters.
 
 So then to decode:
-```
+```php
 $verified = password_verify("ThisIsMyPassword", '\$2y\$10\$hZjugx0VE8uZryPWr9mMj.XEyD7qkfS7uxImRRxKERqGkfocg3.SS');
 
 //Outputs: True
 ```
 
 #### The 60 Character String
-**$2y$10$**hZjugx0VE8uZryPWr9mMj.XEyD7qkfS7uxImRRxKERqGkfocg3.SS
-This denotes a crypt hash
-
-$2y$**10**$hZjugx0VE8uZryPWr9mMj.XEyD7qkfS7uxImRRxKERqGkfocg3.SS
-This is the cost parameter we selected
-
-$2y$10$**hZjugx0VE8uZryPWr9mMj.**XEyD7qkfS7uxImRRxKERqGkfocg3.SS
-The next 22 characters is the salt
-
-$2y$10$hZjugx0VE8uZryPWr9mMj.**XEyD7qkfS7uxImRRxKERqGkfocg3.SS**
-Finally we have the hash of the password itself
+* **$2y$10$**hZjugx0VE8uZryPWr9mMj.XEyD7qkfS7uxImRRxKERqGkfocg3.SS - This denotes a crypt hash
+* $2y$**10**$hZjugx0VE8uZryPWr9mMj.XEyD7qkfS7uxImRRxKERqGkfocg3.SS - This is the cost parameter we selected
+* $2y$10$**hZjugx0VE8uZryPWr9mMj.**XEyD7qkfS7uxImRRxKERqGkfocg3.SS - The next 22 characters is the salt
+* $2y$10$hZjugx0VE8uZryPWr9mMj.**XEyD7qkfS7uxImRRxKERqGkfocg3.SS** - Finally we have the hash of the password itself
 
 More info can be found on the [PHP password_hash page](http://uk1.php.net/password_hash)

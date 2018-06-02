@@ -14,7 +14,7 @@ There are a few things we will need to get around whilst making the query calls:
 
 To combat this, we will keep querying the service in blocks of 1000 rows until there are no more rows remaining. We can do so with something like the following:
 
-```
+```clike
 ' You might not need to import all of these ...
 Imports System
 Imports System.IO

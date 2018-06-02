@@ -2,7 +2,9 @@
 
 Yesterday, I tried running the following command using the symfony console to dump my LESS files into a static CSS file, for my site:
 
-`php app/console assetic:dump --env=prod --no-debug`
+```php
+php app/console assetic:dump --env=prod --no-debug
+```
 
 On doing so, when I visited my site, no CSS styling had been applied, and when checking the generated file in the `/web/bundles/` folder, it was empty.
 

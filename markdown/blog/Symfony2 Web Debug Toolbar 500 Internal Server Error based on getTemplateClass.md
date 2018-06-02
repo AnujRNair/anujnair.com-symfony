@@ -2,21 +2,21 @@
 
 I came across a strange issue today whilst developing on symfony2. On a very bare installation of symfony, every time I refreshed the page, I came across the following error:
 
-```
+```bash
 An error occurred while loading the web debug toolbar (500 internal server error)
 ```
 
 I'd then have the option to view the profiler or cancel.
 On viewing the profiler, I saw the following:
 
-```
+```bash
 Error: Maximum function nesting level of '100' reached, aborting!
 500 Internal Server Error - FatalErrorException
 ```
 
 and the initial stack trace started as:
 
-```
+```php
 $class = substr($this->getTemplateClass($name), strlen($this->templateClassPrefix));
     return $this->getCache() . '/' . $class[0] . '/' . $class[1] . '/' . $class . '.php';
 }
@@ -28,7 +28,7 @@ public function getTemplateClass($name, $index = null)
 
 After that, the same few lines were repeated over and over, until the maximum nesting level was hit:
 
-```
+```php
 at Twig_Environment->loadTemplate ()
 in app/cache/dev/classes.php at line 4754
 

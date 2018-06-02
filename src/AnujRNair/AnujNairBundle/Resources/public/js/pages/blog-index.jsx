@@ -1,6 +1,8 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import Prism from 'prismjs';
+import 'prismjs/components/prism-markup-templating';
+import 'prismjs/components/prism-php';
 import 'prismjs/plugins/line-numbers/prism-line-numbers';
 
 import { Archive, Posts } from '@anujnair/js/types/post';
