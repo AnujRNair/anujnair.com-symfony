@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const merge = require('webpack-merge');
 const ManifestPlugin = require('webpack-manifest-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const cacheDirectory = path.resolve(__dirname, '..', 'node_modules', '.cache');
 
@@ -49,48 +50,43 @@ module.exports = merge(
         // postcss will use `browserslist` in the root of webapp to choose what to prefix
         {
           test: /\.(less|css)$/,
-          use: ExtractTextPlugin.extract({
-            fallback: 'style-loader',
-            use: [
-              {
-                loader: 'cache-loader',
-                options: {
-                  cacheDirectory: path.resolve(
-                    cacheDirectory,
-                    'cache-loader',
-                    'less',
-                    'gantry'
-                  )
-                }
-              },
-              {
-                loader: 'css-loader',
-                options: {
-                  minimize: true
-                }
-              },
-              {
-                loader: 'postcss-loader'
-              },
-              {
-                loader: 'sass-loader',
-                options: {
-                  includePaths: [
-                    path.resolve(
-                      __dirname,
-                      '..',
-                      'src',
-                      'AnujRNair',
-                      'AnujNairBundle',
-                      'Resources',
-                      'public',
-                      'css'
-                    )
-                  ]
-                }
+          use: [
+            {
+              loader: 'cache-loader',
+              options: {
+                cacheDirectory: path.resolve(cacheDirectory, 'css')
               }
-            ]
-          })
+            },
+            {
+              loader: MiniCssExtractPlugin.loader
+            },
+            {
+              loader: 'css-loader',
+              options: {
+                minimize: true
+              }
+            },
+            {
+              loader: 'postcss-loader'
+            },
+            {
+              loader: 'sass-loader',
+              options: {
+                includePaths: [
+                  path.resolve(
+                    __dirname,
+                    '..',
+                    'src',
+                    'AnujRNair',
+                    'AnujNairBundle',
+                    'Resources',
+                    'public',
+                    'css'
+                  )
+                ]
+              }
+            }
+          ]
         }
       ]
     },
@@ -106,16 +102,16 @@ module.exports = merge(
       new webpack.HashedModuleIdsPlugin(),
 
       // This extracts css and less into a separate css file, one for each entry point
-      new ExtractTextPlugin({
+      new MiniCssExtractPlugin({
         filename: '[name].[contenthash:7].css',
-        allChunks: true
+        chunkFilename: '[id].[contenthash:7].css'
       }),
 
       // tree shake, minimize, compress
       new UglifyJsPlugin({
         sourceMap: false,
         cache: path.resolve(cacheDirectory, 'uglifyjs-js-plugin'),
-        parallel: 2,
+        parallel: 2
       }),
 
       // create a manifest file of assets so php knows where to find files
