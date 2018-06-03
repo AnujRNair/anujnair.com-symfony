@@ -3,18 +3,11 @@
 namespace AnujRNair\AnujNairBundle\Controller;
 
 use AnujRNair\AnujNairBundle\Entity\Blog;
-use AnujRNair\AnujNairBundle\Entity\Comment;
-use AnujRNair\AnujNairBundle\Entity\Guest;
 use AnujRNair\AnujNairBundle\Entity\Tag;
-use AnujRNair\AnujNairBundle\Forms\Blog\CommentType;
-use AnujRNair\AnujNairBundle\Helper\PostHelper;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\NoResultException;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -22,14 +15,17 @@ use Symfony\Component\HttpFoundation\Request;
  * @package AnujRNair\AnujNairBundle\Controller
  * @Route("/blog")
  */
-class BlogController extends Controller
+class BlogController extends BaseController
 {
 
     /**
-     * @Route("/", name="_an_blog_index")
+     * @Route("/", name="_an_blog_index", defaults={"webpack" = "blog-index"})
      * @Template("AnujNairBundle:Blog:index.html.twig")
      * @param Request $request
      * @return array
+     * @throws NoResultException
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     * @throws \Doctrine\ORM\Query\QueryException
      */
     public function indexAction(Request $request)
     {
@@ -37,9 +33,12 @@ class BlogController extends Controller
         $noPerPage = min($request->get('noPerPage', 10), 100);
 
         $em = $this->getDoctrine()->getManager();
-        $blogPosts = $em
+        $posts = $em
             ->getRepository('AnujNairBundle:Blog')
             ->getBlogPosts($page, $noPerPage);
+        $number = $em
+            ->getRepository('AnujNairBundle:Blog')
+            ->countBlogPosts();
         $archive = $em
             ->getRepository('AnujNairBundle:Blog')
             ->getBlogPostsByYearMonth(1, 20);
@@ -48,25 +47,31 @@ class BlogController extends Controller
             ->getBlogTagSummary();
 
         return [
-            'page' => $page,
-            'noPerPage' => $noPerPage,
-            'blogPosts' => $blogPosts,
-            'archive' => $archive,
-            'tagSummary' => $tagSummary
+            'json' => json_encode([
+                'count' => (int)$number,
+                'page' => (int)$page,
+                'noPerPage' => (int)$noPerPage,
+                'posts' => $posts,
+                'users' => $this->getUsersForObj($posts),
+                'tags' => $this->getTagsForObj($posts),
+                'archive' => $archive,
+                'tagSummary' => $tagSummary
+            ])
         ];
     }
 
     /**
-     * @Route("/{id}", requirements={"id" : "[\d]+"})
-     * @Route("/{id}-", requirements={"id" : "[\d]+"})
-     * @Route("/{id}-{title}", name="_an_blog_article", requirements={"id" : "[\d]+"})
-     * @Template("AnujNairBundle:Blog:post.html.twig")
+     * @Route("/{id}", requirements={"id" : "[\d]+"}, defaults={"webpack" = "blog-article"})
+     * @Route("/{id}-", requirements={"id" : "[\d]+"}, defaults={"webpack" = "blog-article"})
+     * @Route("/{id}-{title}", name="_an_blog_article", requirements={"id" : "[\d]+"}, defaults={"webpack" = "blog-article"})
+     * @Template("AnujNairBundle:Blog:article.html.twig")
      * @param Request $request
      * @param int $id
      * @param string $title
-     * @return array
+     * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
+     * @throws \Doctrine\ORM\ORMException
      */
-    public function postAction(Request $request, $id, $title = null)
+    public function articleAction(Request $request, $id, $title = null)
     {
         $blog = null;
         /** @var EntityManager $em */
@@ -84,90 +89,39 @@ class BlogController extends Controller
                     'title' => $blog->getUrlSafeTitle()
                 ]), 301);
             }
+
+            $blog->setWantLong(true);
         } catch (NoResultException $e) {
             throw $this->createNotFoundException('The blog post doesn\'t exist.');
         }
 
-        $actionUrl = $this->generateUrl('_an_blog_article', [
-            'id' => $blog->getId(),
-            'title' => $blog->getUrlSafeTitle()
-        ]);
-
-        $comment = new Comment();
-        $commentForm = $this->createForm(new CommentType($actionUrl . '#post-comment'), $comment);
-        $commentForm->handleRequest($request);
-
-        // Posting a comment, let's save it!
-        if ($commentForm->isValid()) {
-            // Get details that we will need
-            $ip = $request->getClientIp();
-            $userAgent = substr($request->headers->get('User-Agent'), 0, 255);
-            $datetime = new \DateTime();
-            $guest = $comment->getGuest();
-
-            // Try and find an existing guest
-            /** @var Guest $existingGuest */
-            $existingGuest = $em
-                ->getRepository('AnujNairBundle:Guest')
-                ->getGuestByNameIpUserAgent($guest->getName(), $ip, $userAgent);
-
-            if ($existingGuest !== null) {
-                $guest = $existingGuest;
-            } else {
-                $guest
-                    ->setDateCreated($datetime)
-                    ->setIpCreated($ip)
-                    ->setUserAgent($userAgent);
-            }
-            $guest
-                ->setDateLastVisited($datetime)
-                ->setIpLastVisited($ip);
-
-            // Save to the database
-            $comment->setBlog($blog);
-            $comment->setGuest($guest);
-            $em->persist($comment);
-            $em->persist($guest);
-            $em->flush();
-
-            // Send email
-            /** @var \Swift_Mime_Message $message */
-            $message = \Swift_Message::newInstance()
-                ->setSubject('AnujNair.com comment has been posted')
-                ->addFrom($this->container->getParameter('mailer_to'))
-                ->addTo($this->container->getParameter('mailer_to'))
-                ->addReplyTo($this->container->getParameter('mailer_to'))
-                ->setBody(
-                    $this->renderView('AnujNairBundle:Email:commentEmail.html.twig', [
-                        'comment' => $comment
-                    ]),
-                    'text/html'
-                );
-            $this->get('mailer')->send($message);
-
-            return $this->redirect($actionUrl . '#comment' . $comment->getId());
-        }
-
-        $similarBlogPosts = $em
+        $similar = $em
             ->getRepository('AnujNairBundle:Blog')
             ->getSimilarBlogPosts($id, 1, 20);
 
         return [
-            'blog' => $blog,
-            'similarBlogPosts' => $similarBlogPosts,
-            'commentForm' => $commentForm->createView()
+            'json' => json_encode([
+                'blog' => $blog,
+                'users' => $this->getUsersForObj([$blog]),
+                'tags' => $this->getTagsForObj([$blog]),
+                'similar' => $similar
+            ]),
+            'blog' => $blog
         ];
     }
 
     /**
-     * @Route("/t/{tagId}", requirements={"tagId" : "[\d]+"})
-     * @Route("/t/{tagId}-", requirements={"tagId" : "[\d]+"})
-     * @Route("/t/{tagId}-{name}", name="_an_blog_tag", requirements={"tagId" : "[\d]+"})
+     * @Route("/t/{tagId}", requirements={"tagId" : "[\d]+"}, defaults={"webpack" = "blog-tag"})
+     * @Route("/t/{tagId}-", requirements={"tagId" : "[\d]+"}, defaults={"webpack" = "blog-tag"})
+     * @Route("/t/{tagId}-{name}", name="_an_blog_tag", requirements={"tagId" : "[\d]+"}, defaults={"webpack" = "blog-tag"})
      * @Template("AnujNairBundle:Blog:index.html.twig")
      * @param Request $request
      * @param int $tagId
      * @param string $name
      * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     * @throws \Doctrine\ORM\Query\QueryException
+     * @throws NoResultException
      */
     public function tagAction(Request $request, $tagId, $name = null)
     {
@@ -194,9 +148,12 @@ class BlogController extends Controller
             throw $this->createNotFoundException('I couldn\'t find that tag!');
         }
 
-        $blogPosts = $em
+        $posts = $em
             ->getRepository('AnujNairBundle:Blog')
             ->getBlogPostsByTagId($tag->getId(), $page, $noPerPage);
+        $count = $em
+            ->getRepository('AnujNairBundle:Blog')
+            ->countBlogPostsByTagId($tag->getId());
         $archive = $em
             ->getRepository('AnujNairBundle:Blog')
             ->getBlogPostsByYearMonth(1, 20);
@@ -205,44 +162,17 @@ class BlogController extends Controller
             ->getBlogTagSummary();
 
         return [
-            'page' => $page,
-            'noPerPage' => $noPerPage,
-            'blogPosts' => $blogPosts,
-            'archive' => $archive,
-            'tagSummary' => $tagSummary,
-            'tagId' => $tagId
+            'json' => json_encode([
+                'count' => (int)$count,
+                'page' => (int)$page,
+                'noPerPage' => (int)$noPerPage,
+                'posts' => $posts,
+                'users' => $this->getUsersForObj($posts),
+                'tags' => $this->getTagsForObj($posts),
+                'archive' => $archive,
+                'tagSummary' => $tagSummary,
+                'tagId' => (int)$tagId
+            ])
         ];
     }
-
-    /**
-     * @Route("/preview", name="_an_blog_preview")
-     * @Method({"POST"})
-     * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\Response|static
-     */
-    public function previewPostAction(Request $request)
-    {
-        $comment = new Comment();
-        $commentForm = $this->createForm(new CommentType(), $comment);
-        $commentForm->handleRequest($request);
-
-        $errors = [];
-        $error = $commentForm->getErrors(true);
-        if (count($error) > 0) {
-            foreach ($error as $err) {
-                $field = $err->getOrigin()->getName();
-                if ($field === 'name') {
-                    continue;
-                }
-                $errors[$field][] = $err->getMessage();
-            }
-        }
-
-        if (count($errors) > 0) {
-            return JsonResponse::create(['parsed' => null, 'errors' => $errors]);
-        }
-
-        return JsonResponse::create(['parsed' => PostHelper::parseBBCode($comment->getComment())]);
-    }
-
 }

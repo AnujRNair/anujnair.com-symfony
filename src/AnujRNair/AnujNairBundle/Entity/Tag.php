@@ -2,6 +2,7 @@
 
 namespace AnujRNair\AnujNairBundle\Entity;
 
+use JsonSerializable;
 use AnujRNair\AnujNairBundle\Helper\URLHelper;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
@@ -14,7 +15,7 @@ use Doctrine\ORM\Mapping\UniqueConstraint;
  * @ORM\HasLifecycleCallbacks()
  * @ORM\Entity(repositoryClass="AnujRNair\AnujNairBundle\Repository\TagRepository")
  */
-class Tag
+class Tag implements JsonSerializable
 {
     /**
      * @var integer
@@ -171,5 +172,14 @@ class Tag
     {
         $this->dateCreated = new \DateTime();
         $this->deleted = false;
+    }
+
+    public function jsonSerialize()
+    {
+        return [
+            'id' => $this->getId(),
+            'name' => $this->getName(),
+            'urlName' => $this->getUrlSafeName()
+        ];
     }
 }

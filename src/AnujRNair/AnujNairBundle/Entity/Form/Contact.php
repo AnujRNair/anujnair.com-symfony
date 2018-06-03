@@ -2,13 +2,14 @@
 
 namespace AnujRNair\AnujNairBundle\Entity\Form;
 
+use JsonSerializable;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class Contact
  * @package AnujRNair\AnujNairBundle\Entity\Form
  */
-class Contact
+class Contact implements JsonSerializable
 {
 
     /**
@@ -148,4 +149,13 @@ class Contact
         $this->ip = ip2long($ip);
     }
 
+    public function jsonSerialize()
+    {
+        return [
+            'name' => $this->getName(),
+            'email' => $this->getEmail(),
+            'subject' => $this->getSubject(),
+            'contents' => $this->getSubject()
+        ];
+    }
 }

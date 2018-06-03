@@ -2,6 +2,8 @@
 
 namespace AnujRNair\AnujNairBundle\Entity;
 
+use Parsedown;
+use JsonSerializable;
 use AnujRNair\AnujNairBundle\Helper\PostHelper;
 use AnujRNair\AnujNairBundle\Helper\URLHelper;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -14,7 +16,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\HasLifecycleCallbacks()
  * @ORM\Entity(repositoryClass="AnujRNair\AnujNairBundle\Repository\PortfolioRepository")
  */
-class Portfolio
+class Portfolio implements JsonSerializable
 {
 
     /**
@@ -73,6 +75,11 @@ class Portfolio
      */
     private $deleted;
 
+    /**
+     * @var Parsedown
+     */
+    private $parsedown = null;
+
 
     /**
      * Set up the One to Many relationships
@@ -80,6 +87,18 @@ class Portfolio
     public function __construct()
     {
         $this->tagMap = new ArrayCollection();
+    }
+
+    /**
+     * Get the Parsedown instance
+     * @return Parsedown
+     */
+    private function getParsedown() {
+        if ($this->parsedown === null) {
+            $this->parsedown = new Parsedown();
+        }
+
+        return $this->parsedown;
     }
 
     /**
@@ -146,7 +165,7 @@ class Portfolio
      */
     public function getContents()
     {
-        return PostHelper::parseBBCode($this->contents);
+        return $this->getParsedown()->text($this->contents);
     }
 
     /**
@@ -202,11 +221,16 @@ class Portfolio
 
     /**
      * Get dateCreated
-     * @return \DateTime
+     * @param string $format
+     * @return string
      */
-    public function getDateCreated()
+    public function getDateCreated($format = 'jS F Y')
     {
-        return $this->dateCreated;
+        if ($this->dateCreated instanceof \DateTime) {
+            return $this->dateCreated->format($format);
+        }
+
+        return null;
     }
 
     /**
@@ -222,11 +246,16 @@ class Portfolio
 
     /**
      * Get dateUpdated
-     * @return \DateTime
+     * @param string $format
+     * @return string
      */
-    public function getDateUpdated()
+    public function getDateUpdated($format = 'jS F Y')
     {
-        return $this->dateUpdated;
+        if ($this->dateUpdated instanceof \DateTime) {
+            return $this->dateUpdated->format($format);
+        }
+
+        return null;
     }
 
     /**
@@ -252,7 +281,7 @@ class Portfolio
     /**
      * Add TagMap
      * @param \AnujRNair\AnujNairBundle\Entity\TagMap $tagMap
-     * @return User
+     * @return Portfolio
      */
     public function addTagMap(TagMap $tagMap)
     {
@@ -292,6 +321,19 @@ class Portfolio
     }
 
     /**
+     * Get Tags for the blog post
+     * @return Integer[]
+     */
+    public function getTagIds()
+    {
+        $tagIds = [];
+        foreach ($this->tagMap as $map) {
+            $tagIds[] = $map->getTag()->getId();
+        }
+        return $tagIds;
+    }
+
+    /**
      * @ORM\PrePersist
      */
     public function prePersist()
@@ -306,5 +348,19 @@ class Portfolio
     public function preUpdate()
     {
         $this->dateUpdated = new \DateTime();
+    }
+
+    public function jsonSerialize()
+    {
+        return [
+            'id' => $this->getId(),
+            'name' => $this->getName(),
+            'contents' => $this->getContents(),
+            'image' => $this->getImage(),
+            'link' => $this->getLink(),
+            'dateCreated' => $this->getDateCreated(),
+            'tagIds' => $this->getTagIds(),
+            'urlTitle' => $this->getUrlSafeName()
+        ];
     }
 }

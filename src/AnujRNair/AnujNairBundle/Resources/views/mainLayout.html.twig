@@ -4,22 +4,24 @@
 {% block activeRoute '_an_none' %}
 
 {% block body %}
+<div class="grid__body-header header">
+    {% block header %}
+        {{ render(path('_an_header_index', {activeRoute: block('activeRoute')})) }}
+    {% endblock %}
+</div>
 
-    <div class="main-container">
-        {% block header %}
-            {{ render(path('_an_header_index', {activeRoute: block('activeRoute')})) }}
-        {% endblock %}
+<div class="grid__body-main {% if error is defined %}grid__body-main--error{% endif %}">
+    <div class="main-content"></div>
 
-        <div class="container content-container {% block pageCss %}{% endblock %}">
-            {% block content %}
-            {% endblock %}
-        </div>
+    <aside class="aside-content" />
+</div>
 
-        <div id="main-container-push"></div>
-    </div>
+{% block content %}
+{% endblock %}
 
+<div class="grid__body-footer footer">
     {% block footer %}
         {{ render(path('_an_footer_index')) }}
     {% endblock %}
-
+</div>
 {% endblock %}

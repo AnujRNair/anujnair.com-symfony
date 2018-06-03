@@ -1,0 +1,33 @@
+@import 'variables.scss';
+
+@font-face {
+  font-family: Delicious-Bold;
+  src: url('../fonts/delicious/Delicious-Bold.otf') format('opentype');
+}
+
+body {
+  text-align: left;
+  line-height: $line-height-base;
+  color: $color-body;
+  font-family: $font-family-body;
+  font-size: $font-size-base;
+  font-weight: $font-weight-normal;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-display: fallback;
+}
+
+@each $font-header, $font-props in $font-headers {
+  #{$font-header} {
+    font-family: $font-family-header;
+    font-size: map-get($font-props, font-size);
+  }
+}
+
+h2,
+h3 {
+  margin: 1.25em 0 0.5em;
+  border-bottom: $border-dotted;
+  padding-bottom: 0.5em;
+  line-height: $line-height-headers;
+}

@@ -37,11 +37,11 @@ class BlogRepository extends EntityRepository
      * Get a paginated list of undeleted blogs
      * @param int $page
      * @param int $numberPerPage
-     * @return Paginator|Blog[]
+     * @return Blog[]
      */
     public function getBlogPosts($page, $numberPerPage)
     {
-        $query = $this->getEntityManager()
+        return $this->getEntityManager()
             ->createQuery('
                 select b
                 from AnujNairBundle:Blog as b
@@ -49,9 +49,25 @@ class BlogRepository extends EntityRepository
                 order by b.datePublished desc
             ')
             ->setFirstResult(($page - 1) * $numberPerPage)
-            ->setMaxResults($numberPerPage);
+            ->setMaxResults($numberPerPage)
+            ->getResult();
+    }
 
-        return new Paginator($query, false);
+    /**
+     * Counts the number of blog posts available
+     * @return string
+     * @throws \Doctrine\ORM\Query\QueryException
+     */
+    public function countBlogPosts()
+    {
+        return $this->getEntityManager()
+            ->createQuery('
+                select count(b)
+                from AnujNairBundle:Blog as b
+                where b.deleted = 0
+                order by b.datePublished desc
+            ')
+            ->getSingleScalarResult();
     }
 
     /**
@@ -64,7 +80,8 @@ class BlogRepository extends EntityRepository
     {
         $blogPosts = $this->getEntityManager()
             ->createQuery('
-                select b
+                select 
+                  partial b.{id, title, datePublished}
                 from AnujNairBundle:Blog as b
                 where b.deleted = 0
                 order by b.datePublished desc
@@ -77,7 +94,7 @@ class BlogRepository extends EntityRepository
         if (count($blogPosts) > 0) {
             foreach ($blogPosts as $post) {
                 /** @var Blog $post */
-                $results[$post->getDatePublished()->format('Y')][$post->getDatePublished()->format('F')][] = $post;
+                $results[$post->getDatePublished('Y')][$post->getDatePublished('F')][] = $post;
             }
         }
 
@@ -93,7 +110,7 @@ class BlogRepository extends EntityRepository
      */
     public function getBlogPostsByTagId($tagId, $page, $numberPerPage)
     {
-        $query = $this->getEntityManager()
+        return $this->getEntityManager()
             ->createQuery('
                 select b
                 from AnujNairBundle:Blog as b
@@ -106,9 +123,31 @@ class BlogRepository extends EntityRepository
             ')
             ->setParameters(['tagId' => $tagId])
             ->setFirstResult(($page - 1) * $numberPerPage)
-            ->setMaxResults($numberPerPage);
+            ->setMaxResults($numberPerPage)
+            ->getResult();
+    }
 
-        return new Paginator($query, false);
+    /**
+     * Count undeleted blog posts by a tag id
+     * @param int $tagId
+     * @return string
+     * @throws \Doctrine\ORM\Query\QueryException
+     */
+    public function countBlogPostsByTagId($tagId)
+    {
+        return $this->getEntityManager()
+            ->createQuery('
+                select count(b)
+                from AnujNairBundle:Blog as b
+                inner join b.tagMap as tm
+                inner join tm.tag as t
+                where t.deleted = 0
+                and b.deleted = 0
+                and t.id = :tagId
+                order by b.datePublished desc
+            ')
+            ->setParameters(['tagId' => $tagId])
+            ->getSingleScalarResult();
     }
 
     /**
@@ -122,7 +161,7 @@ class BlogRepository extends EntityRepository
         $blogPosts = $this->getEntityManager()
             ->createQuery('
                 select
-                    b,
+                    partial b.{id, title, datePublished},
                     count(b.id) as tagCount
                 from AnujNairBundle:Blog as b
                 left join b.tagMap as tm

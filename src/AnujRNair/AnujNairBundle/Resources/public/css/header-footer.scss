@@ -1,0 +1,98 @@
+@import 'variables.scss';
+
+.header {
+  background: url('../images/bg/header.png') #101318 no-repeat center top;
+  font-family: $font-family-header;
+
+  nav {
+    ul {
+      display: block;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+
+      li {
+        display: inline-block;
+
+        a {
+          display: inline-block;
+          padding: 10px 15px;
+          color: $color-white;
+
+          @media (max-width: $breakpoint-small) {
+            color: $color-body;
+          }
+        }
+
+        &.active a,
+        &:hover a {
+          border-bottom: 2px solid $color-white;
+          text-decoration: none;
+
+          @media (max-width: $breakpoint-small) {
+            border-bottom: 2px solid $color-body;
+          }
+        }
+      }
+
+      @media (max-width: $breakpoint-small) {
+        text-align: center;
+      }
+    }
+  }
+
+  .me {
+    &__img {
+      display: inline-block;
+      border: 7px solid $color-white;
+      border-radius: 50%;
+      width: 160px;
+      height: 160px;
+      vertical-align: top;
+
+      img {
+        display: inline-block;
+        border-radius: 50%;
+        max-width: 100%;
+        height: auto;
+      }
+    }
+
+    &__about {
+      display: inline-block;
+      padding-left: 15px;
+      vertical-align: top;
+
+      h1 {
+        margin: 10px 0 20px;
+
+        a {
+          color: $color-white;
+
+          &:hover {
+            text-decoration: none;
+          }
+        }
+      }
+
+      p {
+        margin: 0;
+        padding: 10px 0 0;
+
+        a:before {
+          color: $color-body;
+        }
+      }
+    }
+  }
+}
+
+.footer {
+  border-top: $border-dotted;
+  font-family: $font-family-header;
+  font-size: $font-size-smaller;
+
+  a {
+    padding-left: 5px;
+  }
+}

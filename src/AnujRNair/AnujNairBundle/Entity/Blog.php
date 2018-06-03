@@ -2,6 +2,8 @@
 
 namespace AnujRNair\AnujNairBundle\Entity;
 
+use Parsedown;
+use JsonSerializable;
 use AnujRNair\AnujNairBundle\Helper\PostHelper;
 use AnujRNair\AnujNairBundle\Helper\URLHelper;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -15,7 +17,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\HasLifecycleCallbacks()
  * @ORM\Entity(repositoryClass="AnujRNair\AnujNairBundle\Repository\BlogRepository")
  */
-class Blog
+class Blog implements JsonSerializable
 {
     /**
      * @var integer
@@ -81,6 +83,24 @@ class Blog
      */
     private $hasComments;
 
+    /**
+     * @var bool
+     */
+    private $wantLong = false;
+
+    /**
+     * @var Parsedown
+     */
+    private $parsedown = null;
+
+
+    /**
+     * Set whether we want the contents (long) or the abstract (short)
+     * @param boolean $wantLong
+     */
+    public function setWantLong($wantLong) {
+        $this->wantLong = $wantLong;
+    }
 
     /**
      * Set up the One to Many relationships
@@ -89,6 +109,18 @@ class Blog
     {
         $this->tagMap = new ArrayCollection();
         $this->comments = new ArrayCollection();
+    }
+
+    /**
+     * Get the Parsedown instance
+     * @return Parsedown
+     */
+    private function getParsedown() {
+        if ($this->parsedown === null) {
+            $this->parsedown = new Parsedown();
+        }
+
+        return $this->parsedown;
     }
 
     /**
@@ -175,7 +207,7 @@ class Blog
      */
     public function getContents()
     {
-        return PostHelper::parseBBCode($this->contents);
+        return $this->getParsedown()->text($this->contents);
     }
 
     /**
@@ -186,7 +218,7 @@ class Blog
      */
     public function getNoHTMLAbstract($length = 150, $truncationIndicator = '...')
     {
-        return PostHelper::safeShorten(PostHelper::stripBBCode($this->contents), $length, $truncationIndicator);
+        return PostHelper::safeShorten(strip_tags($this->contents), $length, $truncationIndicator);
     }
 
     /**
@@ -197,7 +229,7 @@ class Blog
      */
     public function getAbstract($length = 500, $truncationIndicator = '...')
     {
-        return PostHelper::safeShorten(PostHelper::parseBBCode($this->contents), $length, $truncationIndicator);
+        return PostHelper::safeShorten($this->getParsedown()->text($this->contents), $length, $truncationIndicator);
     }
 
     /**
@@ -213,11 +245,16 @@ class Blog
 
     /**
      * Get datePublished
-     * @return \DateTime
+     * @param string $format
+     * @return string
      */
-    public function getDatePublished()
+    public function getDatePublished($format = 'jS F Y')
     {
-        return $this->datePublished;
+        if ($this->datePublished instanceof \DateTime) {
+            return $this->datePublished->format($format);
+        }
+
+        return null;
     }
 
     /**
@@ -233,11 +270,16 @@ class Blog
 
     /**
      * Get dateUpdated
-     * @return \DateTime
+     * @param string $format
+     * @return string
      */
-    public function getDateUpdated()
+    public function getDateUpdated($format = 'jS F Y')
     {
-        return $this->dateUpdated;
+        if ($this->dateUpdated instanceof \DateTime) {
+            return $this->dateUpdated->format($format);
+        }
+
+        return null;
     }
 
     /**
@@ -312,6 +354,19 @@ class Blog
             $tags[] = $map->getTag();
         }
         return $tags;
+    }
+
+    /**
+     * Get Tags for the blog post
+     * @return Integer[]
+     */
+    public function getTagIds()
+    {
+        $tagIds = [];
+        foreach ($this->tagMap as $map) {
+            $tagIds[] = $map->getTag()->getId();
+        }
+        return $tagIds;
     }
 
     /**
@@ -390,6 +445,19 @@ class Blog
     public function preUpdate()
     {
         $this->dateUpdated = new \DateTime();
+    }
+
+    public function jsonSerialize()
+    {
+        return [
+            'id' => $this->getId(),
+            'userId' => $this->user->getId(),
+            'tagIds' => $this->getTagIds(),
+            'title' => $this->getTitle(),
+            'contents' => $this->wantLong ? $this->getContents() : $this->getAbstract(),
+            'datePublished' => $this->getDatePublished(),
+            'urlTitle' => $this->getUrlSafeTitle()
+        ];
     }
 
 }

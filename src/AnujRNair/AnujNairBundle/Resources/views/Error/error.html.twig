@@ -1,100 +1,18 @@
 {% extends 'AnujNairBundle::mainLayout.html.twig' %}
 
 {% block htmlTitle 'I couldn\'t find what you were looking for! &raquo; AnujNair.com' %}
-{% block pageCss 'error' %}
 
 {% block content %}
-    <div class="row">
-        <div class="col-xs-12">
-            <h1 class="title-header text-center">
-                <span class="icon-attention"></span>
-                I couldn't find what you were looking for!
-                <span class="icon-attention"></span>
-            </h1>
-            <h3 class="text-center">{{ message }}</h3>
-            <h4 class="metadata text-center">
-                That's a {{ statusCode }}
-            </h4>
-            {% if app.environment == 'dev' and error.trace is defined %}
-                <ul class="metadata list">
-                    {% for trace in error.trace %}
-                        {% if trace.file %}
-                            <li>
-                                <span class="icon-right-open"></span>
-                                <span>{{ trace.file }} (line {{ trace.line }})</span>
-                            </li>
-                        {% endif %}
-                    {% endfor %}
-                </ul>
-            {% endif %}
-            <p>Let's get you back on the right track, Maybe one of the following can help you?</p>
-            <div class="row">
-                <div class="col-sm-4">
-                    <div class="box box-blog">
-                        <div class="media">
-                            <div class="media-left"><span class="icon-pencil"></span></div>
-                            <div class="media-body">
-                                <h2>Check out my blog</h2>
-                                <ul class="list">
-                                    <li>
-                                        <span class="icon-right-open"></span>
-                                        <span>It's interesting, I promise. (I hope.)</span>
-                                    </li>
-                                    <li>
-                                        <span class="icon-right-open"></span>
-                                        <a href="{{ url('_an_blog_index') }}">Visit my blog</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="box box-portfolio">
-                        <div class="media">
-                            <div class="media-left"><span class="icon-globe"></span></div>
-                            <div class="media-body">
-                                <h2>Visit my portfolio</h2>
-                                <ul class="list">
-                                    <li>
-                                        <span class="icon-right-open"></span>
-                                        <span>See my recent work</span>
-                                    </li>
-                                    <li>
-                                        <span class="icon-right-open"></span>
-                                        <a href="{{ url('_an_portfolio_index') }}">Check out my portfolio</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="box box-about">
-                        <div class="media">
-                            <div class="media-left"><span class="icon-user"></span></div>
-                            <div class="media-body">
-                                <h2>Learn about me</h2>
-                                <ul class="list">
-                                    <li>
-                                        <span class="icon-right-open"></span>
-                                        <span>Find out about me, or contact me</span>
-                                    </li>
-                                    <li>
-                                        <span class="icon-right-open"></span>
-                                        <a href="{{ url('_an_about_index') }}">Get to know me</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <p>
-                If you think you've come across a genuine error, please
-                <a href="{{ url('_an_about_index') }}">contact me</a>
-                and let me know! I'd be forever grateful.
-            </p>
-        </div>
-    </div>
+    {% if app.environment == 'dev' and error.trace is defined %}
+        <ul class="list">
+            <li>{{ message }}</li>
+            {% for trace in error.trace %}
+                {% if trace.file %}
+                    <li>
+                        <span>{{ trace.file }} (line {{ trace.line }})</span>
+                    </li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    {% endif %}
 {% endblock %}

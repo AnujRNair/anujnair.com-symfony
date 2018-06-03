@@ -2,6 +2,7 @@
 
 namespace AnujRNair\AnujNairBundle\Repository;
 
+use AnujRNair\AnujNairBundle\Entity\Tag;
 use Doctrine\ORM\EntityRepository;
 
 /**
@@ -14,7 +15,7 @@ class TagRepository extends EntityRepository
     /**
      * Get a tag by it's id
      * @param $id
-     * @return mixed
+     * @return Tag
      * @throws \Doctrine\ORM\NoResultException
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
@@ -29,6 +30,26 @@ class TagRepository extends EntityRepository
             ')
             ->setParameters(['id' => $id])
             ->getSingleResult();
+    }
+
+    /**
+     * Get tags by their ids
+     * @param $ids[]
+     * @return Tag[]
+     * @throws \Doctrine\ORM\NoResultException
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public function getTagsByIds($ids)
+    {
+        return $this->getEntityManager()
+            ->createQuery('
+                select
+                    t
+                from AnujNairBundle:Tag as t
+                where t.id in (:ids)
+            ')
+            ->setParameters(['ids' => $ids])
+            ->getResult();
     }
 
     /**

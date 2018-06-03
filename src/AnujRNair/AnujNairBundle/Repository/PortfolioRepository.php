@@ -41,7 +41,7 @@ class PortfolioRepository extends EntityRepository
      */
     public function getPortfolioList($page, $numberPerPage)
     {
-        $query = $this->getEntityManager()
+        return $this->getEntityManager()
             ->createQuery('
                 select p
                 from AnujNairBundle:Portfolio as p
@@ -49,9 +49,8 @@ class PortfolioRepository extends EntityRepository
                 order by p . dateCreated desc
             ')
             ->setFirstResult(($page - 1) * $numberPerPage)
-            ->setMaxResults($numberPerPage);
-
-        return new Paginator($query, false);
+            ->setMaxResults($numberPerPage)
+            ->getResult();
     }
 
     /**
@@ -63,7 +62,7 @@ class PortfolioRepository extends EntityRepository
      */
     public function getPortfolioListByTagId($tagId, $page, $numberPerPage)
     {
-        $query = $this->getEntityManager()
+        return $this->getEntityManager()
             ->createQuery('
                 select p
                 from AnujNairBundle:Portfolio as p
@@ -76,9 +75,8 @@ class PortfolioRepository extends EntityRepository
             ')
             ->setParameters(['tagId' => $tagId])
             ->setFirstResult(($page - 1) * $numberPerPage)
-            ->setMaxResults($numberPerPage);
-
-        return new Paginator($query, false);
+            ->setMaxResults($numberPerPage)
+            ->getResult();
     }
 
     /**
@@ -92,7 +90,7 @@ class PortfolioRepository extends EntityRepository
         $articles = $this->getEntityManager()
             ->createQuery('
                 select
-                    p,
+                    partial p.{id, name},
                     count(p.id) as tagCount
                 from AnujNairBundle:Portfolio as p
                 left join p.tagMap as tm

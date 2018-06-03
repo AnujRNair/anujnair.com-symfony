@@ -4,35 +4,4 @@
 {% block htmlDescription 'View Anuj Nair\'s Portfolio to see his latest work, whether it be website, application, or library.' %}
 {% block htmlKeywords 'Anuj, Anuj Nair, Portfolio, Work, Website, Application, Library, Client, PHP, SQL, JS, JavaScript' %}
 {% block activeRoute '_an_portfolio_index' %}
-{% block pageCss 'portfolio' %}
 
-{% block content %}
-    <div class="row">
-        <section class="col-md-8">
-            {% if portfolioList|length > 0 %}
-                <h1 class="title-header">My Portfolio and Development Work</h1>
-                <div class="row">
-                    {% for portfolio in portfolioList %}
-                        {% include 'AnujNairBundle:Portfolio/Component:smallTile.html.twig' with {
-                            'portfolio': portfolio
-                        } %}
-                    {% endfor %}
-                </div>
-            {% else %}
-                <div class="no-portfolio-articles">
-                    <div class="alert alert-info text-center">
-                        There doesn't seem to be any portfolio articles here <span class="icon-frown"></span>
-                    </div>
-                </div>
-            {% endif %}
-        </section>
-        <aside class="col-md-4">
-            <div class="row">
-                {% include 'AnujNairBundle:Portfolio/Component:about.html.twig' with {
-                    'tagSummary': tagSummary
-                } %}
-                {% include 'AnujNairBundle:Portfolio/Component:moreInfo.html.twig' %}
-            </div>
-        </aside>
-    </div>
-{% endblock %}

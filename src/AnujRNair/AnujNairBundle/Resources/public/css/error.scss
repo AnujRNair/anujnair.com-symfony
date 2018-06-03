@@ -1,0 +1,54 @@
+.error {
+  h2,
+  h3,
+  h4 {
+    line-height: $line-height-headers;
+    text-align: center;
+
+    &:not(:first-child) {
+      margin: 0.5em 0.5em 0;
+      border: 0;
+      padding: 0;
+    }
+  }
+
+  &__blocks {
+    margin-top: 1em;
+    border-top: $border-dotted;
+  }
+
+  &__block {
+    display: inline-block;
+    margin: 10px;
+    border-radius: 4px;
+    padding: 15px;
+    vertical-align: top;
+    width: calc(33% - 20px);
+
+    h4 {
+      margin: 0 0 0.35em;
+      padding: 0;
+      text-align: left;
+    }
+
+    &--blue {
+      background-color: $color-blue-light;
+      border: 1px solid darken($color-blue-light, 10%);
+    }
+
+    &--yellow {
+      background-color: $color-yellow-light;
+      border: 1px solid darken($color-yellow-light, 10%);
+    }
+
+    &--green {
+      background-color: $color-green-light;
+      border: 1px solid darken($color-green-light, 10%);
+    }
+
+    @media (max-width: $breakpoint-small) {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+  }
+}

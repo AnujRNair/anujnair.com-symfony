@@ -1,0 +1,171 @@
+@font-face {
+  font-family: 'Flaticon';
+  font-weight: normal;
+  font-style: normal;
+  src: url('../fonts/flaticon/Flaticon.eot');
+  src: url('../fonts/flaticon/Flaticon.eot?#iefix') format('embedded-opentype'), // sass-lint:disable-line no-duplicate-properties
+  url('../fonts/flaticon/Flaticon.woff') format('woff'),
+  url('../fonts/flaticon/Flaticon.ttf') format('truetype');
+}
+
+.icon {
+  &:before {
+    display: inline-block;
+    margin-right: 10px;
+    text-transform: none;
+    text-decoration: inherit;
+    text-rendering: optimizeLegibility;
+    line-height: 1;
+    font-family: 'Flaticon';
+    font-weight: normal;
+    font-style: normal;
+    font-variant: normal;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  &:hover:before {
+    text-decoration: none;
+  }
+
+  &--absolute:before {
+    position: absolute;
+    top: 6px;
+  }
+
+  &-pencil-full:before {
+    content: '\f100';
+  }
+
+  &-plane:before {
+    content: '\f101';
+  }
+
+  &-work:before {
+    content: '\f102';
+  }
+
+  &-link:before {
+    content: '\f103';
+  }
+
+  &-mail-full:before {
+    content: '\f104';
+  }
+
+  &-man:before {
+    content: '\f105';
+  }
+
+  &-location:before {
+    content: '\f106';
+  }
+
+  &-calendar:before {
+    content: '\f107';
+  }
+
+  &-thumbs-up:before {
+    content: '\f108';
+  }
+
+  &-spanner:before {
+    content: '\f109';
+  }
+
+  &-pencil:before {
+    content: '\f10a';
+  }
+
+  &-earth-full:before {
+    content: '\f10b';
+  }
+
+  &-earth:before {
+    content: '\f10c';
+  }
+
+  &-star-full:before {
+    content: '\f10d';
+  }
+
+  &-heart:before {
+    content: '\f10e';
+  }
+
+  &-tag:before {
+    content: '\f10f';
+  }
+
+  &-tags:before {
+    content: '\f110';
+  }
+
+  &-li:before {
+    content: '\f111';
+  }
+
+  &-star:before {
+    content: '\f112';
+  }
+
+  &-tags-full:before {
+    content: '\f113';
+  }
+
+  &-tag-full:before {
+    content: '\f114';
+  }
+
+  &-heart-full:before {
+    content: '\f115';
+  }
+
+  &-chat:before {
+    content: '\f116';
+  }
+
+  &-gp:before {
+    content: '\f117';
+  }
+
+  &-mail:before {
+    content: '\f118';
+  }
+
+  &-chats-full:before {
+    content: '\f119';
+  }
+
+  &-li-full:before {
+    content: '\f11a';
+  }
+
+  &-fb-full:before {
+    content: '\f11b';
+  }
+
+  &-fb:before {
+    content: '\f11c';
+  }
+
+  &-gp-full:before {
+    content: '\f11d';
+  }
+
+  &-t-full:before {
+    content: '\f11e';
+  }
+
+  &-t:before {
+    content: '\f11f';
+  }
+
+  &-gh-full:before {
+    content: '\f120';
+  }
+
+  &-so:before {
+    content: '\f121';
+  }
+}

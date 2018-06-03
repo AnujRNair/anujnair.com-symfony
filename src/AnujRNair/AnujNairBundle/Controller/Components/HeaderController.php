@@ -27,8 +27,8 @@ class HeaderController extends Controller
 
         $nav
             ->add('_an_blog_index', 'Blog', 'icon-pencil')
-            ->add('_an_portfolio_index', 'Portfolio', 'icon-globe')
-            ->add('_an_about_index', 'About Me', 'icon-user')
+            ->add('_an_portfolio_index', 'Portfolio', 'icon-earth')
+            ->add('_an_about_index', 'About Me', 'icon-man')
             ->setActive($activeRoute);
 
         return [

@@ -1,0 +1,19 @@
+@import 'variables';
+
+.pagination {
+  display: flex;
+  flex-direction: row;
+  margin-top: 40px;
+
+  &__button {
+    border: 1px solid $color-grey-light;
+    border-radius: 4px;
+    background-color: $color-grey-lighter;
+    padding: 7px 10px;
+
+  }
+
+  &__newer {
+    margin-left: auto;
+  }
+}

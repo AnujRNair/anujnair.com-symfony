@@ -1,0 +1,64 @@
+@import 'variables.scss';
+
+.post {
+  position: relative;
+
+  &__title {
+    a {
+      color: $color-headers;
+
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  }
+
+  &__metadata {
+    margin: 0;
+    border-bottom: $border-dotted;
+    padding: 0 0 4px;
+    list-style: none;
+    font-size: $font-size-smaller;
+
+    li {
+      padding-bottom: 5px;
+
+      &.icon-tags {
+        overflow: hidden;
+        white-space: nowrap;
+      }
+    }
+
+    &-tags {
+      display: inline-block;
+      padding: 0 0 0 5px;
+      list-style: none;
+
+      li {
+        display: inline-block;
+
+        &:not(:first-child):before {
+          display: inline-block;
+          margin: 0 5px;
+          content: '\2022';
+        }
+      }
+    }
+  }
+
+  &__contents {
+    ul {
+      margin: 0;
+    }
+  }
+
+  &__show-more {
+    position: absolute;
+    bottom: -15px;
+    left: -5px;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0, #fff 50%);
+    padding: 35px 0 10px;
+    width: calc(100% + 10px);
+    text-align: center;
+  }
+}

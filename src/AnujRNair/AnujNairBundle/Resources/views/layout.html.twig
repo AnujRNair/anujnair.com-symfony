@@ -1,9 +1,8 @@
 <!DOCTYPE html>
-<html {%if app.request.locale is defined%}lang="{{ app.request.locale }}"{% endif %} prefix="og: http://ogp.me/ns#">
+<html {%if app.request.locale is defined%}lang="{{ app.request.locale }}"{% endif %}>
     <head itemscope itemtype="http://schema.org/WebSite">
         {% block metaTags %}
             <meta charset="utf-8">
-            <meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1">
             <meta name="description" content="{% spaceless %}{% block htmlDescription %}{% endblock %}{% endspaceless %}">
             <meta name="keywords" content="{% spaceless %}{% block htmlKeywords %}{% endblock %}{% endspaceless %}">
             <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -19,36 +18,49 @@
 
         <link rel="apple-touch-icon" href="{{ asset('apple-touch-icon.png') }}">
         <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
-        <link rel="canonical" href="http://anujnair.com" itemprop="url">
+        <link rel="canonical" href="https://anujnair.com" itemprop="url">
         <link rel="author" href="https://plus.google.com/+AnujNair89/posts" />
         <link rel="publisher" href="https://plus.google.com/+AnujNair89" />
 
-        {% block stylesheets %}
-            {% stylesheets
-                'bundles/anujnair/css/anujnair.less'
-                'bower_components/prism/themes/prism-coy.css'
-                'bower_components/prism/plugins/line-numbers/prism-line-numbers.css'
-                output='bundles/anujnair/css/anujnair.css'
-            %}
-                <link rel="stylesheet" href="{{ asset_url }}" />
-            {% endstylesheets %}
-        {% endblock %}
+        {% if app.environment == 'prod' %}
+            {% if error is defined %}
+                {% for css in error_css %}
+                    <link type="text/css" rel="stylesheet" href="{{ css }}"/>
+                {% endfor %}
+            {% else %}
+                {% for css in asset_css %}
+                    <link type="text/css" rel="stylesheet" href="{{ css }}"/>
+                {% endfor %}
+            {% endif %}
+        {% endif %}
     </head>
-    <body>
+    <body class="grid__body">
         {% block body %}
         {% endblock %}
 
-        {% block javascripts %}
-            <script data-main="{{ asset('bundles/anujnair/js/main.js') }}" src="{{ asset('bower_components/requirejs/require.js') }}"></script>
-            <script>
-                requirejs.config({
-                    config: {
-                        'components/ga': {
-                            'ga_tracking': "{{ ga_tracking }}"
-                        }
-                    }
-                });
+        {% if json is defined %}
+            <script type="application/javascript">
+                window.reactProps = {{ json|raw }};
             </script>
-        {% endblock %}
+        {% endif %}
+
+        {% if app.environment == 'prod' %}
+            {% if error is defined %}
+                {% for js in error_js %}
+                    <script src="{{ js }}"></script>
+                {% endfor %}
+            {% else %}
+                {% for js in asset_js %}
+                    <script src="{{ js }}"></script>
+                {% endfor %}
+            {% endif %}
+        {% else %}
+            {% if error is defined %}
+                <script src="http://127.0.0.1:3010/assets/error.bundle.js"></script>
+            {% else %}
+                <!-- webpack dev server for page -->
+                <script src="http://127.0.0.1:3010/assets/{{ app.request.attributes.get("webpack")|default('error') }}.bundle.js"></script>
+            {% endif %}
+        {% endif %}
     </body>
 </html>

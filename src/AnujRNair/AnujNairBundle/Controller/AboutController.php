@@ -18,7 +18,7 @@ class AboutController extends Controller
 {
 
     /**
-     * @Route("/", name="_an_about_index")
+     * @Route("/", name="_an_about_index", defaults={"webpack" = "about-index"})
      * @Template()
      * @param Request $request
      * @return array
@@ -48,13 +48,46 @@ class AboutController extends Controller
                 );
             $this->get('mailer')->send($message);
             $this->addFlash('success', 'Thanks for your email! I\'ll be in contact shortly.');
+
             return $this->redirect($actionUrl);
         }
 
         return [
-            'contactForm' => $contactForm->createView(),
-            'years' => intval(date('Y')) - 2002
+            'json' => json_encode([
+                'years' => intval(date('Y')) - 2002,
+                'form' => [
+                    'csrf' => $contactForm->createView()['_token']->vars['value'],
+                    'values' => $contact,
+                    'errors' => $this->getErrorMessages($contactForm)
+                ],
+                'success' => $this->container->get('session')->getFlashBag()->get('success')
+            ])
         ];
+    }
+
+    /**
+     * Get form errors
+     * @param \Symfony\Component\Form\Form $form
+     * @return array
+     */
+    private function getErrorMessages(\Symfony\Component\Form\Form $form) {
+        $errors = [];
+
+        foreach ($form->getErrors() as $key => $error) {
+            if ($form->isRoot()) {
+                $errors['_form'][] = $error->getMessage();
+            } else {
+                $errors[] = $error->getMessage();
+            }
+        }
+
+        foreach ($form->all() as $child) {
+            if (!$child->isValid()) {
+                $errors[$child->getName()] = $this->getErrorMessages($child);
+            }
+        }
+
+        return $errors;
     }
 
 }

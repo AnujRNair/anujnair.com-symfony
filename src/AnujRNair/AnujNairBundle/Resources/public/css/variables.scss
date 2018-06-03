@@ -1,0 +1,40 @@
+@import 'colors.scss';
+
+$breakpoint-large: 1440px;
+$breakpoint-medium: 960px;
+$breakpoint-small: 720px;
+
+$font-family-header: 'Delicious-Bold', Helvetica, Arial, sans-serif;
+$font-family-body: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+$font-size-base: 16px;
+$font-size-small: $font-size-base * 0.8;
+$font-size-smaller: $font-size-base * 0.75;
+$font-size-large: $font-size-base * 1.125;
+
+$font-weight-thin: 300;
+$font-weight-normal: 400;
+$font-weight-bold: 600;
+
+$font-headers: (
+  h1: (
+    font-size: 2.25em,
+  ),
+  h2: (
+    font-size: 1.5em,
+  ),
+  h3: (
+    font-size: 1.5em,
+  ),
+  h4: (
+    font-size: 1.25em,
+  ),
+  h5: (
+    font-size: 1em,
+  )
+);
+
+$line-height-base: 1.412em;
+$line-height-headers: 1.5em;
+
+$border-dotted: 1px dotted $color-grey-light;

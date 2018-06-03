@@ -1,0 +1,12 @@
+{% extends 'AnujNairBundle::mainLayout.html.twig' %}
+
+{% block htmlTitle %}{{ blog.getTitle}} &raquo; Anuj Nair's Blog &raquo; AnujNair.com{% endblock %}
+{% block htmlDescription %}{{ blog.getNoHTMLAbstract }}{% endblock %}
+{% block htmlKeywords %}
+    {% set keywords = [] %}
+    {% for tag in blog.getTags %}
+        {% set keywords = keywords|merge([tag.getName]) %}
+    {% endfor %}
+    {{ keywords|join(', ') }}
+{% endblock %}
+{% block activeRoute '_an_blog_index' %}

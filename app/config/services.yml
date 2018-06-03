@@ -4,6 +4,10 @@ parameters:
 #    parameter_name: value
 
 services:
-#    service_name:
-#        class: AppBundle\Directory\ClassName
-#        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+    app.assets_extension:
+        class: AnujRNair\AnujNairBundle\Twig\AssetsExtension
+        arguments:
+            - @service_container
+            - "%kernel.environment%"
+        tags:
+            - { name: twig.extension }
