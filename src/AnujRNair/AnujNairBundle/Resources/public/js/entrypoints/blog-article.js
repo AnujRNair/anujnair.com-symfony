@@ -4,11 +4,11 @@ import '@anujnair/css/toolkit.scss';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import BlogPost, { BlogAside } from '@anujnair/js/pages/blog-post';
+import BlogArticle, { BlogAside } from '@anujnair/js/pages/blog-article';
 
 const mainContainer = document.querySelector('.main-content');
 ReactDOM.render(
-  React.createElement(BlogPost, window.reactProps),
+  React.createElement(BlogArticle, window.reactProps),
   mainContainer
 );
 

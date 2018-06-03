@@ -16,6 +16,8 @@ class BaseController extends Controller
      * Get an array of user ids from an array of posts
      * @param Blog[]|Portfolio[] $objs
      * @return Integer[]
+     * @throws \Doctrine\ORM\NoResultException
+     * @throws \Doctrine\ORM\NonUniqueResultException
      */
     protected function getUsersForObj($objs)
     {
@@ -34,6 +36,8 @@ class BaseController extends Controller
      * Get an array of tag ids from an array of posts
      * @param Blog[]|Portfolio[] $objs
      * @return Integer[]
+     * @throws \Doctrine\ORM\NoResultException
+     * @throws \Doctrine\ORM\NonUniqueResultException
      */
     protected function getTagsForObj($objs)
     {

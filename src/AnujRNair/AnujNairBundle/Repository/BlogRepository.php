@@ -137,7 +137,7 @@ class BlogRepository extends EntityRepository
     {
         return $this->getEntityManager()
             ->createQuery('
-                select b
+                select count(b)
                 from AnujNairBundle:Blog as b
                 inner join b.tagMap as tm
                 inner join tm.tag as t

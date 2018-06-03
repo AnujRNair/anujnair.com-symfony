@@ -50,6 +50,7 @@ class PortfolioController extends BaseController
      * @param string $name
      * @return array
      * @throws \Doctrine\ORM\NonUniqueResultException
+     * @throws NoResultException
      */
     public function articleAction($id, $name = null)
     {
@@ -100,6 +101,7 @@ class PortfolioController extends BaseController
      * @param string $name
      * @return array
      * @throws \Doctrine\ORM\NonUniqueResultException
+     * @throws NoResultException
      */
     public function tagAction(Request $request, $tagId, $name = null)
     {

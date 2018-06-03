@@ -23,6 +23,8 @@ class BlogController extends BaseController
      * @Template("AnujNairBundle:Blog:index.html.twig")
      * @param Request $request
      * @return array
+     * @throws NoResultException
+     * @throws \Doctrine\ORM\NonUniqueResultException
      * @throws \Doctrine\ORM\Query\QueryException
      */
     public function indexAction(Request $request)
@@ -59,18 +61,17 @@ class BlogController extends BaseController
     }
 
     /**
-     * @Route("/{id}", requirements={"id" : "[\d]+"}, defaults={"webpack" = "blog-post"})
-     * @Route("/{id}-", requirements={"id" : "[\d]+"}, defaults={"webpack" = "blog-post"})
-     * @Route("/{id}-{title}", name="_an_blog_article", requirements={"id" : "[\d]+"}, defaults={"webpack" = "blog-post"})
-     * @Template("AnujNairBundle:Blog:post.html.twig")
+     * @Route("/{id}", requirements={"id" : "[\d]+"}, defaults={"webpack" = "blog-article"})
+     * @Route("/{id}-", requirements={"id" : "[\d]+"}, defaults={"webpack" = "blog-article"})
+     * @Route("/{id}-{title}", name="_an_blog_article", requirements={"id" : "[\d]+"}, defaults={"webpack" = "blog-article"})
+     * @Template("AnujNairBundle:Blog:article.html.twig")
      * @param Request $request
      * @param int $id
      * @param string $title
      * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
      * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function postAction(Request $request, $id, $title = null)
+    public function articleAction(Request $request, $id, $title = null)
     {
         $blog = null;
         /** @var EntityManager $em */
@@ -120,6 +121,7 @@ class BlogController extends BaseController
      * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
      * @throws \Doctrine\ORM\NonUniqueResultException
      * @throws \Doctrine\ORM\Query\QueryException
+     * @throws NoResultException
      */
     public function tagAction(Request $request, $tagId, $name = null)
     {

@@ -5,6 +5,7 @@
 {% block content %}
     {% if app.environment == 'dev' and error.trace is defined %}
         <ul class="list">
+            <li>{{ message }}</li>
             {% for trace in error.trace %}
                 {% if trace.file %}
                     <li>

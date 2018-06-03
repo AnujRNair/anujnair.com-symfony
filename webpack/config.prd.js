@@ -20,7 +20,7 @@ module.exports = merge(
       chunkFilename: '[name].[chunkhash:7].min.js',
 
       // how they will be accessed through the browser on the cdn
-      publicPath: '/web/bundles/assets/'
+      publicPath: '/bundles/assets/'
     },
 
     // disable webpack defaults
@@ -76,8 +76,7 @@ module.exports = merge(
           ]
         },
 
-        // run css and less through less loader, post css (for vendor prefixes) and then css loader (with minification)
-        // postcss will use `browserslist` in the root of webapp to choose what to prefix
+        // run css and scss through scss loader, post css (for vendor prefixes) and then css loader (with minification)
         {
           test: /\.(scss|css)$/,
           use: [

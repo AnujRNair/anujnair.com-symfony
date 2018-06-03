@@ -27,7 +27,7 @@ module.exports = {
       'entrypoints',
       'blog-index'
     ),
-    'blog-post': path.resolve(
+    'blog-article': path.resolve(
       'src',
       'AnujRNair',
       'AnujNairBundle',
@@ -35,7 +35,7 @@ module.exports = {
       'public',
       'js',
       'entrypoints',
-      'blog-post'
+      'blog-article'
     ),
     'blog-tag': path.resolve(
       'src',

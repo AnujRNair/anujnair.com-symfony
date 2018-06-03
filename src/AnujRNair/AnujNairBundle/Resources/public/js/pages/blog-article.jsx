@@ -11,7 +11,7 @@ import { Users } from '@anujnair/js/types/user';
 import Post from '@anujnair/js/components/post/post';
 import SimilarPosts from '@anujnair/js/components/similar-posts/similar-posts';
 
-export default class BlogPost extends Component {
+export default class BlogArticle extends Component {
   static propTypes = {
     blog: PostProps.isRequired,
     tags: Tags.isRequired,

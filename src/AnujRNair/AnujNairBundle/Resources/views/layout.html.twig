@@ -23,10 +23,15 @@
         <link rel="publisher" href="https://plus.google.com/+AnujNair89" />
 
         {% if app.environment == 'prod' %}
-            <!-- needs hash -->
-            <link type="text/css" rel="stylesheet" href="bundles/webpack/{{ app.request.attributes.get("_route")|default('error') }}.css"/>
-
-            <!-- webpack manifest -->
+            {% if error is defined %}
+                {% for css in error_css %}
+                    <link type="text/css" rel="stylesheet" href="{{ css }}"/>
+                {% endfor %}
+            {% else %}
+                {% for css in asset_css %}
+                    <link type="text/css" rel="stylesheet" href="{{ css }}"/>
+                {% endfor %}
+            {% endif %}
         {% endif %}
     </head>
     <body class="grid__body">
@@ -40,12 +45,14 @@
         {% endif %}
 
         {% if app.environment == 'prod' %}
-            <!-- vendor -->
-
             {% if error is defined %}
-                <!-- error -->
+                {% for js in error_js %}
+                    <script src="{{ js }}"></script>
+                {% endfor %}
             {% else %}
-                <!-- page, default back to error -->
+                {% for js in asset_js %}
+                    <script src="{{ js }}"></script>
+                {% endfor %}
             {% endif %}
         {% else %}
             {% if error is defined %}
