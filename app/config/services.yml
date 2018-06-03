@@ -8,5 +8,6 @@ services:
         class: AnujRNair\AnujNairBundle\Twig\AssetsExtension
         arguments:
             - @service_container
+            - "%kernel.environment%"
         tags:
             - { name: twig.extension }

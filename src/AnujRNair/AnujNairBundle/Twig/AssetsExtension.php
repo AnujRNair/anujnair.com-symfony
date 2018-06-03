@@ -28,7 +28,7 @@ class AssetsExtension extends \Twig_Extension implements \Twig_Extension_Globals
      * Constructor - ensure the manifest exists
      * @param ContainerInterface $container
      */
-    public function __construct($container)
+    public function __construct($container, $env)
     {
         $this->container = $container;
 
@@ -36,12 +36,14 @@ class AssetsExtension extends \Twig_Extension implements \Twig_Extension_Globals
             $this->request = $this->container->get('request');
         }
 
-        $path = realpath(__DIR__ . '/../../../../web/bundles/assets/manifest.json');
-        if ($path === false) {
-            throw new FileNotFoundException('Could not find webpack manifest file');
-        }
+        if ($env !== 'dev') {
+            $path = realpath(__DIR__ . '/../../../../web/bundles/assets/manifest.json');
+            if ($path === false) {
+                throw new FileNotFoundException('Could not find webpack manifest file');
+            }
 
-        $this->manifest = json_decode(file_get_contents($path), true);
+            $this->manifest = json_decode(file_get_contents($path), true);
+        }
     }
 
     /**

@@ -23,6 +23,9 @@ module.exports = merge(
       publicPath: '/bundles/assets/'
     },
 
+    // bug with mini css is forcing us to not cache
+    cache: false,
+
     // disable webpack defaults
     mode: 'none',
 
@@ -80,12 +83,6 @@ module.exports = merge(
         {
           test: /\.(scss|css)$/,
           use: [
-            {
-              loader: 'cache-loader',
-              options: {
-                cacheDirectory: path.resolve(cacheDirectory, 'css')
-              }
-            },
             {
               loader: MiniCssExtractPlugin.loader
             },

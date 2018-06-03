@@ -1,42 +1,47 @@
 {
-    "name": "anujrnair/anujnaircom",
-    "license": "MIT",
-    "type": "project",
-    "description": "AnujNair.com build using the symfony framework",
-    "autoload": {
-        "psr-4": {
-            "": "src/"
-        }
-    },
-    "require": {
-        "php": ">=7.0",
-        "symfony/symfony": "2.7.*",
-        "twig/twig": "@stable",
-        "doctrine/orm": "~2.2,>=2.2.3,<2.5",
-        "doctrine/dbal": "<2.5",
-        "doctrine/doctrine-bundle": "~1.4",
-        "symfony/assetic-bundle": "~2.3",
-        "symfony/swiftmailer-bundle": "~2.3",
-        "symfony/monolog-bundle": "~2.4",
-        "sensio/distribution-bundle": "~4.0",
-        "sensio/framework-extra-bundle": "~3.0,>=3.0.2",
-        "erusev/parsedown": "^1.7"
-    },
-    "require-dev": {
-        "sensio/generator-bundle": "~2.3"
-    },
-    "scripts": {
-        "post-root-package-install": [
-            "SymfonyStandard\\Composer::hookRootPackageInstall"
-        ],
-        "post-install-cmd": [
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache"
-        ],
-        "post-update-cmd": [
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache"
-        ]
-    },
-    "minimum-stability": "stable"
+  "name": "anujrnair/anujnaircom",
+  "license": "MIT",
+  "type": "project",
+  "description": "AnujNair.com build using the symfony framework",
+  "autoload": {
+    "psr-4": {
+      "": "src/"
+    }
+  },
+  "config": {
+    "platform": {
+      "php": "7.0"
+    }
+  },
+  "require": {
+    "php": ">=7.0",
+    "symfony/symfony": "2.7.*",
+    "twig/twig": "@stable",
+    "doctrine/orm": "~2.2,>=2.2.3,<2.5",
+    "doctrine/dbal": "<2.5",
+    "doctrine/doctrine-bundle": "~1.4",
+    "symfony/assetic-bundle": "~2.3",
+    "symfony/swiftmailer-bundle": "~2.3",
+    "symfony/monolog-bundle": "~2.4",
+    "sensio/distribution-bundle": "~4.0",
+    "sensio/framework-extra-bundle": "~3.0,>=3.0.2",
+    "erusev/parsedown": "^1.7"
+  },
+  "require-dev": {
+    "sensio/generator-bundle": "~2.3"
+  },
+  "scripts": {
+    "post-root-package-install": [
+      "SymfonyStandard\\Composer::hookRootPackageInstall"
+    ],
+    "post-install-cmd": [
+      "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
+      "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache"
+    ],
+    "post-update-cmd": [
+      "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
+      "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache"
+    ]
+  },
+  "minimum-stability": "stable"
 }
