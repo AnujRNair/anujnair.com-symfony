@@ -65,7 +65,6 @@ class BlogRepository extends EntityRepository
                 select count(b)
                 from AnujNairBundle:Blog as b
                 where b.deleted = 0
-                order by b.datePublished desc
             ')
             ->getSingleScalarResult();
     }
@@ -144,7 +143,6 @@ class BlogRepository extends EntityRepository
                 where t.deleted = 0
                 and b.deleted = 0
                 and t.id = :tagId
-                order by b.datePublished desc
             ')
             ->setParameters(['tagId' => $tagId])
             ->getSingleScalarResult();
