@@ -18,7 +18,7 @@ AnujNair.com-symfony readme
 
 ## Other
 
-Fixing permissions: https://symfony.com/doc/2.7/setup/file_permissions.html
+[Fixing permissions](https://symfony.com/doc/2.7/setup/file_permissions.html)
 
 ## License
 
