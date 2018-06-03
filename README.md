@@ -14,7 +14,7 @@ AnujNair.com-symfony readme
 
 ## Production
 
-* `./tools/build.sh`
+* `bash ./tools/build.sh`
 
 ## Other
 
