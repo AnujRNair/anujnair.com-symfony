@@ -6,7 +6,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Filesystem\Exception\FileNotFoundException;
 use Symfony\Component\HttpFoundation\Request;
 
-class AssetsExtension extends \Twig_Extension implements \Twig_Extension_GlobalsInterface
+class AssetsExtension extends \Twig_Extension
 {
 
     /**
