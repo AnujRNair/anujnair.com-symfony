@@ -19,7 +19,7 @@ export default class BlogArchive extends Component {
   }
 
   renderList() {
-    const firstKeys = Object.keys(this.props.list);
+    const firstKeys = Object.keys(this.props.list).sort((a, b) => b - a);
     const icon = this.props.icon
       ? `icon ${this.props.icon} icon--absolute`
       : '';
