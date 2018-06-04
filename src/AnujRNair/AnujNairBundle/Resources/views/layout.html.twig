@@ -23,6 +23,14 @@
         <link rel="publisher" href="https://plus.google.com/+AnujNair89" />
 
         {% if app.environment == 'prod' %}
+            <script async src="https://www.googletagmanager.com/gtag/js?id=UA-16216873-1"></script>
+            <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'UA-16216873-1');
+            </script>
+
             {% if error is defined %}
                 {% for css in error_css %}
                     <link type="text/css" rel="stylesheet" href="{{ css }}"/>
