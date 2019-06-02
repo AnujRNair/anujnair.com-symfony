@@ -12,9 +12,12 @@ AnujNair.com-symfony readme
 * `php app/console server:run`
 * `npm run dev`
 
+Run the production command locally to ensure the build process works.
+
 ## Production
 
 * `bash ./tools/build.sh`
+* `sudo apachectl restart`
 
 ## Other
 
