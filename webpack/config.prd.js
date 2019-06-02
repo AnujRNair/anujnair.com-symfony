@@ -2,8 +2,9 @@ const path = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 const ManifestPlugin = require('webpack-manifest-plugin');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 const configBase = require('./config.base');
 
@@ -27,13 +28,22 @@ module.exports = merge(
     cache: false,
 
     // disable webpack defaults
-    mode: 'none',
+    mode: 'production',
 
     // no source maps on production - this greatly increases build time: https://webpack.js.org/configuration/devtool/#devtool
     devtool: false,
 
     // chunk assets
     optimization: {
+      minimizer: [
+        // tree shake, minimize, compress
+        new TerserPlugin({
+          sourceMap: false,
+          cache: path.resolve(cacheDirectory, 'terser-js-plugin'),
+          parallel: 2
+        }),
+        new OptimizeCSSAssetsPlugin()
+      ],
       splitChunks: {
         automaticNameDelimiter: '-',
         chunks: 'all',
@@ -87,10 +97,7 @@ module.exports = merge(
               loader: MiniCssExtractPlugin.loader
             },
             {
-              loader: 'css-loader',
-              options: {
-                minimize: true
-              }
+              loader: 'css-loader'
             },
             {
               loader: 'postcss-loader'
@@ -132,13 +139,6 @@ module.exports = merge(
       new MiniCssExtractPlugin({
         filename: '[name].[contenthash:7].css',
         chunkFilename: '[name].[contenthash:7].css'
-      }),
-
-      // tree shake, minimize, compress
-      new UglifyJsPlugin({
-        sourceMap: false,
-        cache: path.resolve(cacheDirectory, 'uglifyjs-js-plugin'),
-        parallel: 2
       }),
 
       // create a manifest file of assets so php knows where to find files
