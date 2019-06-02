@@ -70,14 +70,14 @@ export default class Error extends Component {
   render() {
     return (
       <div className="error">
-        <h2>I couldn't find what you were looking for!</h2>
+        <h2>I couldn&apos;t find what you were looking for!</h2>
         <h3>{this.props.message}</h3>
-        <h4>That's a {this.props.statusCode}</h4>
+        <h4>That&apos;s a {this.props.statusCode}</h4>
 
         <div className="error__blocks">
           <p>
-            Let's get you back on the right track, Maybe one of the following
-            can help you?
+            Let&apos;s get you back on the right track, Maybe one of the
+            following can help you?
           </p>
           {this.renderBlocks()}
         </div>

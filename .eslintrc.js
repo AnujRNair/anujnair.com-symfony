@@ -20,7 +20,8 @@ module.exports = {
     'react/jsx-no-literals': 0,
     'react/destructuring-assignment': 0,
     'react/no-multi-comp': 0,
-    'react/no-set-state': 0
+    'react/no-set-state': 0,
+    'react/jsx-fragments': 0
   },
   globals: {
     document: true
