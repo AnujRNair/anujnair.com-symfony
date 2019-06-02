@@ -3,6 +3,7 @@
 @font-face {
   font-family: Delicious-Bold;
   src: url('../fonts/delicious/Delicious-Bold.otf') format('opentype');
+  font-display: fallback;
 }
 
 body {
@@ -14,7 +15,6 @@ body {
   font-weight: $font-weight-normal;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
-  font-display: fallback;
 }
 
 @each $font-header, $font-props in $font-headers {
