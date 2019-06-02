@@ -33,10 +33,13 @@ export default class Contact extends PureComponent {
   };
 
   handleNameChange = e => this.updateContactFieldState('name', e.target.value);
+
   handleEmailChange = e =>
     this.updateContactFieldState('email', e.target.value);
+
   handleSubjectChange = e =>
     this.updateContactFieldState('subject', e.target.value);
+
   handleContentsChange = e =>
     this.updateContactFieldState('contents', e.target.value);
 
