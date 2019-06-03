@@ -18,11 +18,11 @@ export default class Skills extends Component {
         'CSS, SCSS, LESS, BEM, ITCSS'
       ],
       'Tools & Tech': [
-        'Webpack, Babel',
+        'Webpack, Babel, ESLint',
         'Jest, Enzyme, Jasmine',
         'Memcached, Redis',
         'Git',
-        'Selenium'
+        'Selenium, Cypress'
       ],
       Interests: [
         'Scalability & Performance',

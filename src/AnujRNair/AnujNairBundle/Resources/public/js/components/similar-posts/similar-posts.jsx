@@ -37,8 +37,10 @@ export default class SimilarPosts extends Component {
 
     return (
       <Fragment key={section}>
-        <li>{section}</li>
-        <ul>{items}</ul>
+        <li>
+          {section}
+          <ul>{items}</ul>
+        </li>
       </Fragment>
     );
   }

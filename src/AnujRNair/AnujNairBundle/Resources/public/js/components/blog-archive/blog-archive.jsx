@@ -37,16 +37,20 @@ export default class BlogArchive extends Component {
 
         return (
           <ul key={s}>
-            <li>{s}</li>
-            <ul>{items}</ul>
+            <li>
+              {s}
+              <ul>{items}</ul>
+            </li>
           </ul>
         );
       });
 
       return (
         <ul className="list" key={f}>
-          <li>{f}</li>
-          {second}
+          <li>
+            {f}
+            {second}
+          </li>
         </ul>
       );
     });
