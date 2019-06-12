@@ -80,32 +80,22 @@ export class AboutAside extends PureComponent {
       {
         icon: 'icon-so',
         name: 'Stack Overflow',
-        link: 'https://github.com/AnujRNair/'
+        link: 'https://stackoverflow.com/users/1759688/anuj'
       },
       {
         icon: 'icon-li',
         name: 'LinkedIn',
-        link: 'https://github.com/AnujRNair/'
-      },
-      {
-        icon: 'icon-fb',
-        name: 'Facebook',
-        link: 'https://github.com/AnujRNair/'
+        link: 'https://www.linkedin.com/in/anujrnair/'
       },
       {
         icon: 'icon-t',
         name: 'Twitter',
-        link: 'https://github.com/AnujRNair/'
-      },
-      {
-        icon: 'icon-gp',
-        name: 'Google+',
-        link: 'https://github.com/AnujRNair/'
+        link: 'https://twitter.com/AnujRNair'
       },
       {
         icon: 'icon-earth-full',
         name: 'AnujNair.com',
-        link: 'https://github.com/AnujRNair/'
+        link: 'https://anujnair.com'
       }
     ];
 
@@ -116,7 +106,9 @@ export class AboutAside extends PureComponent {
         key={item.name}
         rel={item.name === 'Google+' ? 'me' : null}
       >
-        <a href={item.link}>{item.name}</a>
+        <a href={item.link} target="_blank" rel="noopener noreferrer">
+          {item.name}
+        </a>
       </li>
     ));
 
