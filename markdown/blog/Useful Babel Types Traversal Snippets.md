@@ -26,6 +26,8 @@ obj.func({
 I did so by writing the following transformation:
 
 ```javascript
+const t = require('@babel/types');
+
 {
     CallExpression: ({ node }) => {
         // ignore anything which is not on my `func` method
