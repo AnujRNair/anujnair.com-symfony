@@ -4,7 +4,7 @@ echo "Clearing bundles dir ..."
 rm -rf web/bundles/
 
 echo "Creating assets via webpack ..."
-npx webpack --config=webpack/config.prd.js
+NODE_ENV=production npx webpack --config=webpack/config.prd.js
 
 echo "Clearing all environment caches ..."
 php app/console cache:clear --env=dev --no-debug
@@ -14,7 +14,7 @@ echo "Installing bundle assets ..."
 php app/console assets:install web/ --env=prod
 
 echo "Creating assets via webpack again ..."
-npx webpack --config=webpack/config.prd.js
+NODE_ENV=production npx webpack --config=webpack/config.prd.js
 
 echo "Dumping bundle assets ..."
 php app/console assetic:dump --env=prod --no-debug
