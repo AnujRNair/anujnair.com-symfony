@@ -99,18 +99,20 @@ module.exports = merge(
             {
               loader: 'sass-loader',
               options: {
-                includePaths: [
-                  path.resolve(
-                    __dirname,
-                    '..',
-                    'src',
-                    'AnujRNair',
-                    'AnujNairBundle',
-                    'Resources',
-                    'public',
-                    'css'
-                  ),
-                ],
+                sassOptions: {
+                  includePaths: [
+                    path.resolve(
+                      __dirname,
+                      '..',
+                      'src',
+                      'AnujRNair',
+                      'AnujNairBundle',
+                      'Resources',
+                      'public',
+                      'css'
+                    ),
+                  ],
+                },
               },
             },
           ],
