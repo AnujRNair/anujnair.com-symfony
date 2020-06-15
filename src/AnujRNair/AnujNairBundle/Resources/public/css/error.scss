@@ -2,8 +2,8 @@
   h2,
   h3,
   h4 {
-    line-height: $line-height-headers;
     text-align: center;
+    line-height: $line-height-headers;
 
     &:not(:first-child) {
       margin: 0.5em 0.5em 0;
@@ -22,8 +22,8 @@
     margin: 10px;
     border-radius: 4px;
     padding: 15px;
-    vertical-align: top;
     width: calc(33% - 20px);
+    vertical-align: top;
 
     h4 {
       margin: 0 0 0.35em;
@@ -32,23 +32,23 @@
     }
 
     &--blue {
-      background-color: $color-blue-light;
       border: 1px solid darken($color-blue-light, 10%);
+      background-color: $color-blue-light;
     }
 
     &--yellow {
-      background-color: $color-yellow-light;
       border: 1px solid darken($color-yellow-light, 10%);
+      background-color: $color-yellow-light;
     }
 
     &--green {
-      background-color: $color-green-light;
       border: 1px solid darken($color-green-light, 10%);
+      background-color: $color-green-light;
     }
 
     @media (max-width: $breakpoint-small) {
-      width: 100%;
       margin-bottom: 10px;
+      width: 100%;
     }
   }
 }
