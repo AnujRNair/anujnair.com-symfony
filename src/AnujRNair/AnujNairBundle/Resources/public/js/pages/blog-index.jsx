@@ -21,7 +21,7 @@ export default class BlogIndex extends Component {
     page: PropTypes.number.isRequired,
     posts: Posts.isRequired,
     tags: Tags.isRequired,
-    users: Users.isRequired
+    users: Users.isRequired,
   };
 
   componentDidMount() {
@@ -33,12 +33,12 @@ export default class BlogIndex extends Component {
   }
 
   findUserByUserId(userId) {
-    return this.props.users.find(user => user.id === userId);
+    return this.props.users.find((user) => user.id === userId);
   }
 
   findTagsByPost(post) {
-    return post.tagIds.map(tagId =>
-      this.props.tags.find(tag => tag.id === tagId)
+    return post.tagIds.map((tagId) =>
+      this.props.tags.find((tag) => tag.id === tagId)
     );
   }
 
@@ -47,7 +47,7 @@ export default class BlogIndex extends Component {
       return <h2>No articles currently exist</h2>;
     }
 
-    return this.props.posts.map(post => {
+    return this.props.posts.map((post) => {
       const user = this.findUserByUserId(post.userId);
 
       return (
@@ -81,11 +81,11 @@ export class BlogAside extends Component {
   static propTypes = {
     archive: Archive.isRequired,
     tagId: PropTypes.number,
-    tagSummary: TagSummaryProps.isRequired
+    tagSummary: TagSummaryProps.isRequired,
   };
 
   static defaultProps = {
-    tagId: null
+    tagId: null,
   };
 
   shouldComponentUpdate() {

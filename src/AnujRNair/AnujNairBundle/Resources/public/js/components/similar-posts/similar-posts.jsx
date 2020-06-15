@@ -7,11 +7,11 @@ export default class SimilarPosts extends Component {
   static propTypes = {
     icon: PropTypes.string,
     list: Similar.isRequired,
-    urlPath: PropTypes.string.isRequired
+    urlPath: PropTypes.string.isRequired,
   };
 
   static defaultProps = {
-    icon: null
+    icon: null,
   };
 
   shouldComponentUpdate() {
@@ -27,7 +27,7 @@ export default class SimilarPosts extends Component {
       ? `icon ${this.props.icon} icon--absolute`
       : '';
 
-    const items = this.props.list[section].map(post => (
+    const items = this.props.list[section].map((post) => (
       <li className={icon} key={post.id}>
         <a href={`/${this.props.urlPath}/${post.id}-${post.urlTitle}`}>
           {post.title || post.name}
@@ -48,11 +48,11 @@ export default class SimilarPosts extends Component {
   render() {
     const keys = Object.keys(this.props.list);
 
-    if (keys.every(key => this.props.list[key].length === 0)) {
+    if (keys.every((key) => this.props.list[key].length === 0)) {
       return null;
     }
 
-    const sections = keys.map(key => this.renderSection(key));
+    const sections = keys.map((key) => this.renderSection(key));
 
     return (
       <Fragment>

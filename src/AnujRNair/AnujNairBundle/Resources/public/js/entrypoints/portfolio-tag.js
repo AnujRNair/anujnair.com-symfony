@@ -5,7 +5,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import PortfolioIndex, {
-  PortfolioAside
+  PortfolioAside,
 } from '@anujnair/js/pages/portfolio-index';
 
 const mainContainer = document.querySelector('.main-content');

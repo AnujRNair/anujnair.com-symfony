@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 
 import { TagSummary as TagSummaryProps } from '@anujnair/js/types/tag';
 
-const TagSummary = ({ header, highlightTagId, icon, list, urlPath }) => {
+function TagSummary({ header, highlightTagId, icon, list, urlPath }) {
   if (Object.keys(list).length === 0) {
     return null;
   }
 
   const iconClass = icon ? `icon icon--absolute ${icon}` : '';
-  const items = Object.keys(list).map(idx => {
+  const items = Object.keys(list).map((idx) => {
     const item = list[idx];
     const highlightClass =
       highlightTagId === item.id ? 'list--highlighted' : '';
@@ -34,19 +34,19 @@ const TagSummary = ({ header, highlightTagId, icon, list, urlPath }) => {
       <ul className="list">{items}</ul>
     </Fragment>
   );
-};
+}
 
 TagSummary.propTypes = {
   header: PropTypes.string.isRequired,
   highlightTagId: PropTypes.number,
   icon: PropTypes.string,
   list: TagSummaryProps.isRequired,
-  urlPath: PropTypes.string.isRequired
+  urlPath: PropTypes.string.isRequired,
 };
 
 TagSummary.defaultProps = {
   highlightTagId: null,
-  icon: null
+  icon: null,
 };
 
 export default TagSummary;

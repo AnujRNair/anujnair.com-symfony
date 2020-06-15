@@ -8,11 +8,11 @@ import './contact.scss';
 export default class Contact extends PureComponent {
   static propTypes = {
     form: ContactForm.isRequired,
-    success: PropTypes.arrayOf(PropTypes.string.isRequired)
+    success: PropTypes.arrayOf(PropTypes.string.isRequired),
   };
 
   static defaultProps = {
-    success: []
+    success: [],
   };
 
   constructor(props) {
@@ -22,25 +22,26 @@ export default class Contact extends PureComponent {
       name: props.form.values.name || '',
       email: props.form.values.email || '',
       subject: props.form.values.subject || '',
-      contents: props.form.values.contents || ''
+      contents: props.form.values.contents || '',
     };
   }
 
   updateContactFieldState = (prop, text) => {
     this.setState(() => ({
-      [prop]: text
+      [prop]: text,
     }));
   };
 
-  handleNameChange = e => this.updateContactFieldState('name', e.target.value);
+  handleNameChange = (e) =>
+    this.updateContactFieldState('name', e.target.value);
 
-  handleEmailChange = e =>
+  handleEmailChange = (e) =>
     this.updateContactFieldState('email', e.target.value);
 
-  handleSubjectChange = e =>
+  handleSubjectChange = (e) =>
     this.updateContactFieldState('subject', e.target.value);
 
-  handleContentsChange = e =>
+  handleContentsChange = (e) =>
     this.updateContactFieldState('contents', e.target.value);
 
   hasError(section) {
@@ -55,7 +56,7 @@ export default class Contact extends PureComponent {
       return null;
     }
 
-    const errors = this.props.form.errors[section].map(item => (
+    const errors = this.props.form.errors[section].map((item) => (
       <li key={item}>{item}</li>
     ));
 

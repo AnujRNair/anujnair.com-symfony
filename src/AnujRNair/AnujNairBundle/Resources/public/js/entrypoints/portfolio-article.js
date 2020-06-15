@@ -5,7 +5,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import PortfolioArticle, {
-  PortfolioAside
+  PortfolioAside,
 } from '@anujnair/js/pages/portfolio-article';
 
 const mainContainer = document.querySelector('.main-content');

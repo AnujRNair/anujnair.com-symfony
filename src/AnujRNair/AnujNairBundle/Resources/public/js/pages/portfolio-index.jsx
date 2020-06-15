@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
 export default class PortfolioIndex extends Component {
   static propTypes = {
     articles: Articles.isRequired,
-    tags: Tags.isRequired
+    tags: Tags.isRequired,
   };
 
   shouldComponentUpdate() {
@@ -18,8 +18,8 @@ export default class PortfolioIndex extends Component {
   }
 
   findTagsByArticle(article) {
-    return article.tagIds.map(tagId =>
-      this.props.tags.find(tag => tag.id === tagId)
+    return article.tagIds.map((tagId) =>
+      this.props.tags.find((tag) => tag.id === tagId)
     );
   }
 
@@ -28,7 +28,7 @@ export default class PortfolioIndex extends Component {
       return <h2>No portfolio items currently exist</h2>;
     }
 
-    return this.props.articles.map(article => (
+    return this.props.articles.map((article) => (
       <Article
         article={article}
         key={article.id}
@@ -51,11 +51,11 @@ export default class PortfolioIndex extends Component {
 export class PortfolioAside extends Component {
   static propTypes = {
     tagId: PropTypes.number,
-    tagSummary: TagSummaryProps.isRequired
+    tagSummary: TagSummaryProps.isRequired,
   };
 
   static defaultProps = {
-    tagId: null
+    tagId: null,
   };
 
   shouldComponentUpdate() {

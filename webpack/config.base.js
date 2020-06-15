@@ -47,7 +47,7 @@ module.exports = {
       'entrypoints',
       'blog-tag'
     ),
-    'error': path.resolve(
+    error: path.resolve(
       'src',
       'AnujRNair',
       'AnujNairBundle',
@@ -86,14 +86,14 @@ module.exports = {
       'js',
       'entrypoints',
       'portfolio-tag'
-    )
+    ),
   },
   /* eslint-enable */
 
   // output configuration
   output: {
     // where to output assets on disk
-    path: path.resolve('web', 'bundles', 'assets')
+    path: path.resolve('web', 'bundles', 'assets'),
   },
 
   // so we can run webpack from any inner directory, and all of the paths always resolve correctly: https://webpack.js.org/configuration/entry-context/#context
@@ -123,12 +123,12 @@ module.exports = {
           'AnujNairBundle',
           'Resources',
           'public'
-        )
+        ),
       }
     ),
 
     // set extra top level directories where files can be found. Careful adding too much to this as it can slow things down
-    modules: ['node_modules']
+    modules: ['node_modules'],
   },
 
   module: {
@@ -139,7 +139,7 @@ module.exports = {
       // load font files normally through the browser
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/,
-        use: ['file-loader']
+        use: ['file-loader'],
       },
 
       // load images through url, try inlining
@@ -149,11 +149,11 @@ module.exports = {
           {
             loader: 'url-loader',
             options: {
-              limit: 8192
-            }
-          }
-        ]
-      }
-    ]
-  }
+              limit: 8192,
+            },
+          },
+        ],
+      },
+    ],
+  },
 };

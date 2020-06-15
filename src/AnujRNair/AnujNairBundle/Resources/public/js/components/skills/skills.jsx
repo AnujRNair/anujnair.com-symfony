@@ -15,26 +15,26 @@ export default class Skills extends Component {
         'Ruby, Rails',
         'PHP, Symfony2',
         'SQL, MySQL, MSSQL, TSQL',
-        'CSS, SCSS, LESS, BEM, ITCSS'
+        'CSS, SCSS, LESS, BEM, ITCSS',
       ],
       'Tools & Tech': [
         'Webpack, Babel, ESLint',
         'Jest, Enzyme, Jasmine',
         'Memcached, Redis',
         'Git',
-        'Selenium, Cypress'
+        'Selenium, Cypress',
       ],
       Interests: [
         'Scalability & Performance',
         'User & Developer Experience',
         'Intuitive UI & UX',
         'Security',
-        'Mentoring'
-      ]
+        'Mentoring',
+      ],
     };
 
     return Object.keys(items).map((section, index) => {
-      const points = items[section].map(point => (
+      const points = items[section].map((point) => (
         <li className={`icon ${icon[index]}`} key={point}>
           {point}
         </li>

@@ -11,11 +11,11 @@ export default class Article extends Component {
   static propTypes = {
     article: ArticleProps.isRequired,
     mini: PropTypes.bool,
-    tags: Tags.isRequired
+    tags: Tags.isRequired,
   };
 
   static defaultProps = {
-    mini: false
+    mini: false,
   };
 
   shouldComponentUpdate() {
@@ -30,9 +30,7 @@ export default class Article extends Component {
     return (
       <h2 className="article__header">
         <a
-          href={`/portfolio/${this.props.article.id}-${
-            this.props.article.urlTitle
-          }`}
+          href={`/portfolio/${this.props.article.id}-${this.props.article.urlTitle}`}
         >
           {this.props.article.name}
         </a>
@@ -48,9 +46,7 @@ export default class Article extends Component {
     return (
       <h2 className="article__title">
         <a
-          href={`/portfolio/${this.props.article.id}-${
-            this.props.article.urlTitle
-          }`}
+          href={`/portfolio/${this.props.article.id}-${this.props.article.urlTitle}`}
         >
           {this.props.article.name}
         </a>
@@ -62,9 +58,7 @@ export default class Article extends Component {
     return (
       <a
         className="article__img"
-        href={`/portfolio/${this.props.article.id}-${
-          this.props.article.urlTitle
-        }`}
+        href={`/portfolio/${this.props.article.id}-${this.props.article.urlTitle}`}
       >
         <img alt={this.props.article.title} src={this.props.article.image} />
       </a>
@@ -76,7 +70,7 @@ export default class Article extends Component {
       return null;
     }
 
-    const items = this.props.tags.map(tag => (
+    const items = this.props.tags.map((tag) => (
       <li key={tag.id}>
         <a href={`/portfolio/t/${tag.id}-${tag.urlName}`}>{tag.name}</a>
       </li>
@@ -120,7 +114,7 @@ export default class Article extends Component {
   render() {
     const classes = classNames({
       article: true,
-      'article--mini': this.props.mini
+      'article--mini': this.props.mini,
     });
 
     return (

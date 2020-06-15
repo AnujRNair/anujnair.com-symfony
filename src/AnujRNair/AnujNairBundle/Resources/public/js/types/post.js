@@ -7,7 +7,7 @@ const Post = PropTypes.shape({
   tagIds: PropTypes.arrayOf(PropTypes.number.isRequired),
   title: PropTypes.string.isRequired,
   userId: PropTypes.number.isRequired,
-  urlTitle: PropTypes.string.isRequired
+  urlTitle: PropTypes.string.isRequired,
 });
 
 const Posts = PropTypes.arrayOf(Post);
@@ -18,7 +18,7 @@ const Archive = PropTypes.objectOf(
       PropTypes.shape({
         id: PropTypes.number.isRequired,
         title: PropTypes.string.isRequired,
-        urlTitle: PropTypes.string.isRequired
+        urlTitle: PropTypes.string.isRequired,
       }).isRequired
     ).isRequired
   ).isRequired
@@ -26,7 +26,7 @@ const Archive = PropTypes.objectOf(
 
 const Similar = PropTypes.shape({
   'Extra Reading': Posts,
-  'Similar Blog Posts': Posts
+  'Similar Blog Posts': Posts,
 });
 
 export { Archive, Post, Posts, Similar };

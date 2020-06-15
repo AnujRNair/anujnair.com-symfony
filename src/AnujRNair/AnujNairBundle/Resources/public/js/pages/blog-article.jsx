@@ -15,7 +15,7 @@ export default class BlogArticle extends Component {
   static propTypes = {
     blog: PostProps.isRequired,
     tags: Tags.isRequired,
-    users: Users.isRequired
+    users: Users.isRequired,
   };
 
   componentDidMount() {
@@ -27,12 +27,12 @@ export default class BlogArticle extends Component {
   }
 
   findUserByUserId(userId) {
-    return this.props.users.find(user => user.id === userId);
+    return this.props.users.find((user) => user.id === userId);
   }
 
   findTagsByPost(post) {
-    return post.tagIds.map(tagId =>
-      this.props.tags.find(tag => tag.id === tagId)
+    return post.tagIds.map((tagId) =>
+      this.props.tags.find((tag) => tag.id === tagId)
     );
   }
 
@@ -48,12 +48,12 @@ export default class BlogArticle extends Component {
   }
 }
 
-const BlogAside = ({ similar }) => (
-  <SimilarPosts icon="icon-calendar" list={similar} urlPath="blog" />
-);
+function BlogAside({ similar }) {
+  return <SimilarPosts icon="icon-calendar" list={similar} urlPath="blog" />;
+}
 
 BlogAside.propTypes = {
-  similar: Similar.isRequired
+  similar: Similar.isRequired,
 };
 
 export { BlogAside };

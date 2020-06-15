@@ -8,7 +8,7 @@ export default class Pagination extends Component {
     currentPage: PropTypes.number.isRequired,
     maxResults: PropTypes.number.isRequired,
     noPerPage: PropTypes.number.isRequired,
-    slug: PropTypes.string.isRequired
+    slug: PropTypes.string.isRequired,
   };
 
   shouldComponentUpdate() {

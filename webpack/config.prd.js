@@ -21,7 +21,7 @@ module.exports = merge(
       chunkFilename: '[name].[chunkhash:7].min.js',
 
       // how they will be accessed through the browser on the cdn
-      publicPath: '/bundles/assets/'
+      publicPath: '/bundles/assets/',
     },
 
     // bug with mini css is forcing us to not cache
@@ -40,9 +40,9 @@ module.exports = merge(
         new TerserPlugin({
           sourceMap: false,
           cache: path.resolve(cacheDirectory, 'terser-js-plugin'),
-          parallel: 2
+          parallel: 2,
         }),
-        new OptimizeCSSAssetsPlugin()
+        new OptimizeCSSAssetsPlugin(),
       ],
       splitChunks: {
         automaticNameDelimiter: '-',
@@ -57,14 +57,14 @@ module.exports = merge(
           vendors: {
             test: /[\\/]node_modules[\\/]/,
             name: 'vendors',
-            chunks: 'all'
+            chunks: 'all',
           },
           application: {
             minChunks: 2,
-            name: 'application'
-          }
-        }
-      }
+            name: 'application',
+          },
+        },
+      },
     },
 
     module: {
@@ -77,16 +77,16 @@ module.exports = merge(
             {
               loader: 'thread-loader',
               options: {
-                workers: 2
-              }
+                workers: 2,
+              },
             },
             {
               loader: 'babel-loader',
               options: {
-                cacheDirectory: path.resolve(cacheDirectory, 'babel-loader')
-              }
-            }
-          ]
+                cacheDirectory: path.resolve(cacheDirectory, 'babel-loader'),
+              },
+            },
+          ],
         },
 
         // run css and scss through scss loader, post css (for vendor prefixes) and then css loader (with minification)
@@ -94,13 +94,13 @@ module.exports = merge(
           test: /\.(scss|css)$/,
           use: [
             {
-              loader: MiniCssExtractPlugin.loader
+              loader: MiniCssExtractPlugin.loader,
             },
             {
-              loader: 'css-loader'
+              loader: 'css-loader',
             },
             {
-              loader: 'postcss-loader'
+              loader: 'postcss-loader',
             },
             {
               loader: 'sass-loader',
@@ -115,21 +115,21 @@ module.exports = merge(
                     'Resources',
                     'public',
                     'css'
-                  )
-                ]
-              }
-            }
+                  ),
+                ],
+              },
+            },
           ],
-          sideEffects: true
-        }
-      ]
+          sideEffects: true,
+        },
+      ],
     },
 
     plugins: [
       new webpack.DefinePlugin({
         'process.env': {
-          NODE_ENV: JSON.stringify('production')
-        }
+          NODE_ENV: JSON.stringify('production'),
+        },
       }),
 
       // to help with keeping module ids consistent and strengthen caching
@@ -138,14 +138,14 @@ module.exports = merge(
       // This extracts css and less into a separate css file, one for each entry point
       new MiniCssExtractPlugin({
         filename: '[name].[contenthash:7].css',
-        chunkFilename: '[name].[contenthash:7].css'
+        chunkFilename: '[name].[contenthash:7].css',
       }),
 
       // create a manifest file of assets so php knows where to find files
       new ManifestPlugin({
-        fileName: 'manifest.json'
-      })
-    ]
+        fileName: 'manifest.json',
+      }),
+    ],
   },
   configBase
 );

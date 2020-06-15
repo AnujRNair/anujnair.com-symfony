@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 export default class Error extends Component {
   static propTypes = {
     message: PropTypes.string.isRequired,
-    statusCode: PropTypes.number.isRequired
+    statusCode: PropTypes.number.isRequired,
   };
 
   shouldComponentUpdate() {
@@ -20,9 +20,9 @@ export default class Error extends Component {
         bullets: [
           {
             text: "It's interesting, I promise. (I hope.)",
-            url: '/blog'
-          }
-        ]
+            url: '/blog',
+          },
+        ],
       },
       {
         icon: 'icon-earth',
@@ -31,9 +31,9 @@ export default class Error extends Component {
         bullets: [
           {
             text: 'See my recent work',
-            url: '/portfolio'
-          }
-        ]
+            url: '/portfolio',
+          },
+        ],
       },
       {
         icon: 'icon-man',
@@ -42,14 +42,14 @@ export default class Error extends Component {
         bullets: [
           {
             text: 'Find out about me, or contact me',
-            url: '/contact'
-          }
-        ]
-      }
+            url: '/contact',
+          },
+        ],
+      },
     ];
 
-    return blocks.map(block => {
-      const bullets = block.bullets.map(bullet => (
+    return blocks.map((block) => {
+      const bullets = block.bullets.map((bullet) => (
         <li className={`icon icon--absolute ${block.icon}`} key={bullet.text}>
           <a href={bullet.url}>{bullet.text}</a>
         </li>
