@@ -75,12 +75,6 @@ module.exports = merge(
           exclude: /(node_modules)|(js\/libs\/)/,
           use: [
             {
-              loader: 'thread-loader',
-              options: {
-                workers: 2,
-              },
-            },
-            {
               loader: 'babel-loader',
               options: {
                 cacheDirectory: path.resolve(cacheDirectory, 'babel-loader'),
