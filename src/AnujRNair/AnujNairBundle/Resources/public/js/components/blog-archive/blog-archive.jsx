@@ -7,11 +7,11 @@ export default class BlogArchive extends Component {
   static propTypes = {
     icon: PropTypes.string,
     list: Archive.isRequired,
-    urlPath: PropTypes.string.isRequired
+    urlPath: PropTypes.string.isRequired,
   };
 
   static defaultProps = {
-    icon: null
+    icon: null,
   };
 
   shouldComponentUpdate() {
@@ -24,10 +24,10 @@ export default class BlogArchive extends Component {
       ? `icon ${this.props.icon} icon--absolute`
       : '';
 
-    return firstKeys.map(f => {
+    return firstKeys.map((f) => {
       const secondKeys = Object.keys(this.props.list[f]);
-      const second = secondKeys.map(s => {
-        const items = this.props.list[f][s].map(item => (
+      const second = secondKeys.map((s) => {
+        const items = this.props.list[f][s].map((item) => (
           <li className={icon} key={item.id}>
             <a href={`/${this.props.urlPath}/${item.id}-${item.urlTitle}`}>
               {item.title}

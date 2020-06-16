@@ -8,7 +8,7 @@ const Article = PropTypes.shape({
   link: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   tagIds: PropTypes.arrayOf(PropTypes.number.isRequired),
-  urlTitle: PropTypes.string.isRequired
+  urlTitle: PropTypes.string.isRequired,
 });
 
 const Articles = PropTypes.arrayOf(Article);

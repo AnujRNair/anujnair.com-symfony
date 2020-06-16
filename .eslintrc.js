@@ -5,26 +5,27 @@ module.exports = {
   extends: ['airbnb-base', 'plugin:react/all', 'prettier', 'prettier/react'],
   plugins: ['react', 'import', 'prettier'],
   env: {
-    browser: true
+    browser: true,
   },
   rules: {
     'prettier/prettier': ['error', { singleQuote: true }],
     'import/no-extraneous-dependencies': [
       'off',
       {
-        devDependencies: true
-      }
+        devDependencies: true,
+      },
     ],
     'react/jsx-max-depth': [2, { max: 3 }],
     'class-methods-use-this': 0,
+    'max-classes-per-file': 0,
     'react/jsx-no-literals': 0,
     'react/destructuring-assignment': 0,
     'react/no-multi-comp': 0,
     'react/no-set-state': 0,
-    'react/jsx-fragments': 0
+    'react/jsx-fragments': 0,
   },
   globals: {
-    document: true
+    document: true,
   },
   settings: {
     'import/resolver': {
@@ -39,7 +40,7 @@ module.exports = {
                 'AnujNairBundle',
                 'Resources',
                 'public'
-              )
+              ),
             },
             extensions: [
               '.js',
@@ -48,11 +49,14 @@ module.exports = {
               '.svg',
               '.scss',
               '.jpg',
-              '.png'
-            ]
-          }
-        }
-      }
-    }
-  }
+              '.png',
+            ],
+          },
+        },
+      },
+    },
+    react: {
+      version: 'detect',
+    },
+  },
 };

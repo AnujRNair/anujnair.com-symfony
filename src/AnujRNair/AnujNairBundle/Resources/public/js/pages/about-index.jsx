@@ -9,7 +9,7 @@ import Contact from '@anujnair/js/components/contact/contact';
 
 export default class AboutIndex extends Component {
   static propTypes = {
-    years: PropTypes.number.isRequired
+    years: PropTypes.number.isRequired,
   };
 
   shouldComponentUpdate() {
@@ -63,11 +63,11 @@ export default class AboutIndex extends Component {
 export class AboutAside extends PureComponent {
   static propTypes = {
     form: ContactForm.isRequired,
-    success: PropTypes.arrayOf(PropTypes.string.isRequired)
+    success: PropTypes.arrayOf(PropTypes.string.isRequired),
   };
 
   static defaultProps = {
-    success: []
+    success: [],
   };
 
   renderFindMe() {
@@ -75,38 +75,38 @@ export class AboutAside extends PureComponent {
       {
         icon: 'icon-gh-full',
         name: 'GitHub',
-        link: 'https://github.com/AnujRNair/'
+        link: 'https://github.com/AnujRNair/',
       },
       {
         icon: 'icon-so',
         name: 'Stack Overflow',
-        link: 'https://stackoverflow.com/users/1759688/anuj'
+        link: 'https://stackoverflow.com/users/1759688/anuj',
       },
       {
         icon: 'icon-li',
         name: 'LinkedIn',
-        link: 'https://www.linkedin.com/in/anujrnair/'
+        link: 'https://www.linkedin.com/in/anujrnair/',
       },
       {
         icon: 'icon-t',
         name: 'Twitter',
-        link: 'https://twitter.com/AnujRNair'
+        link: 'https://twitter.com/AnujRNair',
       },
       {
         icon: 'icon-earth-full',
         name: 'AnujNair.com',
-        link: 'https://anujnair.com'
-      }
+        link: 'https://anujnair.com',
+      },
     ];
 
-    const jsxItems = items.map(item => (
+    const jsxItems = items.map((item) => (
       <li
         className={`icon icon--absolute ${item.icon}`}
         itemProp="sameAs"
         key={item.name}
         rel={item.name === 'Google+' ? 'me' : null}
       >
-        <a href={item.link} target="_blank" rel="noopener noreferrer">
+        <a href={item.link} rel="noopener noreferrer" target="_blank">
           {item.name}
         </a>
       </li>

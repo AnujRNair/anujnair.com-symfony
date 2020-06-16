@@ -20,7 +20,7 @@ module.exports = merge(
       publicPath: 'http://127.0.0.1:3010/assets/',
 
       // tell webpack to include comments in the generated code with info on the contained bundles
-      pathinfo: true
+      pathinfo: true,
     },
 
     // disable webpack defaults
@@ -44,7 +44,7 @@ module.exports = merge(
       headers: {
         'Access-Control-Allow-Origin': '*',
         'Cache-Control': 'no-cache',
-        'X-Webpack-Dev-Server': 'true'
+        'X-Webpack-Dev-Server': 'true',
       },
 
       // host and port info
@@ -54,7 +54,7 @@ module.exports = merge(
       // Seems to be ignored as of webpack-dev-server 2.5.1
       // I suspect this is an issue with webpack-dev-middleware which was
       // introduced here: https://github.com/webpack/webpack-dev-middleware/commit/23a75095bda747d24f8b902a8114dc8034303871#diff-bbfe1200f066d4b0611fd44a7368c0d4R38
-      publicPath: 'http://127.0.0.1:3010/assets/'
+      publicPath: 'http://127.0.0.1:3010/assets/',
     },
 
     module: {
@@ -67,10 +67,10 @@ module.exports = merge(
             {
               loader: 'babel-loader',
               options: {
-                cacheDirectory: path.resolve(cacheDirectory, 'babel-loader')
-              }
-            }
-          ]
+                cacheDirectory: path.resolve(cacheDirectory, 'babel-loader'),
+              },
+            },
+          ],
         },
 
         // all less and css should be inlined into the head of the document after running through the normal loaders
@@ -78,42 +78,44 @@ module.exports = merge(
           test: /\.(scss|css)$/,
           use: [
             {
-              loader: 'style-loader'
+              loader: 'style-loader',
             },
             {
-              loader: 'css-loader'
+              loader: 'css-loader',
             },
             {
-              loader: 'postcss-loader'
+              loader: 'postcss-loader',
             },
             {
               loader: 'sass-loader',
               options: {
-                includePaths: [
-                  path.resolve(
-                    __dirname,
-                    '..',
-                    'src',
-                    'AnujRNair',
-                    'AnujNairBundle',
-                    'Resources',
-                    'public',
-                    'css'
-                  )
-                ]
-              }
-            }
-          ]
-        }
-      ]
+                sassOptions: {
+                  includePaths: [
+                    path.resolve(
+                      __dirname,
+                      '..',
+                      'src',
+                      'AnujRNair',
+                      'AnujNairBundle',
+                      'Resources',
+                      'public',
+                      'css'
+                    ),
+                  ],
+                }
+              },
+            },
+          ],
+        },
+      ],
     },
 
     plugins: [
       // don't watch node modules as they should never change
       new webpack.WatchIgnorePlugin([
-        path.resolve(__dirname, '..', 'node_modules')
-      ])
-    ]
+        path.resolve(__dirname, '..', 'node_modules'),
+      ]),
+    ],
   },
   configBase
 );

@@ -12,11 +12,11 @@ export default class Post extends Component {
     post: PostProps.isRequired,
     showMore: PropTypes.bool,
     tags: Tags.isRequired,
-    user: User.isRequired
+    user: User.isRequired,
   };
 
   static defaultProps = {
-    showMore: false
+    showMore: false,
   };
 
   shouldComponentUpdate() {
@@ -28,7 +28,7 @@ export default class Post extends Component {
       return null;
     }
 
-    const items = this.props.tags.map(tag => (
+    const items = this.props.tags.map((tag) => (
       <li key={tag.id}>
         <a href={`/blog/t/${tag.id}-${tag.urlName}`}>{tag.name}</a>
       </li>
