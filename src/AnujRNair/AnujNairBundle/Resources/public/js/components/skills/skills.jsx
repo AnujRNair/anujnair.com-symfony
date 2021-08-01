@@ -11,7 +11,7 @@ export default class Skills extends Component {
     const icon = ['icon-thumbs-up', 'icon-spanner', 'icon-heart'];
     const items = {
       Languages: [
-        'JavaScript, React, Redux',
+        'JS, TS, Node, React, Redux',
         'Ruby, Rails',
         'PHP, Symfony2',
         'SQL, MySQL, MSSQL, TSQL',
