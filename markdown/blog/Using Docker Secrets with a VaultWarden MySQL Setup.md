@@ -34,8 +34,8 @@ or
 
 ```bash
 [vaultwarden::util][WARN] Can't connect to database, retrying: DieselCon.
-[CAUSE] InvalidConnectionUrl(
-    "MySQL connection URLs must be in the form `mysql://[[user]:[password]@]host[:port][/database]`",
+[CAUSE] BadConnection(
+    "Access denied for user 'vaultwarden'@'172.18.0.1' (using password: YES)",
 )
 ```
 
