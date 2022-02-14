@@ -28,7 +28,7 @@ export default class AboutIndex extends Component {
           Manager.
         </p>
         <p>
-          I currently work at Slack Technologies as a Staff Software Engineer,
+          I currently work at Slack Technologies as a Senior Staff Software Engineer,
           specializing in Frontend Performance and Architecture. My role is
           focused around making the user and developer experience as smooth,
           efficient and performant as can be.
