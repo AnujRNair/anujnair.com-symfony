@@ -136,23 +136,9 @@ module.exports = {
     strictExportPresence: true,
 
     rules: [
-      // load font files normally through the browser
       {
-        test: /\.(woff|woff2|eot|ttf|otf)$/,
-        use: ['file-loader'],
-      },
-
-      // load images through url, try inlining
-      {
-        test: /\.(png|jpg)/,
-        use: [
-          {
-            loader: 'url-loader',
-            options: {
-              limit: 8192,
-            },
-          },
-        ],
+        test: /\.(png|jpg|woff|woff2|eot|ttf|otf)$/,
+        type: 'asset',
       },
     ],
   },
