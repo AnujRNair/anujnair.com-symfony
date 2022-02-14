@@ -28,10 +28,10 @@ export default class AboutIndex extends Component {
           Manager.
         </p>
         <p>
-          I currently work at Slack Technologies as a Senior Staff Software Engineer,
-          specializing in Frontend Performance and Architecture. My role is
-          focused around making the user and developer experience as smooth,
-          efficient and performant as can be.
+          I currently work at Slack Technologies as a Senior Staff Software
+          Engineer, specializing in Frontend Performance and Architecture. My
+          role is focused around making the user and developer experience as
+          smooth, efficient and performant as can be.
         </p>
         <p>
           I have a passion for the open web and diving into new web technologies
@@ -104,7 +104,6 @@ export class AboutAside extends PureComponent {
         className={`icon icon--absolute ${item.icon}`}
         itemProp="sameAs"
         key={item.name}
-        rel={item.name === 'Google+' ? 'me' : null}
       >
         <a href={item.link} rel="noopener noreferrer" target="_blank">
           {item.name}

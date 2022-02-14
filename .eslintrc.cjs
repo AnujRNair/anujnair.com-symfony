@@ -1,8 +1,8 @@
 const path = require('path');
 
 module.exports = {
-  parser: 'babel-eslint',
-  extends: ['airbnb-base', 'plugin:react/all', 'prettier', 'prettier/react'],
+  parser: '@babel/eslint-parser',
+  extends: ['airbnb-base', 'plugin:react/all', 'prettier'],
   plugins: ['react', 'import', 'prettier'],
   env: {
     browser: true,

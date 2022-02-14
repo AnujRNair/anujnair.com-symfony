@@ -1,12 +1,12 @@
 const path = require('path');
 const webpack = require('webpack');
-const merge = require('webpack-merge');
-const ManifestPlugin = require('webpack-manifest-plugin');
+const { merge } = require('webpack-merge');
+const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
-const configBase = require('./config.base');
+const configBase = require('./config.base.cjs');
 
 const cacheDirectory = path.resolve(__dirname, '..', 'node_modules', '.cache');
 
@@ -38,8 +38,6 @@ module.exports = merge(
       minimizer: [
         // tree shake, minimize, compress
         new TerserPlugin({
-          sourceMap: false,
-          cache: path.resolve(cacheDirectory, 'terser-js-plugin'),
           parallel: 2,
         }),
         new OptimizeCSSAssetsPlugin(),
@@ -51,7 +49,6 @@ module.exports = merge(
         maxInitialRequests: 3,
         minChunks: 1,
         minSize: 10000,
-        name: true,
         cacheGroups: {
           default: false,
           vendors: {
@@ -128,9 +125,6 @@ module.exports = merge(
         },
       }),
 
-      // to help with keeping module ids consistent and strengthen caching
-      new webpack.HashedModuleIdsPlugin(),
-
       // This extracts css and less into a separate css file, one for each entry point
       new MiniCssExtractPlugin({
         filename: '[name].[contenthash:7].css',
@@ -138,7 +132,7 @@ module.exports = merge(
       }),
 
       // create a manifest file of assets so php knows where to find files
-      new ManifestPlugin({
+      new WebpackManifestPlugin({
         fileName: 'manifest.json',
       }),
     ],

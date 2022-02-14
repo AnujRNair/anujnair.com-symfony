@@ -1,8 +1,8 @@
 const path = require('path');
 const webpack = require('webpack');
-const merge = require('webpack-merge');
+const { merge } = require('webpack-merge');
 
-const configBase = require('./config.base');
+const configBase = require('./config.base.cjs');
 
 const cacheDirectory = path.resolve(__dirname, '..', 'node_modules', '.cache');
 
@@ -31,13 +31,6 @@ module.exports = merge(
 
     // dev server config
     devServer: {
-      // We don't need this enabled because Apache proxies requests to
-      // webpack-dev-server, which makes those requests gated behind Uberproxy
-      //
-      // See https://github.com/webpack/webpack-dev-server/releases/tag/v2.4.3
-      // for more info about the host check security enhancement
-      disableHostCheck: true,
-
       // Specified here so the header will get blindly returned by the underlying
       // Express server in the response. Useful for making sure webpack-dev-server
       // is actually proxying requests properly.
@@ -51,10 +44,7 @@ module.exports = merge(
       host: '127.0.0.1',
       port: 3010,
 
-      // Seems to be ignored as of webpack-dev-server 2.5.1
-      // I suspect this is an issue with webpack-dev-middleware which was
-      // introduced here: https://github.com/webpack/webpack-dev-middleware/commit/23a75095bda747d24f8b902a8114dc8034303871#diff-bbfe1200f066d4b0611fd44a7368c0d4R38
-      publicPath: 'http://127.0.0.1:3010/assets/',
+      static: ['assets'],
     },
 
     module: {
@@ -112,9 +102,9 @@ module.exports = merge(
 
     plugins: [
       // don't watch node modules as they should never change
-      new webpack.WatchIgnorePlugin([
+      new webpack.WatchIgnorePlugin({ paths: [
         path.resolve(__dirname, '..', 'node_modules'),
-      ]),
+      ]}),
     ],
   },
   configBase
