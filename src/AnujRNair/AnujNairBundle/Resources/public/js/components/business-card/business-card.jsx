@@ -16,7 +16,7 @@ function BusinessCard() {
         </li>
         <li className="icon icon-calendar">2003 - Present</li>
         <li className="icon icon-spanner">Slack Technologies</li>
-        <li className="icon icon-earth-full">http://anujnair.com</li>
+        <li className="icon icon-earth-full">https://anujnair.com</li>
       </ul>
     </div>
   );
