@@ -7,7 +7,7 @@ function BusinessCard() {
     <div className="business-card">
       <div className="business-card__name">Anuj Nair</div>
       <div className="business-card__profession">
-        Staff Software Engineer, Front End Performance, Infrastructure, &
+        Sr. Staff Software Engineer, Front End Performance, Infrastructure, &
         Architecture{' '}
       </div>
       <ul className="business-card__details list">
