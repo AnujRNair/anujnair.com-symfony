@@ -16,6 +16,7 @@
       grid-template-columns: 1fr 2fr 2fr 2fr 1fr;
       grid-gap: 20px;
       grid-template-areas: '. header-main header-main header-nav .';
+      z-index: 1;
 
       header {
         grid-area: header-main;
