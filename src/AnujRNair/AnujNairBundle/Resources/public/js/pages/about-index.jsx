@@ -28,10 +28,15 @@ export default class AboutIndex extends Component {
           Manager.
         </p>
         <p>
-          I currently work at Slack Technologies as a Senior Staff Software
+          I currently work at OpenAI as a Member of Technical Staff on the Human
+          Data team in the Research Pillar, focused on making specialized
+          internal training platforms.
+        </p>
+        <p>
+          Previously, I worked at Slack Technologies as a Senior Staff Software
           Engineer, specializing in Frontend Performance and Architecture. My
-          role is focused around making the user and developer experience as
-          smooth, efficient and performant as can be.
+          role was focused around making the user and developer experience as
+          smooth, efficient and performant as could be.
         </p>
         <p>
           I have a passion for the open web and diving into new web technologies
